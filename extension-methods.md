@@ -27,7 +27,7 @@ Page.ResizeToFitContents(w,h)
 Visio aready has a Page.ResizeToFitContents() method but this extension method makes it easy to ensure a width and height for the margins
 
 ```
-var margin_size = new VA.Drawing.Size(0.5,0.5);
+var margin_size = new VA.Core.Size(0.5,0.5);
 page.ResizeToFitContents(margin_size);
 ```
 
@@ -36,9 +36,5 @@ page.ResizeToFitContents(margin_size);
 Sometimes one needs to keep looking up the ID of a font. By creating a dictionary, you can perform the lookup once and cache the results.
 
 ```
-var fontname_to_id = doc.Fonts.AsEnumerable().ToDictionary(f =
->
- f.Name, f =
->
- f.ID);
+var fontname_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
 ```
