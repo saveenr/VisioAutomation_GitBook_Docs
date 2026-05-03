@@ -1,71 +1,86 @@
 # Custom properties
 
-## Basic usage with a single shape
+Custom properties (also called "Shape Data" in modern Visio UI) are user-defined named fields on a shape, stored in the `Prop.` section of its ShapeSheet. VisioAutomation exposes them via `VisioAutomation.Shapes.CustomPropertyHelper`.
 
-```
+## Add a single custom property
+
+`Set` takes a `CustomPropertyCells` object that lets you specify any combination of the property's cells (Value, Prompt, Format, Type, Label, etc.):
+
+```csharp
 var page = doc.Pages.Add();
 var s1 = page.DrawRectangle(0, 0, 1, 1);
+
 var cp = new VisioAutomation.Shapes.CustomPropertyCells();
 cp.Value = "Hello World";
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp);
+cp.Label = "Greeting";
 
-// Retrieve all the Custom properties from a shape
-var props = VisioAutomation.Shapes.CustomPropertyHelper.Get(s1);
-
-// Delete the property from the shape
-VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Propname");
+VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
 ```
 
-NOTES:
+`CustomPropertyCells` exposes the full set of property fields as `Core.CellValue` properties:
 
-* CustomPropertyHelper.Get returns a dictionary. The keys of the dictionary are the custom property names, the values are CustomPropertyCells objects.
-* The CustomPropertyCells Object holds the values for the custom properties:
-  * Calendar
-  * Format
-  * Invisible
-  * Label
-  * LangID
-  * Prompt
-  * SortKey
-  * Type
-  * Value
-  * Verify
+* `Value` — the property's value
+* `Prompt` — tooltip / hint shown to the user
+* `Label` — display label
+* `Format` — formatting expression
+* `Type` — data type (numeric, string, date, …)
+* `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask` — additional control fields
 
-## Work with multiple shapes
+All are `Core.CellValue`-typed and accept implicit conversions from strings, ints, doubles, and bools.
 
-```
-var page = doc.Pages.Add();
-var s1 = page.DrawRectangle(0, 0, 1, 1);
-var s2 = page.DrawRectangle(2, 2, 4, 4);
+## Read all custom properties from a shape
 
-var cp1 = new VisioAutomation.Shapes.CustomPropertyCells();
-cp1.Value = "Hello";
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
+`GetDictionary` returns the properties keyed by name. The `CellValueType` parameter chooses between formula text and evaluated result:
 
-var cp2 = new VisioAutomation.Shapes.CustomPropertyCells();
-cp2.Value = "World";
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s2, "Propname", cp2);
+```csharp
+var props = VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(
+                s1,
+                VisioAutomation.Core.CellValueType.Formula);
 
-// Retrieve all the Custom properties from multiple shapes
-
-var shapes = new[] {s1, s2};
-var props = VisioAutomation.Shapes.CustomPropertyHelper.Get(page,shapes);
-
-// Delete the properties from the shapes
-VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Propname");
-VisioAutomation.Shapes.CustomPropertyHelper.Delete(s2, "Propname");
+foreach (var kv in props)
+{
+    System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Value.Value);
+}
 ```
 
-## Count properties and find names
+The returned dictionary's values are `CustomPropertyCells` objects — so you can inspect each property's full set of fields, not just the value.
 
+## Read from multiple shapes
+
+For multiple shapes on the same page, build a `ShapeIDPairs` and use the page-level overload — one batched Visio call per page:
+
+```csharp
+var pairs = VisioAutomation.Core.ShapeIDPairs.FromShapes(s1, s2);
+var per_shape = VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(
+                    page,
+                    pairs,
+                    VisioAutomation.Core.CellValueType.Formula);
+// per_shape is a List<CustomPropertyDictionary>, one entry per shape
 ```
-var page = doc.Pages.Add();
-var s1 = page.DrawRectangle(0, 0, 1, 1);
 
-var cp1 = new VisioAutomation.Shapes.CustomPropertyCells();
-cp1.Value = "Hello";
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
+## Count and enumerate
 
-int num_custom_props = VisioAutomation.Shapes.CustomPropertyHelper.GetCount(s1);
-List<string> custom_prop_names = VisioAutomation.Shapes.CustomPropertyHelper.GetNames(s1);
+```csharp
+int count = VisioAutomation.Shapes.CustomPropertyHelper.GetCount(s1);
+
+System.Collections.Generic.List<string> names =
+    VisioAutomation.Shapes.CustomPropertyHelper.GetNames(s1);
+```
+
+## Check if a property exists
+
+```csharp
+bool exists = VisioAutomation.Shapes.CustomPropertyHelper.Contains(s1, "Greeting");
+```
+
+## Delete a property
+
+```csharp
+VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Greeting");
+```
+
+## Validating property names
+
+```csharp
+bool ok = VisioAutomation.Shapes.CustomPropertyHelper.IsValidName("MyProp");
 ```
