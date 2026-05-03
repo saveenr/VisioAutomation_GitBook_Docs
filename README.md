@@ -1,6 +1,6 @@
 # Introduction
 
-**VisioAutomation** is a .NET library to simplify to automate **Microsoft Visio**.
+**VisioAutomation** is a .NET library that simplifies automating **Microsoft Visio**.
 
 **VisioAutomation** helps you:
 
@@ -14,7 +14,7 @@
 
 ## Projects that use VisioAutomation
 
-* [**Visio PowerShell**](https://github.com/saveenr/VisioPowerShell/wiki): a PowerShell module for Automating Visio 2010.
+* [**Visio PowerShell**](https://saveenr.gitbook.io/visiopowershell/): a PowerShell module for automating Visio. The module is now developed inside the [VisioAutomation repo](https://github.com/saveenr/VisioAutomation) (it used to live in a separate repo).
 * [**Power Tools for Visio 2010**](https://github.com/saveenr/Visio-Power-Tools/releases)**:** Semi-useful tools (no longer maintained)
 
 ## Source Code
