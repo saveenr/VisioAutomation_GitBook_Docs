@@ -10,7 +10,6 @@
   * [Query the ShapeSheet](shapesheet/query-the-shapesheet.md)
   * [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md)
 * [User-defined cells](user-defined-cells.md)
-* [Convert values](convert-values.md)
 * [Custom properties](custom-properties.md)
 * [Resources](resources/README.md)
   * [Stencils and Masters](resources/stencils-and-masters.md)
