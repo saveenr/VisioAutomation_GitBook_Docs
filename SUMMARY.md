@@ -12,6 +12,5 @@
 * [User-defined cells](user-defined-cells.md)
 * [Custom properties](custom-properties.md)
 * [Resources](resources/README.md)
-  * [Stencils and Masters](resources/stencils-and-masters.md)
 * [Namespaces](namespaces.md)
 * [Classes](classes.md)
