@@ -13,7 +13,7 @@ VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp);
 var props = VisioAutomation.Shapes.CustomPropertyHelper.Get(s1);
 
 // Delete the property from the shape
-VisioAutomation.Shapes.CustomProperties.CustomPropertyHelper.Delete(s1, "Propname");
+VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Propname");
 ```
 
 NOTES:
@@ -40,7 +40,7 @@ var s2 = page.DrawRectangle(2, 2, 4, 4);
 
 var cp1 = new VisioAutomation.Shapes.CustomPropertyCells();
 cp1.Value = "Hello";
-VisioAutomation.Shapes.CustomProperties.Set(s1, "Propname", cp1);
+VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
 
 var cp2 = new VisioAutomation.Shapes.CustomPropertyCells();
 cp2.Value = "World";
@@ -67,5 +67,6 @@ cp1.Value = "Hello";
 VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
 
 int num_custom_props = VisioAutomation.Shapes.CustomPropertyHelper.GetCount(s1);
-var custom_prop_names = VisioAutomation.Shapes.CustomPropertyHelper.Ge
+List<string> custom_prop_names = VisioAutomation.Shapes.CustomPropertyHelper.GetNames(s1);
+```
 ```
