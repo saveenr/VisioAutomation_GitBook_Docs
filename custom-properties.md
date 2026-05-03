@@ -69,4 +69,3 @@ VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
 int num_custom_props = VisioAutomation.Shapes.CustomPropertyHelper.GetCount(s1);
 List<string> custom_prop_names = VisioAutomation.Shapes.CustomPropertyHelper.GetNames(s1);
 ```
-```
