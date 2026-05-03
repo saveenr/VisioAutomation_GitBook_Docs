@@ -2,63 +2,76 @@
 
 ## Introduction
 
-A ShapeSheet update allows you to efficiently modify the the contents (formulas, results, or both) of a shapesheet.
+A ShapeSheet update allows you to efficiently modify the contents (formulas or results) of a shape's, master's, or page's ShapeSheet in a single batched operation.
 
 ## Getting started
 
-Imagine we want to set the pinx of a shape. To start we'll use the slow way
+Imagine we want to set the PinX of a shape. The slow way uses Visio's interop API directly:
 
-```
-var pinx_cell = shape.Cells["Pinx"];
+```csharp
+var pinx_cell = shape.CellsU["PinX"];
 pinx_cell.FormulaU = "5.0";
 ```
 
-Updating a single cell on a single shape Now let's map this to an update structure. Because this update occurs to a single specific shape we use the SRCUpdate class
+That works but performs one COM round-trip per cell. The faster way uses a writer that batches many cell updates into one COM call.
 
-```
-var update = new VA.ShapeSheet.Update.SRCUpdate();
-update.SetFormula(VA.ShapeSheet.SRCConstants.PinX, "5.0");
-update.Execute(shape1);
-```
+## Updating one or more cells on a single shape
 
-The SetFormula method will automatically convert integers and doubles to the correct string form, so the example below is also valid
+For a single shape, use `SrcWriter` (cells addressed by `Src`):
 
-```
-var update = new VA.ShapeSheet.Update.SRCUpdate();
-update.SetFormula(VA.ShapeSheet.SRCConstants.PinX, 5.0);
-update.Execute(shape1);
+```csharp
+var writer = new VA.ShapeSheet.Writers.SrcWriter();
+writer.SetValue(VA.Core.SrcConstants.PinX, "5.0");
+writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
 
-And of course to set multiple cells is simple...
+`SetValue` accepts strings, ints, doubles, and bools directly thanks to implicit conversion to `Core.CellValue` — so the example below also works:
 
-The SRCUpdate.SetFormula method will automatically convert integers and doubles to the correct string form, so the example below is also valid
-
-```
-var update = new VA.ShapeSheet.Update.SRCUpdate();
-update.SetFormula(VA.ShapeSheet.SRCConstants.PinX, 5.0);
-update.SetFormula(VA.ShapeSheet.SRCConstants.PinY, 3.5);
-update.Execute(shape1);
+```csharp
+var writer = new VA.ShapeSheet.Writers.SrcWriter();
+writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
+writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
 
-You can set the Results of a cell also
+To set multiple cells, just call `SetValue` repeatedly before committing:
 
+```csharp
+var writer = new VA.ShapeSheet.Writers.SrcWriter();
+writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
+writer.SetValue(VA.Core.SrcConstants.PinY, 3.5);
+writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
-var update = new VA.ShapeSheet.Update.SRCUpdate();
-update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 5.0, IVisio.VisUnitCodes.visNoCast);
-update.Execute(shape1);
+
+The same writer also supports committing to a master or a page:
+
+```csharp
+writer.Commit(master1, VA.Core.CellValueType.Formula);
+writer.Commit(page1, VA.Core.CellValueType.Formula);
 ```
 
-If you mix both formulas and results in an update, the results will be set first and then the formulas will be set
+## Setting results instead of formulas
 
-Setting multiple cells for multiple shapes This is simple. First we need to identify the shapes by their ID. And then we use the SIDSRCUpdate object and execute the update against a page that contains the object.
+The choice between writing formulas (the textual expression) and writing results (the evaluated value) is made at `Commit` time, by passing the appropriate `CellValueType`:
 
+```csharp
+var writer = new VA.ShapeSheet.Writers.SrcWriter();
+writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
+writer.Commit(shape1, VA.Core.CellValueType.Result);
 ```
-var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-update.SetFormula(shape1.ID16, src_pinx, 0.5);
-update.SetFormula(shape1.ID16, src_piny, 0.5);
-update.SetFormula(shape2.ID16, src_pinx, 1.5);
-update.SetFormula(shape2.ID16, src_piny, 1.5);
-update.SetFormula(shape3.ID16, src_pinx, 2.5);
-update.SetFormula(shape3.ID16, src_piny, 2.5);
-update.Execute(page1);
+
+A single writer commits either all-formulas or all-results — to do both, build two writers and commit each separately.
+
+## Updating cells across multiple shapes
+
+For multiple shapes on the same page, use `SidSrcWriter` (cells addressed by shape-ID + `Src`, packaged together as `SidSrc`):
+
+```csharp
+var writer = new VA.ShapeSheet.Writers.SidSrcWriter();
+writer.SetValue(shape1.ID16, src_pinx, 0.5);
+writer.SetValue(shape1.ID16, src_piny, 0.5);
+writer.SetValue(shape2.ID16, src_pinx, 1.5);
+writer.SetValue(shape2.ID16, src_piny, 1.5);
+writer.SetValue(shape3.ID16, src_pinx, 2.5);
+writer.SetValue(shape3.ID16, src_piny, 2.5);
+writer.Commit(page1, VA.Core.CellValueType.Formula);
 ```
