@@ -12,7 +12,7 @@
 * **Visio Automation 2010** [NuGet package](http://www.nuget.org/packages/VisioAutomation2010/) (maintained)
 * **Visio Automation 2007** [NuGet package](http://www.nuget.org/packages/VisioAutomation2007/) (no longer maintained)
 
-## Projects that Use VisioAutomation
+## Projects that use VisioAutomation
 
 * [**Visio PowerShell**](https://github.com/saveenr/VisioPowerShell/wiki): a PowerShell module for Automating Visio 2010.
 * [**Power Tools for Visio 2010**](https://github.com/saveenr/Visio-Power-Tools/releases)**:** Semi-useful tools (no longer maintained)
