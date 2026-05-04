@@ -20,7 +20,7 @@ var src_1 = new VA.Core.Src((short) 0,(short) 0,(short) 0);
 
 ### Create a SRC struct from well known Indices from the Visio PIA
 
-The SRC below to points the fill foreground color
+The SRC below points to the fill foreground color
 
 ```
 using SEC=Microsoft.Office.Interop.Visio.VisSectionIndices;

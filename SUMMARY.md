@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Documentation changes](documentation-changes.md)
 * [Related projects](related-projects.md)
 * [Compiling](compiling.md)
 * [Stencils and masters](stencils-and-masters.md)

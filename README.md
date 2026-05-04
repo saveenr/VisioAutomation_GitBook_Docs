@@ -20,5 +20,3 @@
 ## Source Code
 
 [`https://github.com/saveenr/VisioAutomation/`](https://github.com/saveenr/VisioAutomation/)
-
-##

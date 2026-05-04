@@ -2,39 +2,38 @@
 
 ## Namespace
 
-```
+```csharp
 VisioAutomation.Extensions
 ```
 
-## Summary
+The `VisioAutomation.Extensions` namespace adds a small set of extension methods to the Visio COM types. To use them, add a `using` directive at the top of your file:
 
-The VisioAutomation.Extensions contains a series of useful extension methods. To use simple add a “using” statement using VisioAutomation.Extensions;
-
-## Examples
-
-```
-Shapes.GetShapesFromIDs
+```csharp
+using VisioAutomation.Extensions;
 ```
 
-Methods like DropManyU don't return Shape objects but rather their IDs. If you want to quickly get the shape objects from a list of shape IDs then .Shapes.GetShapesFromIDs can be used.
+## `Shapes.GetShapesFromIDs`
 
+Methods like `Page.DropManyU` return shape **IDs**, not `Shape` objects. To turn the IDs back into shapes, use `GetShapesFromIDs`:
+
+```csharp
+var shapes = page.Shapes.GetShapesFromIDs(shapeids);
 ```
-var shapes = page.Shapes.GetShapesFromIDs(shapeids)
 
-Page.ResizeToFitContents(w,h)
-```
+## `Page.ResizeToFitContents(Size)`
 
-Visio aready has a Page.ResizeToFitContents() method but this extension method makes it easy to ensure a width and height for the margins
+Visio already has a `Page.ResizeToFitContents()` method, but this extension method makes it easy to add a fixed margin around the resized page.
 
-```
-var margin_size = new VA.Core.Size(0.5,0.5);
+```csharp
+var margin_size = new VisioAutomation.Core.Size(0.5, 0.5);
 page.ResizeToFitContents(margin_size);
 ```
 
-## Fonts.AsEnumerable()
+## `Fonts.AsEnumerable()`
 
-Sometimes one needs to keep looking up the ID of a font. By creating a dictionary, you can perform the lookup once and cache the results.
+Visio's `Fonts` collection is COM-typed and not friendly to LINQ. The `AsEnumerable()` extension yields each `Font` so you can build a name-to-ID lookup once and reuse it:
 
-```
-var fontname_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
+```csharp
+var fontname_to_id = doc.Fonts.AsEnumerable()
+    .ToDictionary(f => f.Name, f => f.ID);
 ```
