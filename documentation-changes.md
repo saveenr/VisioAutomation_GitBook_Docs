@@ -30,6 +30,14 @@ A pass aligning every page with the **VisioAutomation** library's current public
 * [Text formatting](text-formatting.md) &mdash; documents `CharacterCells`, `ParagraphCells`, `TextBlockCells`, multi-row writes, plus the `TextHelper` tab-stop helpers (`GetTabStops`/`SetTabStops`).
 * [Geometry](geometry.md) &mdash; documents `GeometryHelper`, `GeometrySection`, `GeometryRow` for building custom paths.
 * [Application](application.md) &mdash; documents `ApplicationHelper`: version detection, alert-bypass quit, content-folder location, and the foreground-window helper.
+* [Undo scope](undo-scope.md) &mdash; documents `UndoScope`, the `IDisposable` wrapper around `BeginUndoScope`/`EndUndoScope`, including the `Commit = false` rollback pattern.
+* [Analyzers](analyzers.md) &mdash; documents `ConnectionAnalyzer.GetDirectedEdges`, `ConnectionAnalyzerOptions`, and the `EdgeDirectionSource` / `EdgeNoArrowsHandling` enums.
+* [Visio error log](logging.md) &mdash; documents `LoggingHelper.GetXmlErrorLogFilename`, `XmlErrorLog`, and the `LogSession` / `LogRecord` shape.
+* [Exception types](exceptions.md) &mdash; documents `AutomationException` and its subclasses `VisioOperationException` and `InternalAssertionException`.
+
+### Pages rewritten
+
+* `extension-methods.md` &mdash; replaced the original three-method intro with a comprehensive reference organized by purpose (LINQ bridges over the COM collection types, drawing primitives, master dropping, ShapeSheet I/O, geometry / coordinates, one-offs). Fixed an example that referenced a non-existent `Fonts.AsEnumerable()` &mdash; the actual extensions are named `ToEnumerable()` and `ToList()`.
 
 ### Pages removed
 
