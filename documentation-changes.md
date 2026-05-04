@@ -25,6 +25,11 @@ A pass aligning every page with the **VisioAutomation** library's current public
 * [Control handles](control-handles.md) &mdash; documents `ControlHelper` and `ControlCells`.
 * [Connection points](connection-points.md) &mdash; documents `ConnectionPointHelper` and `ConnectionPointCells`.
 * [Connectors](connectors.md) &mdash; documents `ConnectorHelper`, including manual connection and AutoConnect.
+* [Shape format / layout / xform cells](shape-cells.md) &mdash; documents `ShapeFormatCells`, `ShapeLayoutCells`, `ShapeXFormCells` and how to combine them in a single `SrcWriter` transaction.
+* [Page cells](page-cells.md) &mdash; documents `PageHelper` plus the four PageSheet records (`PageFormatCells`, `PageLayoutCells`, `PagePrintCells`, `PageRulerAndGridCells`); covers `Duplicate`, `SetSize`/`GetSize`, and `ResizeToFitContents`.
+* [Text formatting](text-formatting.md) &mdash; documents `CharacterCells`, `ParagraphCells`, `TextBlockCells`, multi-row writes, plus the `TextHelper` tab-stop helpers (`GetTabStops`/`SetTabStops`).
+* [Geometry](geometry.md) &mdash; documents `GeometryHelper`, `GeometrySection`, `GeometryRow` for building custom paths.
+* [Application](application.md) &mdash; documents `ApplicationHelper`: version detection, alert-bypass quit, content-folder location, and the foreground-window helper.
 
 ### Pages removed
 
