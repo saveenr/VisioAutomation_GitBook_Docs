@@ -20,6 +20,11 @@ A pass aligning every page with the **VisioAutomation** library's current public
 ### Pages added
 
 * `documentation-changes.md` (this page).
+* [Hyperlinks](hyperlinks.md) &mdash; documents `HyperlinkHelper` and `HyperlinkCells`.
+* [Lock cells](lock-cells.md) &mdash; documents the `LockCells` record and the `SrcWriter` pattern for applying / clearing locks.
+* [Control handles](control-handles.md) &mdash; documents `ControlHelper` and `ControlCells`.
+* [Connection points](connection-points.md) &mdash; documents `ConnectionPointHelper` and `ConnectionPointCells`.
+* [Connectors](connectors.md) &mdash; documents `ConnectorHelper`, including manual connection and AutoConnect.
 
 ### Pages removed
 
