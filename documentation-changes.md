@@ -2,6 +2,17 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+## 2026-05 &mdash; Split shape-cells into per-record pages
+
+The combined `shape-cells.md` page covered three separate cell records under one heading. Split it so each record has its own page, with the original page kept as a thin overview that links to the three:
+
+* [Shape XForm cells](shape-xform-cells.md) &mdash; `ShapeXFormCells` (size, position, rotation, local pin).
+* [Shape format cells](shape-format-cells.md) &mdash; `ShapeFormatCells` (fill, line, fill shadow). Field tables now broken out by sub-section.
+* [Shape layout cells](shape-layout-cells.md) &mdash; `ShapeLayoutCells` (auto-layout placement, routing, line-jump).
+* [Shape cells](shape-cells.md) &mdash; rewritten as a one-page overview pointing to the three above; the "combine multiple records in one writer" example stays here.
+
+`SUMMARY.md` was updated to nest the three sub-pages under the overview entry.
+
 ## 2026-05 &mdash; Compile-failure pass
 
 A compile pass over every C# code block on the site, prompted by a stale snippet found in the source repo's `readme.md`. Fixes:
