@@ -2,6 +2,19 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+## 2026-05 &mdash; Split page-cells into per-record pages
+
+Same treatment as the extension-methods and shape-cells splits below. The combined `page-cells.md` page covered four cell records plus a helper class under one heading; split into one page per record in a new `pages/` subfolder, with the original page kept as the overview that links to all five (the `saveenr.gitbook.io/visioautomation/page-cells` URL is preserved).
+
+* [Page format cells](pages/format.md) &mdash; `PageFormatCells` (size, scale, drawing-units, page shadow). Field tables broken out by sub-section.
+* [Page layout cells](pages/layout.md) &mdash; `PageLayoutCells` (auto-layout: avenues, blocks, line-jump, placement, routing). Tables broken out by purpose.
+* [Page print cells](pages/print.md) &mdash; `PagePrintCells` (margins, paper, orientation, scale, tiling).
+* [Page ruler and grid cells](pages/ruler-grid.md) &mdash; `PageRulerAndGridCells` (per-axis ruler density / origin and grid density / origin / spacing).
+* [Page helper](pages/helper.md) &mdash; `PageHelper.SetSize` / `GetSize`, `ResizeToFitContents`, `Duplicate`.
+* [Page cells](page-cells.md) &mdash; rewritten as a one-page overview with a record table linking to the four cell-record pages and the helper page; the "combine multiple records in one writer" example stays here.
+
+`SUMMARY.md` updated to nest the five sub-pages under the overview entry.
+
 ## 2026-05 &mdash; Split extension-methods into per-category pages
 
 The combined `extension-methods.md` page covered six independent groups of extensions (LINQ bridges, drawing primitives, master dropping, ShapeSheet I/O, coordinates, one-offs) under one heading. Split it into one page per category in a new `extensions/` subfolder, with the original page kept as the overview that links to all six (the `saveenr.gitbook.io/visioautomation/extension-methods` URL is preserved).
