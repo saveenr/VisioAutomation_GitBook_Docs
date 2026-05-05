@@ -2,6 +2,18 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+## 2026-05 &mdash; Split text-formatting into per-record pages
+
+Same treatment as the page-cells / shape-cells / extension-methods splits. The combined `text-formatting.md` page covered three cell records plus a tab-stops helper under one heading; split into one page per topic in a new `text/` subfolder, with the original page kept as the overview that links to all four (the `saveenr.gitbook.io/visioautomation/text-formatting` URL is preserved).
+
+* [Character cells](text/character.md) &mdash; `CharacterCells` (font, size, color, weight, decorations, localization). Field tables broken out by sub-section. The "Multiple rows" example moved here, since this is the canonical example of a section that holds many rows.
+* [Paragraph cells](text/paragraph.md) &mdash; `ParagraphCells` (alignment, indent, spacing, bullets). Cross-links to the multi-row pattern on the Character page rather than repeating it.
+* [Text-block cells](text/block.md) &mdash; `TextBlockCells` (margins, vertical alignment, default tab stop, background, direction). Documents the surprising-but-real method name `GetTextBlockCells` (the other text records expose `GetCells`); the previous overview's catch-all "every record has `GetCells`" claim was wrong for this one record.
+* [Tab stops](text/tab-stops.md) &mdash; `TextHelper.SetTabStops` / `GetTabStops` + the `TabStop` struct and `TabStopAlignment` enum (`Left`, `Center`, `Right`, `Decimal`, `Comma`).
+* [Text formatting](text-formatting.md) &mdash; rewritten as a one-page overview with a record table linking to the four sub-pages; the "combine multiple records in one writer" example stays here.
+
+`SUMMARY.md` updated to nest the four sub-pages under the overview entry.
+
 ## 2026-05 &mdash; Split page-cells into per-record pages
 
 Same treatment as the extension-methods and shape-cells splits below. The combined `page-cells.md` page covered four cell records plus a helper class under one heading; split into one page per record in a new `pages/` subfolder, with the original page kept as the overview that links to all five (the `saveenr.gitbook.io/visioautomation/page-cells` URL is preserved).
