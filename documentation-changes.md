@@ -2,6 +2,20 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+## 2026-05 &mdash; Split extension-methods into per-category pages
+
+The combined `extension-methods.md` page covered six independent groups of extensions (LINQ bridges, drawing primitives, master dropping, ShapeSheet I/O, coordinates, one-offs) under one heading. Split it into one page per category in a new `extensions/` subfolder, with the original page kept as the overview that links to all six (the `saveenr.gitbook.io/visioautomation/extension-methods` URL is preserved).
+
+* [LINQ bridges](extensions/linq.md) &mdash; `ToEnumerable()` / `ToList()` over `Pages`, `Shapes`, `Masters`, etc.
+* [Drawing primitives](extensions/drawing.md) &mdash; `DrawRectangle(rect)`, `DrawPolyline`, `DrawBezier`, `DrawQuarterArc`, `DrawNurbs`.
+* [Master dropping](extensions/dropping.md) &mdash; `Drop(master, point)`, `DropManyU(masters, points)`.
+* [Typed ShapeSheet I/O](extensions/shapesheet.md) &mdash; `GetFormulasU` / `GetResults<T>` / `SetFormulas` / `SetResults` keyed by `Src` / `SidSrc`.
+* [Coordinates and bounding boxes](extensions/coordinates.md) &mdash; `GetBoundingBox`, `XYFromPage`, `XYToPage`, `ResizeToFitContents`.
+* [One-off extensions](extensions/misc.md) &mdash; `Quit`, `Close`, `OpenStencil`, view / window rects, `GetShapesFromIDs`.
+* [Extension methods](extension-methods.md) &mdash; rewritten as a one-page overview with a category table linking to the six.
+
+`SUMMARY.md` updated to nest the six sub-pages under the overview entry.
+
 ## 2026-05 &mdash; Split shape-cells into per-record pages
 
 The combined `shape-cells.md` page covered three separate cell records under one heading. Split it so each record has its own page, with the original page kept as a thin overview that links to the three:
