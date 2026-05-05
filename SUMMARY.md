@@ -1,9 +1,10 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Documentation changes](documentation-changes.md)
-* [Related projects](related-projects.md)
-* [Compiling](compiling.md)
+  * [Related projects](readme/related-projects.md)
+  * [Documentation updates](readme/documentation-changes/README.md)
+    * [2026-05 doc updates](readme/documentation-changes/2026-05-doc-updates.md)
+  * [Getting started](readme/getting-started.md)
 * [Stencils and masters](stencils-and-masters.md)
 * [Extension methods](extension-methods.md)
   * [LINQ bridges](extensions/linq.md)
@@ -47,3 +48,4 @@
 * [Resources](resources/README.md)
 * [Namespaces](namespaces.md)
 * [Classes](classes.md)
+* [Compiling](compiling.md)
