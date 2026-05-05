@@ -5,6 +5,9 @@
   * [Documentation updates](readme/documentation-changes/README.md)
     * [2026-05 doc updates](readme/documentation-changes/2026-05-doc-updates.md)
   * [Getting started](readme/getting-started.md)
+
+## Core APIs
+
 * [Stencils and masters](stencils-and-masters.md)
 * [Extension methods](extension-methods.md)
   * [LINQ bridges](extensions/linq.md)
@@ -17,6 +20,11 @@
   * [SRC structs](shapesheet/cells.md)
   * [Query the ShapeSheet](shapesheet/query-the-shapesheet.md)
   * [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md)
+* [Application](application.md)
+* [Undo scope](undo-scope.md)
+
+## Shape data
+
 * [User-defined cells](user-defined-cells.md)
 * [Custom properties](custom-properties.md)
 * [Hyperlinks](hyperlinks.md)
@@ -24,6 +32,9 @@
 * [Control handles](control-handles.md)
 * [Connection points](connection-points.md)
 * [Connectors](connectors.md)
+
+## Formatting and layout
+
 * [Shape cells](shape-cells.md)
   * [Shape XForm cells](shape-xform-cells.md)
   * [Shape format cells](shape-format-cells.md)
@@ -40,12 +51,16 @@
   * [Text-block cells](text/block.md)
   * [Tab stops](text/tab-stops.md)
 * [Geometry](geometry.md)
-* [Application](application.md)
-* [Undo scope](undo-scope.md)
+
+## Diagnostics
+
 * [Analyzers](analyzers.md)
 * [Visio error log](logging.md)
 * [Exception types](exceptions.md)
-* [Resources](resources/README.md)
+
+## Reference
+
 * [Namespaces](namespaces.md)
 * [Classes](classes.md)
 * [Compiling](compiling.md)
+* [Resources](resources/README.md)

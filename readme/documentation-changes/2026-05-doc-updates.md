@@ -1,5 +1,17 @@
 # 2026-05 doc updates
 
+## 2026-05: Doc-review feedback pass
+
+Acted on feedback from a 2026-05-05 doc-review. Small fixes and a few content additions; bigger items captured as GitHub issues so the gitbook backlog stays focused.
+
+* **[Introduction](../../README.md)**: replaced the bullet list of NuGet packages with a status-and-when-to-use table (clarifies the `VisioAutomation2007` package's deprecated state). Added a "Visio version compatibility" table covering 2010, 2013, 2016, 2019, 2021, and Microsoft 365.
+* **[Getting started](../getting-started.md)**: substantial rewrite. Added a "Choosing an entry point" decision table at the top covering the four API tiers (PowerShell module, `VisioScripting.Client`, `VisioAutomation.Models` DOM, `VisioAutomation` helpers). Split the previously-concatenated `var doc = ...; var page = ...` line. Added `csharp` language tags to every code fence. Fixed the "day-to-day like easier so I do recommended it" typo. Added a `doc.SaveAs(...)` step so the tutorial actually finishes with a saved file. Added a "The full program" section that compiles cleanly in `VPlayground`. Added a "Next steps" section with cross-links to the topic pages.
+* **[Stencils and masters](../../stencils-and-masters.md)**: removed the duplicated `## Stencils and masters` H2 (the page already had it as H1). Replaced it with a stencil-filenames callout box that cross-links to `ApplicationHelper.GetContentLocation` for finding the right path on the installed Visio version. Added `csharp` language tags to the code fences.
+* **[Namespaces](../../namespaces.md)**, **[Classes](../../classes.md)**: added descriptive alt text for the diagram images so the page has fallback content if the image fails to load.
+* **[Table of contents](../../SUMMARY.md)**: added section dividers (`## Core APIs`, `## Shape data`, `## Formatting and layout`, `## Diagnostics`, `## Reference`) so the now-50-entry sidebar is scannable.
+
+Bigger items from the same review (out of scope for this pass) filed as GitHub issues on the source repo: [#131 VisioScripting docs gap](https://github.com/saveenr/VisioAutomation/issues/131), [#132 VisioAutomation.Models docs gap](https://github.com/saveenr/VisioAutomation/issues/132), [#133 troubleshooting page](https://github.com/saveenr/VisioAutomation/issues/133). Also recorded in the source repo's `docs/FUTURES.md`.
+
 ## 2026-05: Split text-formatting into per-record pages
 
 Same treatment as the page-cells / shape-cells / extension-methods splits. The combined `text-formatting.md` page covered three cell records plus a tab-stops helper under one heading; split into one page per topic in a new `text/` subfolder, with the original page kept as the overview that links to all four (the `saveenr.gitbook.io/visioautomation/text-formatting` URL is preserved).
