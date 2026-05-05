@@ -74,9 +74,9 @@ But if you want to draw a lot of shapes and want to do that fast and want to do 
 
 So now you should learn how to drop a single shape.
 
-This means loading a stencil document. The extension method OpenStencil makes this easy.
+This means loading a stencil document. The extension method `OpenStencil` makes this easy.
 
-Then find the master of the shape you want to drop - in this case "Rectange" - that is inside the stencil.
+Then find the master of the shape you want to drop - in this case "Rectangle" - that is inside the stencil.
 
 Then drop the shape.
 
@@ -95,3 +95,22 @@ A couple of notes here
 * over the years the stencils have changed&#x20;
 * they may have different filenames
 * the masters they contain may have different names or visual looks
+
+## Dropping multiple shapes
+
+You could call Drop for each shape. That will be slow. Instead use `DropMany`.
+
+```
+var stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
+var rectmaster = stencil.Masters["Rectangle"];
+var page = doc.Pages.Add();
+
+var centerpoints = new[] {
+    new VisioAutomation.Core.Point(1, 2),
+    new VisioAutomation.Core.Point(5, 4)
+};
+
+var masters = new[] { rectmaster, rectmaster };
+short[] shapeids = page.DropManyU(masters, centerpoints);
+```
+
