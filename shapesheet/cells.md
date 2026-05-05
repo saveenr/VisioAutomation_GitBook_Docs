@@ -87,4 +87,4 @@ var cc_src_row1 = cc_src_row0.ForRow(1);
 
 ## Converting between cell names and (s,r,c) values
 
-There is no built-in helper method in the library to convert between a cell name string (like `"PinX"`) and an `Src` value, or vice versa. The current recommended pattern is to use the `SrcConstants` named constants directly — e.g., `VA.Core.SrcConstants.PinX` — rather than starting from a string.
+There is no built-in helper method in the library to convert between a cell name string (like `"PinX"`) and an `Src` value, or vice versa. The current recommended pattern is to use the `SrcConstants` named constants directly, e.g., `VA.Core.SrcConstants.PinX`, rather than starting from a string.

@@ -48,5 +48,5 @@ var connectors = VisioAutomation.Shapes.ConnectorHelper.ConnectShapes(
 
 ## See also
 
-* [Connection points](connection-points.md) — where on a shape a connector can attach.
-* [Stencils and masters](stencils-and-masters.md) — loading connector masters from a stencil.
+* [Connection points](connection-points.md): where on a shape a connector can attach.
+* [Stencils and masters](stencils-and-masters.md): loading connector masters from a stencil.

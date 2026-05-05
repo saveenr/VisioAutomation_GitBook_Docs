@@ -1,6 +1,6 @@
 # Page layout cells
 
-`VisioAutomation.Pages.PageLayoutCells` covers the page-level cells that drive Visio's auto-layout engine &mdash; spacing between shapes ("avenues"), block sizes, line routing, line-jump style, placement direction, and the page-level resize / split / avoid-page-breaks flags. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page print cells](print.md), and [Page ruler and grid cells](ruler-grid.md).
+`VisioAutomation.Pages.PageLayoutCells` covers the page-level cells that drive Visio's auto-layout engine: spacing between shapes ("avenues"), block sizes, line routing, line-jump style, placement direction, and the page-level resize / split / avoid-page-breaks flags. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page print cells](print.md), and [Page ruler and grid cells](ruler-grid.md).
 
 These cells are mostly relevant when you're letting Visio re-arrange shapes for you (e.g. via [`Format-VisioPage -LayoutStyle`](https://saveenr.gitbook.io/visiopowershell/cmdlets/pages/format-visiopage) on the PowerShell side, or by passing a `LayoutStyle` to the page-level layout commands on the .NET side). The matching per-shape cells live in [`ShapeLayoutCells`](../shape-layout-cells.md).
 
@@ -85,7 +85,7 @@ Pass `CellValueType.Result` to read evaluated values instead of formulas.
 
 ## See also
 
-* [Page cells overview](../page-cells.md) &mdash; the four PageSheet records at a glance.
-* [Shape layout cells](../shape-layout-cells.md) &mdash; the matching per-shape record.
-* [Page format cells](format.md), [Page print cells](print.md), [Page ruler and grid cells](ruler-grid.md) &mdash; the other PageSheet records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Page cells overview](../page-cells.md): the four PageSheet records at a glance.
+* [Shape layout cells](../shape-layout-cells.md): the matching per-shape record.
+* [Page format cells](format.md), [Page print cells](print.md), [Page ruler and grid cells](ruler-grid.md): the other PageSheet records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

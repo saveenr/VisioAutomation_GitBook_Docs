@@ -1,6 +1,6 @@
 # One-off extensions
 
-A handful of extensions that don't fit cleanly into one of the other categories &mdash; alert-bypass quit, stencil opening, selection / view rectangles, and the `IList<int>` &rarr; `Shape[]` conversion used after `DropManyU`.
+A handful of extensions that don't fit cleanly into one of the other categories: alert-bypass quit, stencil opening, selection / view rectangles, and the `IList<int>` &rarr; `Shape[]` conversion used after `DropManyU`.
 
 To use the extensions, add a `using` directive at the top of your file:
 
@@ -22,7 +22,7 @@ using VisioAutomation.Extensions;
 
 ## See also
 
-* [Application](../application.md) &mdash; `ApplicationHelper` covers a few application-level operations that aren't extension methods.
-* [Stencils and masters](../stencils-and-masters.md) &mdash; uses `Documents.OpenStencil`.
-* [Master dropping](dropping.md) &mdash; `DropManyU` returns `short[]` IDs that `Shapes.GetShapesFromIDs` converts back to objects.
+* [Application](../application.md): `ApplicationHelper` covers a few application-level operations that aren't extension methods.
+* [Stencils and masters](../stencils-and-masters.md): uses `Documents.OpenStencil`.
+* [Master dropping](dropping.md): `DropManyU` returns `short[]` IDs that `Shapes.GetShapesFromIDs` converts back to objects.
 * [Extension methods overview](../extension-methods.md).

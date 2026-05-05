@@ -41,13 +41,13 @@ foreach (var session in log.LogSessions)
 
 | `LogSession` | `LogRecord` |
 | --- | --- |
-| `StartLine`, `EndLine` &mdash; the raw XML markers | `Type`, `SubType` &mdash; categorical fields written by Visio |
-| `FileType`, `Source` &mdash; metadata about what Visio recorded | `Context` &mdash; what Visio was doing when it logged the record |
-| `StartTimeRaw`, `StartTime` &mdash; raw and parsed timestamp | `Description` &mdash; human-readable detail |
-| `LogRecords` &mdash; the records in this session | |
+| `StartLine`, `EndLine`: the raw XML markers | `Type`, `SubType`: categorical fields written by Visio |
+| `FileType`, `Source`: metadata about what Visio recorded | `Context`: what Visio was doing when it logged the record |
+| `StartTimeRaw`, `StartTime`: raw and parsed timestamp | `Description`: human-readable detail |
+| `LogRecords`: the records in this session | |
 
 The constructor throws `ArgumentException` if the file doesn't exist.
 
 ## See also
 
-* [Application](application.md) &mdash; other application-level helpers.
+* [Application](application.md): other application-level helpers.

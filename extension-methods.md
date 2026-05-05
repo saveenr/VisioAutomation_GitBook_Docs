@@ -1,6 +1,6 @@
 # Extension methods
 
-`VisioAutomation.Extensions` is a namespace of extension methods that fill in gaps in Visio's COM API &mdash; LINQ-friendly enumeration over collection types, drawing primitives that take typed `Core.Rectangle` / `Core.Point` arguments, ShapeSheet I/O that takes typed `Src` / `SidSrc` arguments, and a handful of one-off conveniences.
+`VisioAutomation.Extensions` is a namespace of extension methods that fill in gaps in Visio's COM API: LINQ-friendly enumeration over collection types, drawing primitives that take typed `Core.Rectangle` / `Core.Point` arguments, ShapeSheet I/O that takes typed `Src` / `SidSrc` arguments, and a handful of one-off conveniences.
 
 To use any of them, add a `using` directive at the top of your file:
 
@@ -23,6 +23,6 @@ The extensions are grouped into six categories, each documented on its own page:
 
 ## See also
 
-* [Stencils and masters](stencils-and-masters.md) &mdash; uses `Drop` / `DropManyU` / `Documents.OpenStencil`.
-* [Query the ShapeSheet](shapesheet/query-the-shapesheet.md), [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md) &mdash; the high-level wrappers around the typed ShapeSheet I/O extensions.
-* [Application](application.md) &mdash; `ApplicationHelper` covers a few application-level operations not exposed as extension methods.
+* [Stencils and masters](stencils-and-masters.md): uses `Drop` / `DropManyU` / `Documents.OpenStencil`.
+* [Query the ShapeSheet](shapesheet/query-the-shapesheet.md), [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md): the high-level wrappers around the typed ShapeSheet I/O extensions.
+* [Application](application.md): `ApplicationHelper` covers a few application-level operations not exposed as extension methods.

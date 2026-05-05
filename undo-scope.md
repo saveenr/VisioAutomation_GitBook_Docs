@@ -22,7 +22,7 @@ The scope's `Name` is the label Visio shows in its Undo / Redo menu.
 
 ## Roll back instead of committing
 
-Set `Commit = false` before `Dispose` (or before the `using` block exits) to **discard** the scope &mdash; Visio will undo the contained edits as if they never happened. Useful when an exception fires partway through a transaction-like sequence.
+Set `Commit = false` before `Dispose` (or before the `using` block exits) to **discard** the scope; Visio will undo the contained edits as if they never happened. Useful when an exception fires partway through a transaction-like sequence.
 
 ```csharp
 using (var scope = new VisioAutomation.Application.UndoScope(app, "Risky edit"))
@@ -51,4 +51,4 @@ The constructor throws `ArgumentException` for an empty `name` and `ArgumentNull
 
 ## See also
 
-* [Application](application.md) &mdash; other application-level helpers.
+* [Application](application.md): other application-level helpers.

@@ -1,6 +1,6 @@
 # Exception types
 
-VisioAutomation defines three exception types under `VisioAutomation.Exceptions`. They are derived from `System.Exception` (via `AutomationException`), so any plain `catch (Exception)` will also catch them &mdash; but matching the specific type lets you distinguish a library-thrown error from one bubbling up from the COM layer.
+VisioAutomation defines three exception types under `VisioAutomation.Exceptions`. They are derived from `System.Exception` (via `AutomationException`), so any plain `catch (Exception)` will also catch them, but matching the specific type lets you distinguish a library-thrown error from one bubbling up from the COM layer.
 
 ## `AutomationException`
 
@@ -34,8 +34,8 @@ catch (VisioAutomation.Exceptions.VisioOperationException ex)
 
 ## `InternalAssertionException`
 
-Thrown when the library encounters an inconsistency that "shouldn't be possible" &mdash; e.g., Visio returned a different section index than the one just requested. If you see this in production code, it's a library bug worth filing rather than a normal error condition; catching it makes sense only at the very top level of a script.
+Thrown when the library encounters an inconsistency that "shouldn't be possible", e.g., Visio returned a different section index than the one just requested. If you see this in production code, it's a library bug worth filing rather than a normal error condition; catching it makes sense only at the very top level of a script.
 
 ## See also
 
-* [Application](application.md) &mdash; other application-level helpers, where some of these exceptions can fire.
+* [Application](application.md): other application-level helpers, where some of these exceptions can fire.

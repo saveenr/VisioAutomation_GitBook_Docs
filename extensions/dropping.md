@@ -26,11 +26,11 @@ var s = page.Drop(rectmaster, new VisioAutomation.Core.Point(2.0, 1.0));
 
 ## Batch dropping
 
-`DropManyU` is the same operation in batch &mdash; one `IVisio.DropManyU` COM call for many shapes, much faster than calling `Drop` in a loop. `DropManyU` returns shape IDs; turn them back into `Shape` objects with `Shapes.GetShapesFromIDs` (see the [one-offs](misc.md) page).
+`DropManyU` is the same operation in batch: one `IVisio.DropManyU` COM call for many shapes, much faster than calling `Drop` in a loop. `DropManyU` returns shape IDs; turn them back into `Shape` objects with `Shapes.GetShapesFromIDs` (see the [one-offs](misc.md) page).
 
 ## See also
 
-* [Stencils and masters](../stencils-and-masters.md) &mdash; opening stencils and finding masters.
-* [Drawing primitives](drawing.md) &mdash; for drawn (non-master) shapes.
-* [One-off extensions](misc.md) &mdash; `Shapes.GetShapesFromIDs` to convert the IDs returned by `DropManyU` back into objects.
+* [Stencils and masters](../stencils-and-masters.md): opening stencils and finding masters.
+* [Drawing primitives](drawing.md): for drawn (non-master) shapes.
+* [One-off extensions](misc.md): `Shapes.GetShapesFromIDs` to convert the IDs returned by `DropManyU` back into objects.
 * [Extension methods overview](../extension-methods.md).

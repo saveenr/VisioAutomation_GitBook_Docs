@@ -63,4 +63,4 @@ int removed = VisioAutomation.Shapes.ConnectionPointHelper.Delete(shape);
 
 ## See also
 
-* [Connectors](connectors.md) — how shapes get wired together. Connection points define where a connector can attach.
+* [Connectors](connectors.md): how shapes get wired together. Connection points define where a connector can attach.

@@ -1,6 +1,6 @@
 # LINQ bridges over the COM collection types
 
-Visio's COM collection types (`IVisio.Pages`, `IVisio.Shapes`, etc.) don't implement `IEnumerable<T>` &mdash; they predate generics and use the legacy `Count` + 1-based indexer pattern. The extensions add `ToEnumerable()` and `ToList()` overloads so you can use LINQ against them directly.
+Visio's COM collection types (`IVisio.Pages`, `IVisio.Shapes`, etc.) don't implement `IEnumerable<T>`; they predate generics and use the legacy `Count` + 1-based indexer pattern. The extensions add `ToEnumerable()` and `ToList()` overloads so you can use LINQ against them directly.
 
 To use them, add a `using` directive at the top of your file:
 
@@ -40,4 +40,4 @@ var backup_pages = doc.Pages.ToEnumerable()
 
 ## See also
 
-* [Extension methods overview](../extension-methods.md) &mdash; the rest of the `VisioAutomation.Extensions` namespace.
+* [Extension methods overview](../extension-methods.md): the rest of the `VisioAutomation.Extensions` namespace.

@@ -38,6 +38,6 @@ var poly = page.DrawPolyline(pts);
 
 ## See also
 
-* [Master dropping](dropping.md) &mdash; the other way to get shapes onto a page.
-* [Geometry](../geometry.md) &mdash; building custom paths via `GeometrySection` / `GeometryRow` once a shape exists.
+* [Master dropping](dropping.md): the other way to get shapes onto a page.
+* [Geometry](../geometry.md): building custom paths via `GeometrySection` / `GeometryRow` once a shape exists.
 * [Extension methods overview](../extension-methods.md).

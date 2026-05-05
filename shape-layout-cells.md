@@ -1,6 +1,6 @@
 # Shape layout cells
 
-`VisioAutomation.Shapes.ShapeLayoutCells` covers the per-shape cells in the **Shape Layout** section &mdash; placement, routing, and line-jump behavior used by Visio's auto-layout engine. It is one of the three `Shape*Cells` records; the others are [Shape XForm cells](shape-xform-cells.md) and [Shape format cells](shape-format-cells.md).
+`VisioAutomation.Shapes.ShapeLayoutCells` covers the per-shape cells in the **Shape Layout** section: placement, routing, and line-jump behavior used by Visio's auto-layout engine. It is one of the three `Shape*Cells` records; the others are [Shape XForm cells](shape-xform-cells.md) and [Shape format cells](shape-format-cells.md).
 
 These cells are mostly relevant when you're letting Visio re-arrange shapes for you (e.g. via [`Format-VisioPage -LayoutStyle`](https://saveenr.gitbook.io/visiopowershell/cmdlets/pages/format-visiopage) on the PowerShell side, or by passing a `LayoutStyle` to the page-level layout commands on the .NET side). For purely manual placement they can usually be left at their defaults.
 
@@ -67,7 +67,7 @@ Pass `CellValueType.Result` to read evaluated values instead of formulas.
 
 ## See also
 
-* [Shape cells overview](shape-cells.md) &mdash; the three `Shape*Cells` records at a glance.
-* [Shape XForm cells](shape-xform-cells.md), [Shape format cells](shape-format-cells.md) &mdash; the other two records; combine multiple records in one writer.
-* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` / `SidSrcWriter` API.
-* [Page cells](page-cells.md) &mdash; the page-level `PageLayoutCells` record holds the matching layout-engine settings for the whole page.
+* [Shape cells overview](shape-cells.md): the three `Shape*Cells` records at a glance.
+* [Shape XForm cells](shape-xform-cells.md), [Shape format cells](shape-format-cells.md): the other two records; combine multiple records in one writer.
+* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` / `SidSrcWriter` API.
+* [Page cells](page-cells.md): the page-level `PageLayoutCells` record holds the matching layout-engine settings for the whole page.

@@ -1,6 +1,6 @@
 # Analyzers
 
-`VisioAutomation.Analyzers` provides a small set of utilities for **inspecting** an existing Visio diagram &mdash; reading its structure rather than building it. The current public surface is focused on connector analysis: extracting the directed graph of how shapes are connected on a page.
+`VisioAutomation.Analyzers` provides a small set of utilities for **inspecting** an existing Visio diagram, reading its structure rather than building it. The current public surface is focused on connector analysis: extracting the directed graph of how shapes are connected on a page.
 
 ## `ConnectionAnalyzer.GetDirectedEdges`
 
@@ -64,4 +64,4 @@ It's used internally by `GetDirectedEdges` and is reusable when you need to buil
 
 ## See also
 
-* [Connectors](connectors.md) &mdash; building connections programmatically (the inverse direction).
+* [Connectors](connectors.md): building connections programmatically (the inverse direction).

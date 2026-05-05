@@ -1,6 +1,6 @@
 # Shape XForm cells
 
-`VisioAutomation.Shapes.ShapeXFormCells` covers the seven cells in a shape's `Shape Transform` section &mdash; size, position, rotation, and the local "pin" (anchor) point. It is one of the three `Shape*Cells` records; the others are [Shape format cells](shape-format-cells.md) and [Shape layout cells](shape-layout-cells.md).
+`VisioAutomation.Shapes.ShapeXFormCells` covers the seven cells in a shape's `Shape Transform` section: size, position, rotation, and the local "pin" (anchor) point. It is one of the three `Shape*Cells` records; the others are [Shape format cells](shape-format-cells.md) and [Shape layout cells](shape-layout-cells.md).
 
 ## The `ShapeXFormCells` record
 
@@ -50,6 +50,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Shape cells overview](shape-cells.md) &mdash; the three `Shape*Cells` records at a glance.
-* [Shape format cells](shape-format-cells.md), [Shape layout cells](shape-layout-cells.md) &mdash; the other two records; combine multiple records in one writer.
-* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` / `SidSrcWriter` API.
+* [Shape cells overview](shape-cells.md): the three `Shape*Cells` records at a glance.
+* [Shape format cells](shape-format-cells.md), [Shape layout cells](shape-layout-cells.md): the other two records; combine multiple records in one writer.
+* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` / `SidSrcWriter` API.

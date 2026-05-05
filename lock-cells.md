@@ -2,7 +2,7 @@
 
 The `Protection.` section of a shape's ShapeSheet holds 20 named **lock cells** (`LockMoveX`, `LockSelect`, `LockTextEdit`, &hellip;) that tell Visio to refuse certain user operations on the shape. VisioAutomation exposes them via the `VisioAutomation.Shapes.LockCells` record. Set a cell to `1` to enable the lock, `0` to clear it.
 
-There is no separate "helper" class &mdash; you just construct a `LockCells` and write it through the standard ShapeSheet writer.
+There is no separate "helper" class; you just construct a `LockCells` and write it through the standard ShapeSheet writer.
 
 ## The `LockCells` record
 
@@ -70,5 +70,5 @@ var locks_per_shape = VisioAutomation.Shapes.LockCells.GetCells(
 
 ## See also
 
-* [Custom properties](custom-properties.md) &mdash; the read/write pattern is the same shape (cell record + helper).
-* [ShapeSheet &mdash; modify](shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` flow.
+* [Custom properties](custom-properties.md): the read/write pattern is the same shape (cell record + helper).
+* [ShapeSheet: modify](shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` flow.

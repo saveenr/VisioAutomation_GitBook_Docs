@@ -1,6 +1,6 @@
 # Hyperlinks
 
-A Visio shape can carry one or more **hyperlinks** — targets that the user can navigate to from the shape (URLs, file paths, or sub-addresses such as a specific page or bookmark). VisioAutomation exposes them via `VisioAutomation.Shapes.HyperlinkHelper` and the `HyperlinkCells` record.
+A Visio shape can carry one or more **hyperlinks**: targets that the user can navigate to from the shape (URLs, file paths, or sub-addresses such as a specific page or bookmark). VisioAutomation exposes them via `VisioAutomation.Shapes.HyperlinkHelper` and the `HyperlinkCells` record.
 
 ## The `HyperlinkCells` record
 
@@ -27,7 +27,7 @@ hl.Description = "Microsoft Learn";
 int row = VisioAutomation.Shapes.HyperlinkHelper.Add(shape, hl);
 ```
 
-The `Address` field is required — `Add` throws if it's null.
+The `Address` field is required; `Add` throws if it's null.
 
 ## Update an existing hyperlink
 
@@ -57,4 +57,4 @@ VisioAutomation.Shapes.HyperlinkHelper.Delete(shape, 0);   // first hyperlink
 
 ## See also
 
-* [`Custom properties`](custom-properties.md) — the parallel mechanism for arbitrary shape metadata.
+* [`Custom properties`](custom-properties.md): the parallel mechanism for arbitrary shape metadata.

@@ -1,6 +1,6 @@
 # Page print cells
 
-`VisioAutomation.Pages.PagePrintCells` covers the cells in a page's **Print Properties** section &mdash; margins, paper kind, orientation, scale, the centering / fit-to-N-pages flags, and the printer source. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page layout cells](layout.md), and [Page ruler and grid cells](ruler-grid.md).
+`VisioAutomation.Pages.PagePrintCells` covers the cells in a page's **Print Properties** section: margins, paper kind, orientation, scale, the centering / fit-to-N-pages flags, and the printer source. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page layout cells](layout.md), and [Page ruler and grid cells](ruler-grid.md).
 
 ## The `PagePrintCells` record
 
@@ -66,6 +66,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Page cells overview](../page-cells.md) &mdash; the four PageSheet records at a glance.
-* [Page format cells](format.md), [Page layout cells](layout.md), [Page ruler and grid cells](ruler-grid.md) &mdash; the other PageSheet records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Page cells overview](../page-cells.md): the four PageSheet records at a glance.
+* [Page format cells](format.md), [Page layout cells](layout.md), [Page ruler and grid cells](ruler-grid.md): the other PageSheet records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

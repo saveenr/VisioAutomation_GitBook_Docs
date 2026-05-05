@@ -1,6 +1,6 @@
 # Page format cells
 
-`VisioAutomation.Pages.PageFormatCells` covers the cells in a page's **Page Properties** section &mdash; size, drawing scale, drawing-size type, page-shadow cells, and the ResizeType / UIVisibility flags. It is one of the four PageSheet records; the others are [Page layout cells](layout.md), [Page print cells](print.md), and [Page ruler and grid cells](ruler-grid.md).
+`VisioAutomation.Pages.PageFormatCells` covers the cells in a page's **Page Properties** section: size, drawing scale, drawing-size type, page-shadow cells, and the ResizeType / UIVisibility flags. It is one of the four PageSheet records; the others are [Page layout cells](layout.md), [Page print cells](print.md), and [Page ruler and grid cells](ruler-grid.md).
 
 ## The `PageFormatCells` record
 
@@ -32,7 +32,7 @@ All fields are `Core.CellValue`-typed and accept implicit conversions from strin
 
 ## Set page size
 
-Construct the record, set the fields you want, hand it to a `SrcWriter`, commit. Cells you don't set are left untouched. PageSheet writes use the same `SrcWriter` as Shape writes &mdash; just commit against `page.PageSheet` instead of a shape.
+Construct the record, set the fields you want, hand it to a `SrcWriter`, commit. Cells you don't set are left untouched. PageSheet writes use the same `SrcWriter` as Shape writes; just commit against `page.PageSheet` instead of a shape.
 
 ```csharp
 var fmt = new VisioAutomation.Pages.PageFormatCells();
@@ -62,7 +62,7 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Page cells overview](../page-cells.md) &mdash; the four PageSheet records at a glance.
-* [Page helper](helper.md) &mdash; `SetSize` / `GetSize` shortcut and other page-level operations.
-* [Page layout cells](layout.md), [Page print cells](print.md), [Page ruler and grid cells](ruler-grid.md) &mdash; the other PageSheet records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Page cells overview](../page-cells.md): the four PageSheet records at a glance.
+* [Page helper](helper.md): `SetSize` / `GetSize` shortcut and other page-level operations.
+* [Page layout cells](layout.md), [Page print cells](print.md), [Page ruler and grid cells](ruler-grid.md): the other PageSheet records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

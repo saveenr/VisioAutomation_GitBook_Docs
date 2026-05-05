@@ -29,6 +29,6 @@ var local = shape.XYFromPage(new VisioAutomation.Core.Point(5.0, 4.0));
 
 ## See also
 
-* [Page cells](../page-cells.md) &mdash; `PageHelper.ResizeToFitContents` is the underlying implementation, and is also reachable directly.
-* [Geometry](../geometry.md) &mdash; the geometry-section model for shapes that need a custom path rather than just bounding-box / coordinate work.
+* [Page cells](../page-cells.md): `PageHelper.ResizeToFitContents` is the underlying implementation, and is also reachable directly.
+* [Geometry](../geometry.md): the geometry-section model for shapes that need a custom path rather than just bounding-box / coordinate work.
 * [Extension methods overview](../extension-methods.md).

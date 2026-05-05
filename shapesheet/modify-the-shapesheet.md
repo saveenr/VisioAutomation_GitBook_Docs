@@ -25,9 +25,9 @@ writer.SetValue(VA.Core.SrcConstants.XFormPinX, "5.0");
 writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
 
-`SrcConstants` exposes the well-known cells using their cell-record-prefixed names — `XFormPinX` / `XFormPinY` for the position cells, `XFormWidth` / `XFormHeight` for the size cells, etc. The `SrcConstants.cs` source file is the authoritative list.
+`SrcConstants` exposes the well-known cells using their cell-record-prefixed names: `XFormPinX` / `XFormPinY` for the position cells, `XFormWidth` / `XFormHeight` for the size cells, etc. The `SrcConstants.cs` source file is the authoritative list.
 
-`SetValue` accepts strings, ints, doubles, and bools directly thanks to implicit conversion to `Core.CellValue` — so the example below also works:
+`SetValue` accepts strings, ints, doubles, and bools directly thanks to implicit conversion to `Core.CellValue`, so the example below also works:
 
 ```csharp
 var writer = new VA.ShapeSheet.Writers.SrcWriter();
@@ -61,7 +61,7 @@ writer.SetValue(VA.Core.SrcConstants.XFormPinX, 5.0);
 writer.Commit(shape1, VA.Core.CellValueType.Result);
 ```
 
-A single writer commits either all-formulas or all-results — to do both, build two writers and commit each separately.
+A single writer commits either all-formulas or all-results; to do both, build two writers and commit each separately.
 
 ## Updating cells across multiple shapes
 

@@ -23,6 +23,6 @@ In practice you'll usually go through the higher-level `CellQuery` / `SectionQue
 
 ## See also
 
-* [Query the ShapeSheet](../shapesheet/query-the-shapesheet.md), [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the recommended high-level wrappers.
-* [SRC structs](../shapesheet/cells.md) &mdash; how cells are addressed.
+* [Query the ShapeSheet](../shapesheet/query-the-shapesheet.md), [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the recommended high-level wrappers.
+* [SRC structs](../shapesheet/cells.md): how cells are addressed.
 * [Extension methods overview](../extension-methods.md).

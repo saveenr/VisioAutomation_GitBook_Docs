@@ -59,6 +59,6 @@ foreach (var ts in existing)
 
 ## See also
 
-* [Text formatting overview](../text-formatting.md) &mdash; the three text-formatting cell records and this helper at a glance.
-* [Text-block cells](block.md) &mdash; `DefaultTabStop` on the box governs the *default* spacing when no per-stop entries are defined.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API used by `SetTabStops`.
+* [Text formatting overview](../text-formatting.md): the three text-formatting cell records and this helper at a glance.
+* [Text-block cells](block.md): `DefaultTabStop` on the box governs the *default* spacing when no per-stop entries are defined.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API used by `SetTabStops`.

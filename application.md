@@ -1,6 +1,6 @@
 # Application
 
-`VisioAutomation.Application.ApplicationHelper` provides a small set of helpers around the `IVisio.Application` COM object &mdash; version detection, alert-bypass shutdown, content-folder location, and bringing the Visio window to the foreground.
+`VisioAutomation.Application.ApplicationHelper` provides a small set of helpers around the `IVisio.Application` COM object: version detection, alert-bypass shutdown, content-folder location, and bringing the Visio window to the foreground.
 
 ## Get the Visio version
 
@@ -46,4 +46,4 @@ VisioAutomation.Application.ApplicationHelper.BringWindowToTop(app);
 
 ## See also
 
-* [Stencils and masters](stencils-and-masters.md) &mdash; opening stencils relative to the Visio Content folder.
+* [Stencils and masters](stencils-and-masters.md): opening stencils relative to the Visio Content folder.

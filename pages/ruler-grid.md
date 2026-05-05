@@ -1,6 +1,6 @@
 # Page ruler and grid cells
 
-`VisioAutomation.Pages.PageRulerAndGridCells` covers the ten cells in a page's **Ruler & Grid** section &mdash; ruler density and origin per axis, grid density / origin / spacing per axis. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page layout cells](layout.md), and [Page print cells](print.md).
+`VisioAutomation.Pages.PageRulerAndGridCells` covers the ten cells in a page's **Ruler & Grid** section: ruler density and origin per axis, grid density / origin / spacing per axis. It is one of the four PageSheet records; the others are [Page format cells](format.md), [Page layout cells](layout.md), and [Page print cells](print.md).
 
 ## The `PageRulerAndGridCells` record
 
@@ -54,6 +54,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Page cells overview](../page-cells.md) &mdash; the four PageSheet records at a glance.
-* [Page format cells](format.md), [Page layout cells](layout.md), [Page print cells](print.md) &mdash; the other PageSheet records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Page cells overview](../page-cells.md): the four PageSheet records at a glance.
+* [Page format cells](format.md), [Page layout cells](layout.md), [Page print cells](print.md): the other PageSheet records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

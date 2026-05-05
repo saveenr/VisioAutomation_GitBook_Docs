@@ -1,6 +1,6 @@
 # Geometry
 
-Most Visio shapes are *masters* dropped onto a page &mdash; their geometry comes pre-baked. When you need to draw a custom path (a rectangle that's not a master, a polyline, an arc), you build it as one or more **geometry sections** in the shape's ShapeSheet. VisioAutomation exposes this via `VisioAutomation.Shapes.GeometryHelper`, `GeometrySection`, and `GeometryRow`.
+Most Visio shapes are *masters* dropped onto a page; their geometry comes pre-baked. When you need to draw a custom path (a rectangle that's not a master, a polyline, an arc), you build it as one or more **geometry sections** in the shape's ShapeSheet. VisioAutomation exposes this via `VisioAutomation.Shapes.GeometryHelper`, `GeometrySection`, and `GeometryRow`.
 
 ## Concepts
 
@@ -64,7 +64,7 @@ GeometryRow.CreateArcTo(x, y, a);          // a = arc bulge
 
 ## Add another section to an existing shape
 
-`GeometryHelper.AddSection(shape)` adds a new (empty) geometry section and returns its section index. `GeometrySection.Render` already calls this internally, so the typical pattern is to build a `GeometrySection`, set its rows, and call `Render` &mdash; you don't normally call `AddSection` directly.
+`GeometryHelper.AddSection(shape)` adds a new (empty) geometry section and returns its section index. `GeometrySection.Render` already calls this internally, so the typical pattern is to build a `GeometrySection`, set its rows, and call `Render`; you don't normally call `AddSection` directly.
 
 ## Delete all geometry sections
 
@@ -76,5 +76,5 @@ This removes every `Geometry1`, `Geometry2`, ... section from the shape.
 
 ## See also
 
-* [Stencils and masters](stencils-and-masters.md) &mdash; for non-custom geometry, drop a master instead.
-* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md) &mdash; geometry rows are committed through the same `SrcWriter` infrastructure.
+* [Stencils and masters](stencils-and-masters.md): for non-custom geometry, drop a master instead.
+* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md): geometry rows are committed through the same `SrcWriter` infrastructure.

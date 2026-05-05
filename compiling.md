@@ -4,7 +4,7 @@
 
 * Windows 10 or above
 * Visio 2010 or above
-* Visual Studio 2022 (Visual Studio 2026 is not yet supported &mdash; its MSBuild does not resolve the .NET Framework 4.5.2 reference assemblies that the shipping libraries target)
+* Visual Studio 2022 (Visual Studio 2026 is not yet supported: its MSBuild does not resolve the .NET Framework 4.5.2 reference assemblies that the shipping libraries target)
 * The .NET Framework **4.5.2 Developer Pack** (the reference assemblies are not bundled with modern Windows install media). Easiest install: `choco install netfx-4.5.2-devpack -y`.
 
 ## Notes

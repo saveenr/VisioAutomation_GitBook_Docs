@@ -24,6 +24,6 @@ writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
 
 ## See also
 
-* [Shape XForm cells](shape-xform-cells.md), [Shape format cells](shape-format-cells.md), [Shape layout cells](shape-layout-cells.md) &mdash; the per-record details.
-* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` / `SidSrcWriter` API.
-* [Lock cells](lock-cells.md), [Custom properties](custom-properties.md), [User-defined cells](user-defined-cells.md) &mdash; other per-shape ShapeSheet records.
+* [Shape XForm cells](shape-xform-cells.md), [Shape format cells](shape-format-cells.md), [Shape layout cells](shape-layout-cells.md): the per-record details.
+* [Modify the ShapeSheet](shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` / `SidSrcWriter` API.
+* [Lock cells](lock-cells.md), [Custom properties](custom-properties.md), [User-defined cells](user-defined-cells.md): other per-shape ShapeSheet records.

@@ -1,6 +1,6 @@
 # Character cells
 
-`VisioAutomation.Text.CharacterCells` covers the per-run character properties stored in a shape's **Character** ShapeSheet section &mdash; font, size, color, weight / italic / underline, language, etc. It is one of the three text-formatting cell records; the others are [Paragraph cells](paragraph.md) and [Text-block cells](block.md). Tab stops are handled separately by [`TextHelper`](tab-stops.md).
+`VisioAutomation.Text.CharacterCells` covers the per-run character properties stored in a shape's **Character** ShapeSheet section: font, size, color, weight / italic / underline, language, etc. It is one of the three text-formatting cell records; the others are [Paragraph cells](paragraph.md) and [Text-block cells](block.md). Tab stops are handled separately by [`TextHelper`](tab-stops.md).
 
 A shape can have multiple character rows, one per text run. See [Multiple rows](#multiple-rows) below.
 
@@ -63,7 +63,7 @@ writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
 
 ## Multiple rows
 
-The Character section can hold multiple rows &mdash; one per text run. Pass a row index to `SetValues` to target a specific row:
+The Character section can hold multiple rows: one per text run. Pass a row index to `SetValues` to target a specific row:
 
 ```csharp
 var run0 = new VisioAutomation.Text.CharacterCells();
@@ -85,7 +85,7 @@ The same multi-row pattern applies to `ParagraphCells` (one row per paragraph).
 
 ## Read existing values
 
-`GetCells(shape, CellValueType)` returns a `CellRecords<CharacterCells>` &mdash; one entry per character row on the shape. The page-level overload `GetCells(page, ShapeIDPairs, CellValueType)` reads many shapes in one batched call.
+`GetCells(shape, CellValueType)` returns a `CellRecords<CharacterCells>`: one entry per character row on the shape. The page-level overload `GetCells(page, ShapeIDPairs, CellValueType)` reads many shapes in one batched call.
 
 ```csharp
 // All character rows on one shape:
@@ -103,6 +103,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Text formatting overview](../text-formatting.md) &mdash; the three text-formatting records at a glance.
-* [Paragraph cells](paragraph.md), [Text-block cells](block.md), [Tab stops](tab-stops.md) &mdash; the other text-formatting records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Text formatting overview](../text-formatting.md): the three text-formatting records at a glance.
+* [Paragraph cells](paragraph.md), [Text-block cells](block.md), [Tab stops](tab-stops.md): the other text-formatting records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

@@ -1,8 +1,8 @@
 # Paragraph cells
 
-`VisioAutomation.Text.ParagraphCells` covers the per-paragraph properties stored in a shape's **Paragraph** ShapeSheet section &mdash; alignment, indent, spacing, and bullet settings. It is one of the three text-formatting cell records; the others are [Character cells](character.md) and [Text-block cells](block.md). Tab stops are handled separately by [`TextHelper`](tab-stops.md).
+`VisioAutomation.Text.ParagraphCells` covers the per-paragraph properties stored in a shape's **Paragraph** ShapeSheet section: alignment, indent, spacing, and bullet settings. It is one of the three text-formatting cell records; the others are [Character cells](character.md) and [Text-block cells](block.md). Tab stops are handled separately by [`TextHelper`](tab-stops.md).
 
-A shape can have multiple paragraph rows, one per paragraph. See the [multi-row pattern](character.md#multiple-rows) on the character-cells page &mdash; the same `SetValues(record, rowIndex)` overload applies here.
+A shape can have multiple paragraph rows, one per paragraph. See the [multi-row pattern](character.md#multiple-rows) on the character-cells page; the same `SetValues(record, rowIndex)` overload applies here.
 
 ## The `ParagraphCells` record
 
@@ -49,7 +49,7 @@ writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
 
 ## Read existing values
 
-`GetCells(shape, CellValueType)` returns a `CellRecords<ParagraphCells>` &mdash; one entry per paragraph row on the shape. The page-level overload `GetCells(page, ShapeIDPairs, CellValueType)` reads many shapes in one batched call.
+`GetCells(shape, CellValueType)` returns a `CellRecords<ParagraphCells>`: one entry per paragraph row on the shape. The page-level overload `GetCells(page, ShapeIDPairs, CellValueType)` reads many shapes in one batched call.
 
 ```csharp
 var rows = VisioAutomation.Text.ParagraphCells.GetCells(
@@ -66,6 +66,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Text formatting overview](../text-formatting.md) &mdash; the three text-formatting records at a glance.
-* [Character cells](character.md), [Text-block cells](block.md), [Tab stops](tab-stops.md) &mdash; the other text-formatting records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Text formatting overview](../text-formatting.md): the three text-formatting records at a glance.
+* [Character cells](character.md), [Text-block cells](block.md), [Tab stops](tab-stops.md): the other text-formatting records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.

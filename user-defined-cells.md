@@ -40,7 +40,7 @@ cells.Prompt = "The answer";
 VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape1, "MyCell", cells);
 ```
 
-Both `Value` and `Prompt` are `Core.CellValue` properties — implicit conversions let you assign strings, ints, doubles, or bools directly without constructing a `CellValue`.
+Both `Value` and `Prompt` are `Core.CellValue` properties; implicit conversions let you assign strings, ints, doubles, or bools directly without constructing a `CellValue`.
 
 ## Count and enumerate cells
 

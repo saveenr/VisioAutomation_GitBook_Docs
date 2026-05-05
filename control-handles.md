@@ -30,7 +30,7 @@ ctrl.Tip = "Adjust";
 int row2 = VisioAutomation.Shapes.ControlHelper.Add(shape, ctrl);
 ```
 
-The `Add` overload that takes `ControlCells` auto-defaults `XDynamics` / `YDynamics` to `Controls.Row_N` / `Controls.Row_N.Y` if you leave them null — that's the standard self-referential dynamics for a free handle.
+The `Add` overload that takes `ControlCells` auto-defaults `XDynamics` / `YDynamics` to `Controls.Row_N` / `Controls.Row_N.Y` if you leave them null; that's the standard self-referential dynamics for a free handle.
 
 ## Update an existing control handle
 

@@ -1,6 +1,6 @@
 # Page helper methods
 
-`VisioAutomation.Pages.PageHelper` is a small static class of one-line shortcuts for common page-level operations &mdash; getting / setting the page size, resizing to fit contents (with optional padding), and duplicating an entire page including its PageSheet cells and shapes.
+`VisioAutomation.Pages.PageHelper` is a small static class of one-line shortcuts for common page-level operations: getting / setting the page size, resizing to fit contents (with optional padding), and duplicating an entire page including its PageSheet cells and shapes.
 
 These are convenience wrappers; for full control over the underlying ShapeSheet cells use the four cell records ([format](format.md), [layout](layout.md), [print](print.md), [ruler-grid](ruler-grid.md)) directly.
 
@@ -48,5 +48,5 @@ VisioAutomation.Pages.PageHelper.Duplicate(src, dest);
 
 ## See also
 
-* [Page cells overview](../page-cells.md) &mdash; the four PageSheet records at a glance.
-* [Coordinates and bounding boxes](../extensions/coordinates.md) &mdash; the matching extension method that wraps `ResizeToFitContents`.
+* [Page cells overview](../page-cells.md): the four PageSheet records at a glance.
+* [Coordinates and bounding boxes](../extensions/coordinates.md): the matching extension method that wraps `ResizeToFitContents`.

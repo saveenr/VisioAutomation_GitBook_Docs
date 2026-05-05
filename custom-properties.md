@@ -19,12 +19,12 @@ VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
 
 `CustomPropertyCells` exposes the full set of property fields as `Core.CellValue` properties:
 
-* `Value` — the property's value
-* `Prompt` — tooltip / hint shown to the user
-* `Label` — display label
-* `Format` — formatting expression
-* `Type` — data type (numeric, string, date, …)
-* `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask` — additional control fields
+* `Value`: the property's value
+* `Prompt`: tooltip / hint shown to the user
+* `Label`: display label
+* `Format`: formatting expression
+* `Type`: data type (numeric, string, date, …)
+* `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask`: additional control fields
 
 All are `Core.CellValue`-typed and accept implicit conversions from strings, ints, doubles, and bools.
 
@@ -43,11 +43,11 @@ foreach (var kv in props)
 }
 ```
 
-The returned dictionary's values are `CustomPropertyCells` objects — so you can inspect each property's full set of fields, not just the value.
+The returned dictionary's values are `CustomPropertyCells` objects, so you can inspect each property's full set of fields, not just the value.
 
 ## Read from multiple shapes
 
-For multiple shapes on the same page, build a `ShapeIDPairs` and use the page-level overload — one batched Visio call per page:
+For multiple shapes on the same page, build a `ShapeIDPairs` and use the page-level overload, one batched Visio call per page:
 
 ```csharp
 var pairs = VisioAutomation.Core.ShapeIDPairs.FromShapes(s1, s2);

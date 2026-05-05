@@ -1,13 +1,13 @@
 # Query the ShapeSheet
 
-A ShapeSheet query is a high-performance way of retrieving cell data from one or more shapes — VisioAutomation batches the work into a single COM call into Visio, much faster than reading cells one at a time through the `Cells[…]` indexer.
+A ShapeSheet query is a high-performance way of retrieving cell data from one or more shapes: VisioAutomation batches the work into a single COM call into Visio, much faster than reading cells one at a time through the `Cells[…]` indexer.
 
 You can retrieve:
 
 * **Formulas** (the textual expression in each cell)
 * **Results** (the evaluated value, returnable as `double`, `int`, `bool`, or `string`)
 
-Choose between formulas and results per call — `GetFormulas(...)` vs `GetResults<T>(...)`.
+Choose between formulas and results per call: `GetFormulas(...)` vs `GetResults<T>(...)`.
 
 You can query:
 
@@ -16,12 +16,12 @@ You can query:
 
 There are two query types:
 
-* **`CellQuery`** — for retrieving specifically identified cells
-* **`SectionQuery`** — an optimized way of retrieving all rows across one section (e.g., every custom property, every connection point)
+* **`CellQuery`**: for retrieving specifically identified cells
+* **`SectionQuery`**: an optimized way of retrieving all rows across one section (e.g., every custom property, every connection point)
 
 ## Building a query
 
-Create a query, add one column for each cell you want, then call `GetFormulas` or `GetResults<T>`. The return value's exact type depends on which query and which overload — see the table below.
+Create a query, add one column for each cell you want, then call `GetFormulas` or `GetResults<T>`. The return value's exact type depends on which query and which overload. See the table below.
 
 | Method | Return type |
 |---|---|
@@ -82,7 +82,7 @@ VA.ShapeSheet.Data.DataRows<string> results_string = query.GetResults<string>(sh
 
 ## Querying a section on a single shape
 
-Imagine you want every row in a particular section — for example, every custom property of a shape. A `SectionQuery` is the optimized path for that. You build it by adding one or more sections (each call returns a `DataColumns` you then add cell columns to); all rows in those sections are returned.
+Imagine you want every row in a particular section, for example, every custom property of a shape. A `SectionQuery` is the optimized path for that. You build it by adding one or more sections (each call returns a `DataColumns` you then add cell columns to); all rows in those sections are returned.
 
 ```csharp
 var query = new VA.ShapeSheet.Query.SectionQuery();
@@ -91,7 +91,7 @@ sec_cols.Add(VA.Core.SrcConstants.CharColor);
 var formulas = query.GetFormulas(shape1);     // Data.DataRowGroup<string>
 ```
 
-The return type is `DataRowGroup<T>` — a single group (one shape) containing one `DataRows<T>` per section that was added to the query. Each `DataRows<T>` then contains one `DataRow<T>` per row in that section, and a row's cells are indexed by column. So iterating goes section → row → cell:
+The return type is `DataRowGroup<T>`: a single group (one shape) containing one `DataRows<T>` per section that was added to the query. Each `DataRows<T>` then contains one `DataRow<T>` per row in that section, and a row's cells are indexed by column. So iterating goes section → row → cell:
 
 ```csharp
 foreach (var section in formulas)
@@ -131,4 +131,4 @@ var pairs = VA.Core.ShapeIDPairs.FromShapes(s1, s2, s3, s4);
 var formulas = query.GetFormulas(page1, pairs);       // Data.DataRowGroups<string>
 ```
 
-`DataRowGroups<T>` is a list of `DataRowGroup<T>` — one group per shape, each group containing the rows from that shape's section. A group can contain zero rows if the section doesn't exist on that shape or has no rows.
+`DataRowGroups<T>` is a list of `DataRowGroup<T>`: one group per shape, each group containing the rows from that shape's section. A group can contain zero rows if the section doesn't exist on that shape or has no rows.

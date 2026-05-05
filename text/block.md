@@ -1,6 +1,6 @@
 # Text-block cells
 
-`VisioAutomation.Text.TextBlockCells` covers the box-level text settings stored in a shape's **Text Block** ShapeSheet section &mdash; margins, vertical alignment, default tab stop, background fill, and writing direction. Unlike [Character cells](character.md) and [Paragraph cells](paragraph.md), which can hold many rows per shape, the Text Block section has exactly one row.
+`VisioAutomation.Text.TextBlockCells` covers the box-level text settings stored in a shape's **Text Block** ShapeSheet section: margins, vertical alignment, default tab stop, background fill, and writing direction. Unlike [Character cells](character.md) and [Paragraph cells](paragraph.md), which can hold many rows per shape, the Text Block section has exactly one row.
 
 It is one of the three text-formatting cell records; the others are [Character cells](character.md) and [Paragraph cells](paragraph.md). Tab stops within the block are handled separately by [`TextHelper`](tab-stops.md).
 
@@ -60,6 +60,6 @@ Pass `CellValueType.Formula` to read the underlying formulas instead of evaluate
 
 ## See also
 
-* [Text formatting overview](../text-formatting.md) &mdash; the three text-formatting records at a glance.
-* [Character cells](character.md), [Paragraph cells](paragraph.md), [Tab stops](tab-stops.md) &mdash; the other text-formatting records.
-* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md) &mdash; the underlying `SrcWriter` API.
+* [Text formatting overview](../text-formatting.md): the three text-formatting records at a glance.
+* [Character cells](character.md), [Paragraph cells](paragraph.md), [Tab stops](tab-stops.md): the other text-formatting records.
+* [Modify the ShapeSheet](../shapesheet/modify-the-shapesheet.md): the underlying `SrcWriter` API.
