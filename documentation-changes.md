@@ -2,6 +2,14 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+## 2026-05 &mdash; Compile-failure pass
+
+A compile pass over every C# code block on the site, prompted by a stale snippet found in the source repo's `readme.md`. Fixes:
+
+* **`shapesheet/modify-the-shapesheet.md`** &mdash; replaced `SrcConstants.PinX` / `SrcConstants.PinY` (which don't exist on `SrcConstants`) with `XFormPinX` / `XFormPinY`. Added a one-line note about the cell-record-prefixed naming so the right constant name is easier to predict.
+* **`shapesheet/query-the-shapesheet.md`** &mdash; the `SectionQuery` examples were calling a 1-arg constructor that doesn't exist (`new SectionQuery(visSectionProp)`) and a `.Columns.Add` property that doesn't exist on `SectionQuery`. Rewrote both single-shape and multi-shape examples to use `new SectionQuery()` followed by `query.Add(sectionIndex)` (which returns a `DataColumns` you then add cell columns to). Also corrected the iteration: `DataRowGroup<T>` enumerates *sections*, not rows, so the `foreach` example needed a nested loop to reach a row.
+* **`connection-points.md`**, **`hyperlinks.md`**, **`control-handles.md`** &mdash; the `Set` overload takes the row index as `short`, but `Add` returns `int`, so the as-written `Set(shape, row, ...)` calls didn't compile. Each example now casts to `(short)row` and a one-line note explains the type asymmetry.
+
 ## 2026-05 &mdash; Refresh against current API
 
 A pass aligning every page with the **VisioAutomation** library's current public API. The underlying library had drifted (class renames, namespace renames, struct renames) and several pages still described the older shape; the docs now match what's in the source.

@@ -26,12 +26,14 @@ int row = VisioAutomation.Shapes.ConnectionPointHelper.Add(shape, cp);
 
 ## Update an existing connection point
 
+`Set` takes the row index as a `short` (whereas `Add` returns `int`), so cast when round-tripping a row index from `Add`:
+
 ```csharp
 var cp = new VisioAutomation.Shapes.ConnectionPointCells();
 cp.X = "Width";
 cp.Y = "Height*0.5";
 
-VisioAutomation.Shapes.ConnectionPointHelper.Set(shape, row, cp);
+VisioAutomation.Shapes.ConnectionPointHelper.Set(shape, (short)row, cp);
 ```
 
 ## Read existing connection points

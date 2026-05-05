@@ -21,15 +21,17 @@ For a single shape, use `SrcWriter` (cells addressed by `Src`):
 
 ```csharp
 var writer = new VA.ShapeSheet.Writers.SrcWriter();
-writer.SetValue(VA.Core.SrcConstants.PinX, "5.0");
+writer.SetValue(VA.Core.SrcConstants.XFormPinX, "5.0");
 writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
+
+`SrcConstants` exposes the well-known cells using their cell-record-prefixed names — `XFormPinX` / `XFormPinY` for the position cells, `XFormWidth` / `XFormHeight` for the size cells, etc. The `SrcConstants.cs` source file is the authoritative list.
 
 `SetValue` accepts strings, ints, doubles, and bools directly thanks to implicit conversion to `Core.CellValue` — so the example below also works:
 
 ```csharp
 var writer = new VA.ShapeSheet.Writers.SrcWriter();
-writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
+writer.SetValue(VA.Core.SrcConstants.XFormPinX, 5.0);
 writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
 
@@ -37,8 +39,8 @@ To set multiple cells, just call `SetValue` repeatedly before committing:
 
 ```csharp
 var writer = new VA.ShapeSheet.Writers.SrcWriter();
-writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
-writer.SetValue(VA.Core.SrcConstants.PinY, 3.5);
+writer.SetValue(VA.Core.SrcConstants.XFormPinX, 5.0);
+writer.SetValue(VA.Core.SrcConstants.XFormPinY, 3.5);
 writer.Commit(shape1, VA.Core.CellValueType.Formula);
 ```
 
@@ -55,7 +57,7 @@ The choice between writing formulas (the textual expression) and writing results
 
 ```csharp
 var writer = new VA.ShapeSheet.Writers.SrcWriter();
-writer.SetValue(VA.Core.SrcConstants.PinX, 5.0);
+writer.SetValue(VA.Core.SrcConstants.XFormPinX, 5.0);
 writer.Commit(shape1, VA.Core.CellValueType.Result);
 ```
 

@@ -82,24 +82,28 @@ VA.ShapeSheet.Data.DataRows<string> results_string = query.GetResults<string>(sh
 
 ## Querying a section on a single shape
 
-Imagine you want every row in a particular section — for example, every custom property of a shape. A `SectionQuery` is the optimized path for that. You only need to specify the section index and which cell columns you want; all rows in the section are returned.
+Imagine you want every row in a particular section — for example, every custom property of a shape. A `SectionQuery` is the optimized path for that. You build it by adding one or more sections (each call returns a `DataColumns` you then add cell columns to); all rows in those sections are returned.
 
 ```csharp
-var query = new VA.ShapeSheet.Query.SectionQuery((short)IVisio.VisSectionIndices.visSectionProp);
-query.Columns.Add(VA.Core.SrcConstants.CharColor);
+var query = new VA.ShapeSheet.Query.SectionQuery();
+var sec_cols = query.Add(IVisio.VisSectionIndices.visSectionProp);
+sec_cols.Add(VA.Core.SrcConstants.CharColor);
 var formulas = query.GetFormulas(shape1);     // Data.DataRowGroup<string>
 ```
 
-The return type is `DataRowGroup<T>` — a single group (one shape) containing all the section's rows. Iterate or index by row:
+The return type is `DataRowGroup<T>` — a single group (one shape) containing one `DataRows<T>` per section that was added to the query. Each `DataRows<T>` then contains one `DataRow<T>` per row in that section, and a row's cells are indexed by column. So iterating goes section → row → cell:
 
 ```csharp
-foreach (var row in formulas)
+foreach (var section in formulas)
 {
-    System.Console.WriteLine(row[0]);    // first column of this row
+    foreach (var row in section)
+    {
+        System.Console.WriteLine(row[0]);    // first column of this row
+    }
 }
 ```
 
-If the section doesn't exist on the shape or the section is empty, the group will contain zero rows.
+If a queried section doesn't exist on the shape or is empty, that section's `DataRows<T>` will contain zero rows.
 
 ## Retrieving cells from multiple shapes
 
@@ -120,8 +124,9 @@ The returned `DataRows<string>` has one row per shape (in the same order as the 
 `SectionQuery` requires `Core.ShapeIDPairs` for the page-level overload:
 
 ```csharp
-var query = new VA.ShapeSheet.Query.SectionQuery((short)IVisio.VisSectionIndices.visSectionProp);
-query.Columns.Add(VA.Core.SrcConstants.CharColor);
+var query = new VA.ShapeSheet.Query.SectionQuery();
+var sec_cols = query.Add(IVisio.VisSectionIndices.visSectionProp);
+sec_cols.Add(VA.Core.SrcConstants.CharColor);
 var pairs = VA.Core.ShapeIDPairs.FromShapes(s1, s2, s3, s4);
 var formulas = query.GetFormulas(page1, pairs);       // Data.DataRowGroups<string>
 ```

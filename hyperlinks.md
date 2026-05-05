@@ -31,14 +31,14 @@ The `Address` field is required &mdash; `Add` throws if it's null.
 
 ## Update an existing hyperlink
 
-`Set` writes a `HyperlinkCells` to a known row index (returned from `Add` or by walking the section).
+`Set` writes a `HyperlinkCells` to a known row index (returned from `Add` or by walking the section). The row index is a `short`; cast when reusing the `int` returned by `Add`.
 
 ```csharp
 var hl = new VisioAutomation.Shapes.HyperlinkCells();
 hl.Address = "https://example.com";
 hl.Description = "Updated description";
 
-VisioAutomation.Shapes.HyperlinkHelper.Set(shape, row, hl);
+VisioAutomation.Shapes.HyperlinkHelper.Set(shape, (short)row, hl);
 ```
 
 ## Count and delete

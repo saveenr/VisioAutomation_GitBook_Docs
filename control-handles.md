@@ -34,11 +34,13 @@ The `Add` overload that takes `ControlCells` auto-defaults `XDynamics` / `YDynam
 
 ## Update an existing handle
 
+`Set` takes the row index as a `short` (whereas `Add` returns `int`), so cast when reusing a row index returned by `Add`.
+
 ```csharp
 var ctrl = new VisioAutomation.Shapes.ControlCells();
 ctrl.Tip = "Resize me";
 
-VisioAutomation.Shapes.ControlHelper.Set(shape, row, ctrl);
+VisioAutomation.Shapes.ControlHelper.Set(shape, (short)row, ctrl);
 ```
 
 ## Read existing handles
