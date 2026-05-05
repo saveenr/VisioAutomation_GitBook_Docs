@@ -4,11 +4,11 @@ A **connection point** is a small `x` mark on a shape that connectors can snap t
 
 ## The `ConnectionPointCells` record
 
-| Field | Purpose |
-| --- | --- |
-| `X`, `Y` | Position formulas. Required when adding a row. |
-| `DirX`, `DirY` | Direction vector for the connection point. |
-| `Type` | `0` = inward, `1` = outward, `2` = inward & outward. |
+| Field          | Purpose                                              |
+| -------------- | ---------------------------------------------------- |
+| `X`, `Y`       | Position formulas. Required when adding a row.       |
+| `DirX`, `DirY` | Direction vector for the connection point.           |
+| `Type`         | `0` = inward, `1` = outward, `2` = inward & outward. |
 
 All fields are `Core.CellValue`-typed.
 
@@ -46,11 +46,15 @@ var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(
     VisioAutomation.Core.CellValueType.Formula);
 ```
 
-## Count and delete
+## Count connection points
 
 ```csharp
 int count = VisioAutomation.Shapes.ConnectionPointHelper.GetCount(shape);
+```
 
+## Delete connection points
+
+```
 VisioAutomation.Shapes.ConnectionPointHelper.Delete(shape, 0);   // delete row 0
 
 // Delete all connection points on the shape
@@ -59,4 +63,4 @@ int removed = VisioAutomation.Shapes.ConnectionPointHelper.Delete(shape);
 
 ## See also
 
-* [Connectors](connectors.md) &mdash; how shapes get wired together. Connection points define where a connector can attach.
+* [Connectors](connectors.md) — how shapes get wired together. Connection points define where a connector can attach.

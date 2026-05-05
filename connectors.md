@@ -29,7 +29,7 @@ VisioAutomation.Shapes.ConnectorHelper.ConnectShapes(shape1, shape2, null, false
 
 The `manual_connection: false` argument tells the helper to call `IVisio.Shape.AutoConnect` instead of gluing endpoints itself.
 
-## Wire many shapes at once
+## Connect many shapes at once
 
 The page-level overload connects an array of `from` shapes to an array of `to` shapes (zipped) and returns the new connector shapes. The two arrays must be the same length. Pass a connector master if you want a specific connector style; pass `null` to use AutoConnect.
 
@@ -48,5 +48,5 @@ var connectors = VisioAutomation.Shapes.ConnectorHelper.ConnectShapes(
 
 ## See also
 
-* [Connection points](connection-points.md) &mdash; where on a shape a connector can attach.
-* [Stencils and masters](stencils-and-masters.md) &mdash; loading connector masters from a stencil.
+* [Connection points](connection-points.md) — where on a shape a connector can attach.
+* [Stencils and masters](stencils-and-masters.md) — loading connector masters from a stencil.

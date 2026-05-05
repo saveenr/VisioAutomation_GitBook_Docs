@@ -4,13 +4,13 @@ A shape's **control handles** are the yellow draggable diamonds Visio draws on a
 
 ## The `ControlCells` record
 
-| Field | Purpose |
-| --- | --- |
-| `X`, `Y` | Position formula(s). Typically expressions like `Width*0.5`, `Height*0.5`. |
-| `XBehavior`, `YBehavior` | How the handle's position adapts when the shape resizes. |
+| Field                    | Purpose                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
+| `X`, `Y`                 | Position formula(s). Typically expressions like `Width*0.5`, `Height*0.5`.                         |
+| `XBehavior`, `YBehavior` | How the handle's position adapts when the shape resizes.                                           |
 | `XDynamics`, `YDynamics` | Whether the handle's coordinate is "free" or driven by another formula. Auto-defaulted when added. |
-| `CanGlue` | Whether the handle accepts glue connections. |
-| `Tip` | Tooltip shown on hover. |
+| `CanGlue`                | Whether the handle accepts glue connections.                                                       |
+| `Tip`                    | Tooltip shown on hover.                                                                            |
 
 All fields are `Core.CellValue`-typed.
 
@@ -30,9 +30,9 @@ ctrl.Tip = "Adjust";
 int row2 = VisioAutomation.Shapes.ControlHelper.Add(shape, ctrl);
 ```
 
-The `Add` overload that takes `ControlCells` auto-defaults `XDynamics` / `YDynamics` to `Controls.Row_N` / `Controls.Row_N.Y` if you leave them null &mdash; that's the standard self-referential dynamics for a free handle.
+The `Add` overload that takes `ControlCells` auto-defaults `XDynamics` / `YDynamics` to `Controls.Row_N` / `Controls.Row_N.Y` if you leave them null — that's the standard self-referential dynamics for a free handle.
 
-## Update an existing handle
+## Update an existing control handle
 
 `Set` takes the row index as a `short` (whereas `Add` returns `int`), so cast when reusing a row index returned by `Add`.
 
@@ -43,7 +43,7 @@ ctrl.Tip = "Resize me";
 VisioAutomation.Shapes.ControlHelper.Set(shape, (short)row, ctrl);
 ```
 
-## Read existing handles
+## Read existing control handles
 
 `ControlCells.GetCells` reads the cells off a single shape; the multi-shape overload reads from a page in one batched call.
 
@@ -53,10 +53,14 @@ var cells = VisioAutomation.Shapes.ControlCells.GetCells(
     VisioAutomation.Core.CellValueType.Formula);
 ```
 
-## Count and delete
+## Count control handles
 
 ```csharp
 int count = VisioAutomation.Shapes.ControlHelper.GetCount(shape);
+```
 
+## Delete control handles
+
+```
 VisioAutomation.Shapes.ControlHelper.Delete(shape, 0);   // first handle
 ```
