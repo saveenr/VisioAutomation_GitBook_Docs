@@ -13,9 +13,12 @@ var s1 = page.DrawRectangle(0, 0, 1, 1);
 var cp = new VisioAutomation.Shapes.CustomPropertyCells();
 cp.Value = "Hello World";
 cp.Label = "Greeting";
+cp.EncodeValues();
 
 VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
 ```
+
+The `cp.EncodeValues()` call is important: see [String values are formulas, not literals](#string-values-are-formulas-not-literals) below.
 
 `CustomPropertyCells` exposes the full set of property fields as `Core.CellValue` properties:
 
@@ -27,6 +30,30 @@ VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
 * `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask`: additional control fields
 
 All are `Core.CellValue`-typed and accept implicit conversions from strings, ints, doubles, and bools.
+
+### String values are formulas, not literals
+
+Each `Core.CellValue` field on `CustomPropertyCells` is a Visio *formula*, not a literal value. Setting `cp.Value = "Hello World"` stores the formula `Hello World` (no quotes), which Visio evaluates as an expression: it tries to parse `Hello` as a name reference, fails, and silently substitutes a default (typically `0`). The property is created on the shape, but the value reads back wrong.
+
+To store a string literal, the formula has to include the quotes. Two ways to do that:
+
+```csharp
+// Option A: call EncodeValues() before passing to Set.
+// Quotes Value, Label, Format, and Prompt as needed.
+var cp = new VisioAutomation.Shapes.CustomPropertyCells();
+cp.Value = "Hello World";
+cp.EncodeValues();
+VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
+
+// Option B: pre-quote the formula yourself.
+var cp = new VisioAutomation.Shapes.CustomPropertyCells();
+cp.Value = "\"Hello World\"";
+VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
+```
+
+Numeric, boolean, and date values are not strings and don't need quoting; pass them as ordinary literals (`cp.Value = 42`, `cp.Value = true`, etc.). The dedicated typed constructors (`new CustomPropertyCells(42)`, `new CustomPropertyCells(true)`, `new CustomPropertyCells(DateTime.Now)`) handle the formatting for you.
+
+The PowerShell `Set-VisioCustomProperty` cmdlet calls `EncodeValues()` internally, so its callers don't have to think about this. The .NET-level API leaves it to the caller; [issue #144](https://github.com/saveenr/VisioAutomation/issues/144) tracks options for making this more ergonomic.
 
 ## Read all custom properties from a shape
 

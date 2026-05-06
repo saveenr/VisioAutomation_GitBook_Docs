@@ -1,5 +1,11 @@
 # 2026-05 doc updates
 
+## 2026-05: Custom-properties: explain that values are formulas, not literals
+
+Surfaced by [issue #117](https://github.com/saveenr/VisioAutomation/issues/117) on the source repo: a user assigned `cp.Value = "testVal"` directly on a `CustomPropertyCells` and got a property whose value read back as `0` instead of `"testVal"`. Root cause is that each `Core.CellValue` field on `CustomPropertyCells` is a Visio *formula*, not a literal; the bare word `testVal` evaluates to a name reference and silently fails. The previous code example on [Custom properties](../../custom-properties.md) showed the same buggy pattern.
+
+Patched the example to call `cp.EncodeValues()` before `Set`, and added a "String values are formulas, not literals" subsection that explains the formula-vs-literal distinction and shows both ways to store a string (`EncodeValues()` or pre-quoting). Cross-links the open [API ergonomics issue (#144)](https://github.com/saveenr/VisioAutomation/issues/144) so readers know the foot-gun is being looked at.
+
 ## 2026-05: New page documenting the directed-graph XML format
 
 Added [Directed graph XML format](../../directed-graph-xml.md) under a new **Diagram models** section in the table of contents. The page documents the `<directedgraph>` schema consumed by `Import-VisioModel` and `DirectedGraphDocumentLoader.LoadFromXml`: the root element, `<page>`, `<renderoptions>` (including the `direction`, `connectortype`, and `layout` attributes added in the same pass on the source repo), `<shape>` and `<connector>` schemas, and what's not exposed in XML. Surfaced by [issue #105](https://github.com/saveenr/VisioAutomation/issues/105) on the source repo, where the user reported the format was undocumented.
