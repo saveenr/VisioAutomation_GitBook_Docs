@@ -4,56 +4,58 @@ Custom properties (also called "Shape Data" in modern Visio UI) are user-defined
 
 ## Add a single custom property
 
-`Set` takes a `CustomPropertyCells` object that lets you specify any combination of the property's cells (Value, Prompt, Format, Type, Label, etc.):
+`Set` takes a `CustomPropertyCells` object. The recommended way to populate it is via the typed setters, which take care of Visio's formula encoding for you:
 
 ```csharp
 var page = doc.Pages.Add();
 var s1 = page.DrawRectangle(0, 0, 1, 1);
 
 var cp = new VisioAutomation.Shapes.CustomPropertyCells();
-cp.Value = "Hello World";
-cp.Label = "Greeting";
-cp.EncodeValues();
+cp.SetString("Hello World");
+cp.Label = "\"Greeting\"";
 
 VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
 ```
 
-The `cp.EncodeValues()` call is important: see [String values are formulas, not literals](#string-values-are-formulas-not-literals) below.
+Each typed setter sets the `Formula` field to a correctly-encoded Visio expression and the `Type` field to match. See [Setting values](#setting-values) below for the full list.
 
-`CustomPropertyCells` exposes the full set of property fields as `Core.CellValue` properties:
+`CustomPropertyCells` exposes the full set of property fields:
 
-* `Value`: the property's value
-* `Prompt`: tooltip / hint shown to the user
-* `Label`: display label
-* `Format`: formatting expression
-* `Type`: data type (numeric, string, date, …)
-* `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask`: additional control fields
+| Field | Purpose |
+| --- | --- |
+| `Formula` | The property's value, expressed as a Visio formula. (Renamed from `Value` in 2026-05; the old name is preserved as an `[Obsolete]` alias.) |
+| `Prompt` | Tooltip / hint shown to the user. |
+| `Label` | Display label. |
+| `Format` | Formatting expression. |
+| `Type` | Data type code (0=string, 2=number, 3=boolean, 5=date, …). |
+| `Calendar`, `Invisible`, `LangID`, `SortKey`, `Ask` | Additional control fields. |
 
-All are `Core.CellValue`-typed and accept implicit conversions from strings, ints, doubles, and bools.
+`Formula`, `Label`, `Format`, and `Prompt` are all Visio formulas. Use a typed setter for `Formula`; for `Label` / `Format` / `Prompt`, either pre-quote the literal (`cp.Label = "\"Greeting\""`) or call `cp.EncodeValues()` before `Set` to encode all four fields together. The remaining fields are numeric codes and accept ordinary integer assignment.
 
-### String values are formulas, not literals
+## Setting values
 
-Each `Core.CellValue` field on `CustomPropertyCells` is a Visio *formula*, not a literal value. Setting `cp.Value = "Hello World"` stores the formula `Hello World` (no quotes), which Visio evaluates as an expression: it tries to parse `Hello` as a name reference, fails, and silently substitutes a default (typically `0`). The property is created on the shape, but the value reads back wrong.
+Each setter writes a correctly-encoded formula and sets `Type` to match:
 
-To store a string literal, the formula has to include the quotes. Two ways to do that:
+| Setter | What it does | Resulting `Type` |
+| --- | --- | --- |
+| `cp.SetString("hello")` | Encodes the string as a Visio string literal (`"hello"`). | `0` (String) |
+| `cp.SetNumber(42)` / `cp.SetNumber(3.14)` | Writes a numeric formula. | `2` (Number) |
+| `cp.SetBool(true)` | Writes `TRUE` or `FALSE`. | `3` (Boolean) |
+| `cp.SetDate(DateTime.Now)` | Wraps in `DATETIME("…")`. | `5` (Date) |
+| `cp.SetFormula("=…")` | Raw escape hatch. Writes the formula verbatim, leaves `Type` untouched. Use when you have a hand-crafted Visio formula. |  |
 
-```csharp
-// Option A: call EncodeValues() before passing to Set.
-// Quotes Value, Label, Format, and Prompt as needed.
-var cp = new VisioAutomation.Shapes.CustomPropertyCells();
-cp.Value = "Hello World";
-cp.EncodeValues();
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
+Direct assignment to `cp.Formula` works too, but you take responsibility for valid Visio formula syntax. A bare identifier (`cp.Formula = "testVal"`) is parsed by Visio as a name reference, fails to resolve, and raises a friendly `ArgumentException` with a diagnostic from `Set`. Calling `EncodeValues()` before `Set` is the older alternative; the typed setters are the recommended path.
 
-// Option B: pre-quote the formula yourself.
-var cp = new VisioAutomation.Shapes.CustomPropertyCells();
-cp.Value = "\"Hello World\"";
-VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Greeting", cp);
-```
+## What Visio actually stores
 
-Numeric, boolean, and date values are not strings and don't need quoting; pass them as ordinary literals (`cp.Value = 42`, `cp.Value = true`, etc.). The dedicated typed constructors (`new CustomPropertyCells(42)`, `new CustomPropertyCells(true)`, `new CustomPropertyCells(DateTime.Now)`) handle the formatting for you.
+The `Type` cell is metadata, not enforcement. Visio doesn't validate that the formula matches the declared type, so a few combinations are surprising. Things to know:
 
-The PowerShell `Set-VisioCustomProperty` cmdlet calls `EncodeValues()` internally, so its callers don't have to think about this. The .NET-level API leaves it to the caller; [issue #144](https://github.com/saveenr/VisioAutomation/issues/144) tracks options for making this more ergonomic.
+* **Numeric strings sneak through Type=String.** `cp.Formula = "42"` with `Type=String` succeeds and renders as `42.0000`, not the string `"42"`. Use `SetString("42")` to force the string interpretation.
+* **Type=Boolean accepts `"1"` / `"0"`.** Visio stores them as numeric formulas, and the rendered Result is `1.0000` / `0.0000`, not `TRUE` / `FALSE`. Use `SetBool(true)` / `SetBool(false)` to get the expected boolean rendering.
+* **Type=Date accepts arbitrary quoted strings.** `cp.Formula = "\"2017-03-31\""` with `Type=Date` stores the literal string, not a parsed date. Use `SetDate(...)` to get a real `DATETIME` formula.
+* **Empty / `null` / whitespace defaults to `0`.** All four cases (`""`, `null`, `" "`, missing-write) leave the cell at Visio's default value, which renders as `0.0000`. If you observe a property that reads back as `0` and you didn't set `0`, this is the path to check.
+
+The full per-Type characterization (driving the test suite) lives in [`docs/internal/custom-property-encoding.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/internal/custom-property-encoding.md) on the source repo.
 
 ## Read all custom properties from a shape
 
@@ -66,7 +68,7 @@ var props = VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(
 
 foreach (var kv in props)
 {
-    System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Value.Value);
+    System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Formula.Value);
 }
 ```
 

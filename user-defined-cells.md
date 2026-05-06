@@ -30,17 +30,31 @@ var per_shape = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(
 
 ## Add or update a cell
 
-`Set` takes a `UserDefinedCellCells` object holding the value and prompt:
+`Set` takes a `UserDefinedCellCells` object holding the value (as a Visio formula) and an optional prompt. Use the typed setters to write the formula correctly without having to think about Visio's expression grammar:
 
 ```csharp
 var cells = new VisioAutomation.Shapes.UserDefinedCellCells();
-cells.Value = "42";
-cells.Prompt = "The answer";
+cells.SetString("the answer");      // string literal
+cells.Prompt = "\"Hint shown to the user\"";
 
 VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape1, "MyCell", cells);
 ```
 
-Both `Value` and `Prompt` are `Core.CellValue` properties; implicit conversions let you assign strings, ints, doubles, or bools directly without constructing a `CellValue`.
+`UserDefinedCellCells` exposes:
+
+| Field | Purpose |
+| --- | --- |
+| `Formula` | The cell's value, expressed as a Visio formula. (Renamed from `Value` in 2026-05; the old name is preserved as an `[Obsolete]` alias.) |
+| `Prompt` | Optional tooltip / hint. |
+
+Setters:
+
+| Setter | What it does |
+| --- | --- |
+| `cells.SetString("hello")` | Encodes as a Visio string literal (`"hello"`). |
+| `cells.SetFormula("=A+B")` | Raw escape hatch. Writes the formula verbatim. Use for hand-crafted formulas (numeric expressions, references to other cells, function calls). |
+
+Direct assignment to `cells.Formula` works too, but you take responsibility for valid Visio formula syntax. A bare identifier (`cells.Formula = "hello"`) is parsed by Visio as a name reference and raises a friendly `ArgumentException` with a diagnostic from `Set`. Calling `cells.EncodeValues()` before `Set` is the older alternative.
 
 ## Count and enumerate cells
 

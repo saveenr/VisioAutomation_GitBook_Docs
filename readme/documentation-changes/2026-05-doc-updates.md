@@ -1,5 +1,24 @@
 # 2026-05 doc updates
 
+## 2026-05: Custom properties typed setters and behavior matrix
+
+[Issue #144](https://github.com/saveenr/VisioAutomation/issues/144) on the source repo landed: the API ergonomics around `CustomPropertyCells` and `UserDefinedCellCells` got two coordinated improvements that the docs now reflect.
+
+* **Typed setters** are the new recommended way to populate the cells: `cp.SetString("v")` / `SetNumber(42)` / `SetBool(true)` / `SetDate(DateTime.Now)` / `SetFormula("=...")` for `CustomPropertyCells`; `cells.SetString(...)` / `SetFormula(...)` for `UserDefinedCellCells`. Each writes a correctly-encoded Visio formula and (for `CustomPropertyCells`) sets `Type` to match.
+* **`Value` was renamed to `Formula`** to surface the fact that the field stores a Visio formula, not a literal value. The old `Value` name is kept as an `[Obsolete]` source-compat alias.
+* **`CustomPropertyHelper.Set` and `UserDefinedCellHelper.Set` now wrap Visio's opaque `COMException: #NAME?`** in an `ArgumentException` with a self-explanatory message pointing at the typed setters. The trap is now diagnosable rather than cryptic.
+
+[Custom properties](../../custom-properties.md) and [User-defined cells](../../user-defined-cells.md) rewritten to lead with the typed setters, document the full setter surface in a table, note the `Formula` rename, and (on the Custom properties page) add a "What Visio actually stores" matrix describing the per-Type surprises:
+
+* numeric strings sneak through `Type=String`,
+* `Type=Boolean` accepts `"1"` / `"0"` as numeric,
+* `Type=Date` accepts arbitrary quoted strings as literals,
+* empty / `null` / whitespace silently default the cell to `0`.
+
+The full per-Type characterization (driving the test suite) is referenced as a link to [`docs/internal/custom-property-encoding.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/internal/custom-property-encoding.md) on the source repo, so the gitbook stays user-readable while the engineering-grade matrix has a stable home.
+
+Closes the long-running thread that started with [issue #117](https://github.com/saveenr/VisioAutomation/issues/117).
+
 ## 2026-05: Custom-properties: explain that values are formulas, not literals
 
 Surfaced by [issue #117](https://github.com/saveenr/VisioAutomation/issues/117) on the source repo: a user assigned `cp.Value = "testVal"` directly on a `CustomPropertyCells` and got a property whose value read back as `0` instead of `"testVal"`. Root cause is that each `Core.CellValue` field on `CustomPropertyCells` is a Visio *formula*, not a literal; the bare word `testVal` evaluates to a name reference and silently fails. The previous code example on [Custom properties](../../custom-properties.md) showed the same buggy pattern.
