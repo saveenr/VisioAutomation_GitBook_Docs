@@ -1,5 +1,11 @@
 # 2026-05 doc updates
 
+## 2026-05: New page documenting the directed-graph XML format
+
+Added [Directed graph XML format](../../directed-graph-xml.md) under a new **Diagram models** section in the table of contents. The page documents the `<directedgraph>` schema consumed by `Import-VisioModel` and `DirectedGraphDocumentLoader.LoadFromXml`: the root element, `<page>`, `<renderoptions>` (including the `direction`, `connectortype`, and `layout` attributes added in the same pass on the source repo), `<shape>` and `<connector>` schemas, and what's not exposed in XML. Surfaced by [issue #105](https://github.com/saveenr/VisioAutomation/issues/105) on the source repo, where the user reported the format was undocumented.
+
+The new "Diagram models" section is the entry point for the rest of the Tier 3 work (`OrgChart`, `DataTable`, `XmlModel`, `Forms`, the in-memory `DirectedGraphDocument` model, layout-style classes) tracked in [`docs/futures/docs.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/futures/docs.md) on the source repo.
+
 ## 2026-05: Doc-review feedback pass
 
 Acted on feedback from a 2026-05-05 doc-review. Small fixes and a few content additions; bigger items captured as GitHub issues so the gitbook backlog stays focused.

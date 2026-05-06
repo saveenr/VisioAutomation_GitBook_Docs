@@ -52,6 +52,10 @@
   * [Tab stops](text/tab-stops.md)
 * [Geometry](geometry.md)
 
+## Diagram models
+
+* [Directed graph XML format](directed-graph-xml.md)
+
 ## Diagnostics
 
 * [Analyzers](analyzers.md)
