@@ -2,18 +2,22 @@
 
 The library simplifies a lot of tasks, but it cannot remove the need for you to be familiar with Visio and how it works.
 
-## Discussion on VisGuy.com
+## Microsoft Learn: Visio developer documentation
 
-[http://www.visguy.com/vgforum/](http://www.visguy.com/vgforum/)
+[Visio for Developers](https://learn.microsoft.com/en-us/office/client-developer/visio/visio-home) on Microsoft Learn is the canonical reference for the Visio object model, the ShapeSheet, and the underlying COM API that VisioAutomation wraps.
 
-## Visio Questions on StackOverflow
+## VisioAutomation reference docs
 
-[http://stackoverflow.com/questions/tagged/visio](http://stackoverflow.com/questions/tagged/visio)
+The source repository ships two reference documents that complement this gitbook:
 
-## Visio 2003 Developer's Survival Pack
+* [`docs/ARCHITECTURE.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/ARCHITECTURE.md): the projects in the solution, their dependencies, and the central concepts.
+* [`docs/GLOSSARY.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/GLOSSARY.md): Visio and codebase terminology.
 
-* Author: Graham Widemann
-* Language: English
-* ISBN-10: 1412011124 ISBN-13: 978-1412011129
-* The Kindle version ([http://amzn.com/B001GS6Q8K](http://amzn.com/B001GS6Q8K))&#x20;
-* Printed version ([http://amzn.com/1412011124](http://amzn.com/1412011124))
+## Community
+
+* [Visio questions on Stack Overflow](https://stackoverflow.com/questions/tagged/visio): the `[visio]` tag. Activity is sparse but answered questions are often high quality.
+* [VisGuy.com forum](http://www.visguy.com/vgforum/): long-running Visio community forum. Activity has tapered off but the archive remains useful for older Visio versions.
+
+## Older references
+
+* *Visio 2003 Developer's Survival Pack* by Graham Widemann: predates the Visio 2010 object-model changes that VisioAutomation targets, but remains a thorough single treatment of ShapeSheet internals from the Visio SDK era. ISBN-10: 1412011124, ISBN-13: 978-1412011129.
