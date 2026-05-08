@@ -2,7 +2,7 @@
 
 `VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)`, and you get a Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels.
 
-The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around and Visio's auto-layout will keep the connections tidy.
+The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around and Visio's auto-layout will keep the connections tidy..
 
 ## Hello-world
 
@@ -46,7 +46,7 @@ orgchart.OrgCharts.Add(ceo);
 orgchart.Render(visioApp);
 ```
 
-The renderer drops the org-chart template's "Position" master per node (or "Position Belt" on Visio 2013+, see *Styling* below), sizes each shape, lays them out top-down by default, and connects parent to child with the dynamic connector master.
+The renderer drops the org-chart template's "Position" master per node (or "Position Belt" on Visio 2013+, see _Styling_ below), sizes each shape, lays them out top-down by default, and connects parent to child with the dynamic connector master.
 
 After render every `Node` has its `VisioShape` populated for follow-up work.
 
@@ -82,10 +82,10 @@ For interactive org charts, leave it at the default. For one-shot exports where 
 
 `OrgChartStyling` (settable on `OrgChartDocument.Styling`) exposes the per-Visio-version names the renderer uses. The defaults match the Visio install layout for both 2010 and 2013+:
 
-| Setting | Visio 2010 default | Visio 2013+ default |
-| :--- | :--- | :--- |
-| `Visio2010Template` / `Visio2013Template` | `orgch_u.vst` | `orgch_u.vstx` |
-| `Visio2010NodeMaster` / `Visio2013NodeMaster` | `Position` | `Position Belt` |
+| Setting                                                 | Visio 2010 default  | Visio 2013+ default |
+| ------------------------------------------------------- | ------------------- | ------------------- |
+| `Visio2010Template` / `Visio2013Template`               | `orgch_u.vst`       | `orgch_u.vstx`      |
+| `Visio2010NodeMaster` / `Visio2013NodeMaster`           | `Position`          | `Position Belt`     |
 | `Visio2010ConnectorMaster` / `Visio2013ConnectorMaster` | `Dynamic connector` | `Dynamic connector` |
 
 The renderer auto-picks the right pair based on the running Visio's major version (≥15 means 2013+). Override either set if your install ships a different stencil or template, or if you want a custom node master.
