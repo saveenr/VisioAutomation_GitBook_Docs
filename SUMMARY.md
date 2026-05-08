@@ -67,4 +67,5 @@
 * [Namespaces](namespaces.md)
 * [Classes](classes.md)
 * [Compiling](compiling.md)
+* [Version compatibility](version-compatibility.md)
 * [Resources](resources/README.md)
