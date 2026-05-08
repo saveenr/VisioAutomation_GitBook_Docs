@@ -54,7 +54,13 @@
 
 ## Diagram models
 
+* [Declarative DOM](models/dom.md)
+* [Layouts: Tree, Grid, Box](models/layouts.md)
+* [Directed graph](models/directed-graph.md)
 * [Directed graph XML format](directed-graph-xml.md)
+* [Layout styles](models/layout-styles.md)
+* [Org charts](models/org-charts.md)
+* [Form pages](models/forms.md)
 
 ## Diagnostics
 
