@@ -26,6 +26,8 @@
 ## VisioScripting
 
 * [VisioScripting.Client](visio-scripting.md)
+  * [client.Hyperlink](visio-scripting/hyperlink.md)
+  * [client.Page](visio-scripting/page.md)
 
 ## Shape data
 

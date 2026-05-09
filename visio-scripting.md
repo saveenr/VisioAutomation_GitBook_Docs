@@ -70,13 +70,13 @@ Each property on `Client` returns a single command-group object. The methods on 
 | `client.Draw`              | Draw primitives: rectangles, ovals, lines, beziers, polylines.         | (in progress)                              |
 | `client.Export`            | Save pages or selections to image or HTML files.                       | (in progress)                              |
 | `client.Grouping`          | Group, ungroup shapes.                                                 | (in progress)                              |
-| `client.Hyperlink`         | Add, get, delete hyperlinks on shapes.                                 | (in progress)                              |
+| `client.Hyperlink`         | Add, get, delete hyperlinks on shapes.                                 | [client.Hyperlink](visio-scripting/hyperlink.md) |
 | `client.Layer`             | Find layers by name on a page; get all layers on a page.               | (in progress)                              |
 | `client.Lock`              | Get, set lock cells (`LockCalcWH`, `LockMoveX`, ...) on shapes.        | (in progress)                              |
 | `client.Master`            | Get masters in stencils, drop masters by name onto a page.             | (in progress)                              |
 | `client.Model`             | Render and load high-level models: org charts, directed graphs, grids. | (in progress)                              |
 | `client.Output`            | Logging sink: verbose, debug, warning, error, user messages.           | (in progress)                              |
-| `client.Page`              | Pages: create, delete, navigate, set orientation, get dimensions.      | (in progress)                              |
+| `client.Page`              | Pages: create, delete, navigate, set orientation, get dimensions.      | [client.Page](visio-scripting/page.md)     |
 | `client.Selection`         | Select, deselect shapes; act on the current selection.                 | (in progress)                              |
 | `client.ShapeSheet`        | Read, write ShapeSheet cells in batch (via reader, writer).            | (in progress)                              |
 | `client.Text`              | Get, set shape text.                                                   | (in progress)                              |
