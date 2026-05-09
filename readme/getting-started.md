@@ -9,7 +9,7 @@ VisioAutomation ships several layered APIs. Pick the one that matches your scena
 | Use case                                      | Entry point                                                                                                  |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | Scripting from PowerShell                     | The [`Visio` PowerShell module](https://saveenr.gitbook.io/visiopowershell/) (`Import-Module Visio`)         |
-| Scripting from C# at a high level             | `VisioScripting.Client` (a topic-grouped facade over the rest)                                               |
+| Scripting from C# at a high level             | [`VisioScripting.Client`](../visio-scripting.md) (a topic-grouped facade over the rest)                       |
 | Generating diagrams from data declaratively   | `VisioAutomation.Models` (DOM + automated layouts: tree, directed graph, org chart, grid)                    |
 | Low-level helpers over the Visio COM API      | The `VisioAutomation` namespaces (this guide)                                                                |
 | Raw COM interop                               | `Microsoft.Office.Interop.Visio` directly (this guide bootstraps from raw interop, then layers the helpers) |
