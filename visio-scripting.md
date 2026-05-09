@@ -58,31 +58,31 @@ Each property on `Client` returns a single command-group object. The methods on 
 
 | Property                   | Topic                                                                  | Page                                       |
 |----------------------------|------------------------------------------------------------------------|--------------------------------------------|
-| `client.Application`       | The Visio process: lifetime, version, window placement.                | (in progress)                              |
-| `client.Arrange`           | Move, align, distribute, nudge selected shapes.                        | (in progress)                              |
-| `client.Connection`        | Connect shapes; analyze connector edges on a page.                     | (in progress)                              |
-| `client.ConnectionPoint`   | Add, get, delete connection points on shapes.                          | (in progress)                              |
-| `client.Container`         | Drop a container shape around shapes.                                  | (in progress)                              |
-| `client.Control`           | Add, get, delete control handles on shapes.                            | (in progress)                              |
-| `client.CustomProperty`    | Read, write, delete custom properties (Shape Data) on shapes.          | (in progress)                              |
-| `client.Developer`         | Render diagrams of internal types and namespaces (debug aid).          | (in progress)                              |
-| `client.Document`          | Open, close, create, find, save documents and stencils.                | (in progress)                              |
-| `client.Draw`              | Draw primitives: rectangles, ovals, lines, beziers, polylines.         | (in progress)                              |
-| `client.Export`            | Save pages or selections to image or HTML files.                       | (in progress)                              |
-| `client.Grouping`          | Group, ungroup shapes.                                                 | (in progress)                              |
+| `client.Application`       | The Visio process: lifetime, version, window placement.                | [client.Application](visio-scripting/application.md) |
+| `client.Arrange`           | Move, align, distribute, nudge selected shapes.                        | [client.Arrange](visio-scripting/arrange.md) |
+| `client.Connection`        | Connect shapes; analyze connector edges on a page.                     | [client.Connection](visio-scripting/connection.md) |
+| `client.ConnectionPoint`   | Add, get, delete connection points on shapes.                          | [client.ConnectionPoint](visio-scripting/connection-point.md) |
+| `client.Container`         | Drop a container shape around shapes.                                  | [client.Container](visio-scripting/container.md) |
+| `client.Control`           | Add, get, delete control handles on shapes.                            | [client.Control](visio-scripting/control.md) |
+| `client.CustomProperty`    | Read, write, delete custom properties (Shape Data) on shapes.          | [client.CustomProperty](visio-scripting/custom-property.md) |
+| `client.Developer`         | Render diagrams of internal types and namespaces (debug aid).          | [client.Developer](visio-scripting/developer.md) |
+| `client.Document`          | Open, close, create, find, save documents and stencils.                | [client.Document](visio-scripting/document.md) |
+| `client.Draw`              | Draw primitives: rectangles, ovals, lines, beziers, polylines.         | [client.Draw](visio-scripting/draw.md) |
+| `client.Export`            | Save pages or selections to image or HTML files.                       | [client.Export](visio-scripting/export.md) |
+| `client.Grouping`          | Group, ungroup shapes.                                                 | [client.Grouping](visio-scripting/grouping.md) |
 | `client.Hyperlink`         | Add, get, delete hyperlinks on shapes.                                 | [client.Hyperlink](visio-scripting/hyperlink.md) |
-| `client.Layer`             | Find layers by name on a page; get all layers on a page.               | (in progress)                              |
-| `client.Lock`              | Get, set lock cells (`LockCalcWH`, `LockMoveX`, ...) on shapes.        | (in progress)                              |
-| `client.Master`            | Get masters in stencils, drop masters by name onto a page.             | (in progress)                              |
-| `client.Model`             | Render and load high-level models: org charts, directed graphs, grids. | (in progress)                              |
-| `client.Output`            | Logging sink: verbose, debug, warning, error, user messages.           | (in progress)                              |
+| `client.Layer`             | Find layers by name on a page; get all layers on a page.               | [client.Layer](visio-scripting/layer.md) |
+| `client.Lock`              | Get, set lock cells (`LockCalcWH`, `LockMoveX`, ...) on shapes.        | [client.Lock](visio-scripting/lock.md) |
+| `client.Master`            | Get masters in stencils, drop masters by name onto a page.             | [client.Master](visio-scripting/master.md) |
+| `client.Model`             | Render and load high-level models: org charts, directed graphs, grids. | [client.Model](visio-scripting/model.md) |
+| `client.Output`            | Logging sink: verbose, debug, warning, error, user messages.           | [client.Output](visio-scripting/output.md) |
 | `client.Page`              | Pages: create, delete, navigate, set orientation, get dimensions.      | [client.Page](visio-scripting/page.md)     |
-| `client.Selection`         | Select, deselect shapes; act on the current selection.                 | (in progress)                              |
-| `client.ShapeSheet`        | Read, write ShapeSheet cells in batch (via reader, writer).            | (in progress)                              |
-| `client.Text`              | Get, set shape text.                                                   | (in progress)                              |
-| `client.Undo`              | Open, commit, abort an undo scope; trigger Undo or Redo.               | (in progress)                              |
-| `client.UserDefinedCell`   | Read, write, delete user-defined cells on shapes.                      | (in progress)                              |
-| `client.View`              | Zoom: set the active window's zoom value or zoom-to-object.            | (in progress)                              |
+| `client.Selection`         | Select, deselect shapes; act on the current selection.                 | [client.Selection](visio-scripting/selection.md) |
+| `client.ShapeSheet`        | Read, write ShapeSheet cells in batch (via reader, writer).            | [client.ShapeSheet](visio-scripting/shape-sheet.md) |
+| `client.Text`              | Get, set shape text.                                                   | [client.Text](visio-scripting/text.md) |
+| `client.Undo`              | Open, commit, abort an undo scope; trigger Undo or Redo.               | [client.Undo](visio-scripting/undo.md) |
+| `client.UserDefinedCell`   | Read, write, delete user-defined cells on shapes.                      | [client.UserDefinedCell](visio-scripting/user-defined-cell.md) |
+| `client.View`              | Zoom: set the active window's zoom value or zoom-to-object.            | [client.View](visio-scripting/view.md) |
 
 ## Output sinks: ClientContext and DefaultClientContext
 

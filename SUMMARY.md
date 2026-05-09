@@ -26,8 +26,31 @@
 ## VisioScripting
 
 * [VisioScripting.Client](visio-scripting.md)
+  * [client.Application](visio-scripting/application.md)
+  * [client.Arrange](visio-scripting/arrange.md)
+  * [client.Connection](visio-scripting/connection.md)
+  * [client.ConnectionPoint](visio-scripting/connection-point.md)
+  * [client.Container](visio-scripting/container.md)
+  * [client.Control](visio-scripting/control.md)
+  * [client.CustomProperty](visio-scripting/custom-property.md)
+  * [client.Developer](visio-scripting/developer.md)
+  * [client.Document](visio-scripting/document.md)
+  * [client.Draw](visio-scripting/draw.md)
+  * [client.Export](visio-scripting/export.md)
+  * [client.Grouping](visio-scripting/grouping.md)
   * [client.Hyperlink](visio-scripting/hyperlink.md)
+  * [client.Layer](visio-scripting/layer.md)
+  * [client.Lock](visio-scripting/lock.md)
+  * [client.Master](visio-scripting/master.md)
+  * [client.Model](visio-scripting/model.md)
+  * [client.Output](visio-scripting/output.md)
   * [client.Page](visio-scripting/page.md)
+  * [client.Selection](visio-scripting/selection.md)
+  * [client.ShapeSheet](visio-scripting/shape-sheet.md)
+  * [client.Text](visio-scripting/text.md)
+  * [client.Undo](visio-scripting/undo.md)
+  * [client.UserDefinedCell](visio-scripting/user-defined-cell.md)
+  * [client.View](visio-scripting/view.md)
 
 ## Shape data
 
