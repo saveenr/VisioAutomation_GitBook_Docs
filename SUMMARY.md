@@ -23,6 +23,10 @@
 * [Application](application.md)
 * [Undo scope](undo-scope.md)
 
+## VisioScripting
+
+* [VisioScripting.Client](visio-scripting.md)
+
 ## Shape data
 
 * [User-defined cells](user-defined-cells.md)
