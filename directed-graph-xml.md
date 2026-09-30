@@ -3,7 +3,9 @@
 VisioAutomation can render a directed graph (nodes connected by edges, automatically laid out via MSAGL's Sugiyama layered algorithm) from a compact XML format. The same XML is consumed by two entry points:
 
 * The PowerShell pipeline `Import-VisioModel some.xml | Out-VisioApplication`, where the `Import-VisioModel` cmdlet returns a `DirectedGraphDocument`.
-* The .NET method `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc)`, called directly from C#.
+* In current source, the .NET method `client.Model.LoadDirectedGraphFromXml(xmldoc)`, called through the public `VisioScripting.Client` facade.
+
+The facade loader is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc)`. That loader class is internal in current source; new code built from source should use the facade.
 
 The format is small enough to write by hand and is intentionally a separate file format from `.vsd` / `.vsdx`. Use it to declare a graph in source-controlled XML, then have VisioAutomation lay it out and emit the Visio drawing.
 

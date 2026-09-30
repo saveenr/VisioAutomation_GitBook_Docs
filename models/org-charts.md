@@ -108,7 +108,9 @@ orgchart.Render(app);   // produces a 2-page document
 
 ## Loading from XML
 
-The same `OrgChartDocument` can be built from XML via `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)`, mirroring the directed-graph XML loader. The XML schema is documented in the source-side data files (`VTest.Models/datafiles/orgchart_*.xml`); inline build is more common for programmatic use.
+In current source, build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is internal in current source.
+
+The XML schema is illustrated by the source fixtures under `VTest/datafiles/orgchart_*.xml`; inline construction is more common for programmatic use.
 
 ## See also
 

@@ -100,13 +100,15 @@ Both the `Size`-derived width/height and the `Cells`-driven fill are honored at 
 
 ## Loading from XML
 
-The same `DirectedGraphLayout` graph can be built from an XML document via `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml`. The XML schema is documented on the [Directed graph XML format](../directed-graph-xml.md) page; the call returns a `DirectedGraphDocument` (one or more `DirectedGraphLayout` per `<page>`):
+The same `DirectedGraphLayout` graph can be built from XML via the public `Client.Model.LoadDirectedGraphFromXml` facade. The XML schema is documented on the [Directed graph XML format](../directed-graph-xml.md) page; the call returns a `DirectedGraphDocument` (one or more `DirectedGraphLayout` per `<page>`).
+
+This example targets current source, where the facade loader is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, replace the loader call below with `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xml)`. That class is internal in current source.
 
 ```csharp
 using SXL = System.Xml.Linq;
 
 var xml = SXL.XDocument.Parse(xml_string);
-var dg_doc = VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xml);
+var dg_doc = client.Model.LoadDirectedGraphFromXml(xml);
 
 var styling = new VA.Models.Layouts.DirectedGraph.DirectedGraphStyling();
 client.Model.DrawDirectedGraphDocument(dg_doc, styling);
