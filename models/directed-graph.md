@@ -85,7 +85,7 @@ renderer.Render(visioPage, d);
 | `EdgeLabelBoxSize` | `Size` | `1.0 x 0.5` | Space in inches reserved for each edge's label, for every edge whether or not it has a label. Smaller values give tighter gaps between layers. See [Tightening the layout](#tightening-the-layout). |
 | `LayerSeparation` | `double?` | `null` | Minimum distance in inches between layers (rows for `TopToBottom`, columns for `LeftToRight`). `null` uses MSAGL's own default. The value is in inches whatever the `ScalingFactor`. |
 
-`EdgeLabelBoxSize` and `LayerSeparation` are in current source and are an unreleased addition after NuGet 3.0.0. In the published 3.0.0 package the label box is fixed at 1.0 x 0.5 and there is no layer separation setting.
+`EdgeLabelBoxSize` and `LayerSeparation` were added in NuGet 3.1.0. In 3.0.0 and earlier the label box is fixed at 1.0 x 0.5 and there is no layer separation setting.
 
 ## How the layout works
 
@@ -146,7 +146,7 @@ Both the `Size`-derived width/height and the `Cells`-driven fill are honored at 
 
 The same `DirectedGraphLayout` graph can be built from XML via the public `Client.Model.LoadDirectedGraphFromXml` facade. The XML schema is documented on the [Directed graph XML format](../directed-graph-xml.md) page; the call returns a `DirectedGraphDocument` (one or more `DirectedGraphLayout` per `<page>`).
 
-This example targets current source, where the facade loader is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, replace the loader call below with `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xml)`. That class is internal in current source.
+This example uses `Client.Model.LoadDirectedGraphFromXml`, which was added in NuGet 3.1.0. With 3.0.0, replace the loader call below with `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xml)`. That class is `internal` from 3.1.0 on.
 
 ```csharp
 using SXL = System.Xml.Linq;

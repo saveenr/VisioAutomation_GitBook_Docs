@@ -3,9 +3,9 @@
 VisioAutomation can render a directed graph (nodes connected by edges, automatically laid out via MSAGL's Sugiyama layered algorithm) from a compact XML format. The same XML is consumed by two entry points:
 
 * The PowerShell pipeline `Import-VisioModel some.xml | Out-VisioApplication`, where the `Import-VisioModel` cmdlet returns a `DirectedGraphDocument`.
-* In current source, the .NET method `client.Model.LoadDirectedGraphFromXml(xmldoc)`, called through the public `VisioScripting.Client` facade.
+* The .NET method `client.Model.LoadDirectedGraphFromXml(xmldoc)`, called through the public `VisioScripting.Client` facade (NuGet 3.1.0 and later).
 
-The facade loader is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc)`. That loader class is internal in current source; new code built from source should use the facade.
+The facade loader, `Client.Model.LoadDirectedGraphFromXml`, was added in NuGet 3.1.0. With 3.0.0, use `VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc)`. That loader class is `internal` from 3.1.0 on, so new code should use the facade.
 
 The format is small enough to write by hand and is intentionally a separate file format from `.vsd` / `.vsdx`. Use it to declare a graph in source-controlled XML, then have VisioAutomation lay it out and emit the Visio drawing.
 
@@ -63,7 +63,7 @@ Per-page rendering knobs.
 | `edgelabelboxheight` | `double` | no | `0.5` | Height in inches reserved for each edge's label. Smaller values give tighter gaps between layers. |
 | `layout` | `Sugiyama` | no | none | Parsed only if present, then discarded. Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
 
-`layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` are in current source and are an unreleased addition after NuGet 3.0.0; older packages ignore them. If you set only one of the two label box attributes, the other keeps its default. For what they do, see [Tightening the layout](models/directed-graph.md#tightening-the-layout).
+`layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` were added in NuGet 3.1.0; older packages ignore them. If you set only one of the two label box attributes, the other keeps its default. For what they do, see [Tightening the layout](models/directed-graph.md#tightening-the-layout).
 
 ```xml
 <renderoptions usedynamicconnectors="false" scalingfactor="20"
