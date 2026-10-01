@@ -38,7 +38,7 @@ The root element takes no attributes. Document-wide settings go in an optional `
 
 ## `<documentoptions>`
 
-An optional element, placed directly under `<directedgraph>` before the `<page>` elements, that holds settings for the whole document. Every attribute is optional. Added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
+An optional element, placed directly under `<directedgraph>` before the `<page>` elements, that holds settings for the whole document. Every attribute is optional. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
 
 | Attribute | Type | Default | Notes |
 | --- | --- | --- | --- |
@@ -55,7 +55,7 @@ If you set only one of the two border attributes, the other keeps its default. T
 </directedgraph>
 ```
 
-**About `template`.** The value is handed to `NewDocumentFromTemplate`, the same code as `New-VisioDocument -Template`. In releases after NuGet 3.1.0 it creates the drawing from the template, so the drawing gets the template's page setup, styles and settings, and the stencils in the template's workspace open and dock. A stencil file (`.vss` or `.vssx`) is not a template and raises `ArgumentException`. In NuGet 3.1.0 and earlier the file was instead opened as a separate docked stencil (an empty one in Visio 2013 and later) beside a blank drawing, so the drawing was not based on the template ([#229](https://github.com/saveenr/VisioAutomation/issues/229)).
+**About `template`.** The value is handed to `NewDocumentFromTemplate`, the same code as `New-VisioDocument -Template`. From NuGet 3.2.0 it creates the drawing from the template, so the drawing gets the template's page setup, styles and settings, and the stencils in the template's workspace open and dock. A stencil file (`.vss` or `.vssx`) is not a template and raises `ArgumentException`. In NuGet 3.1.0 and earlier the file was instead opened as a separate docked stencil (an empty one in Visio 2013 and later) beside a blank drawing, so the drawing was not based on the template ([#229](https://github.com/saveenr/VisioAutomation/issues/229)).
 
 ## `<page>`
 
@@ -103,7 +103,7 @@ Each shape becomes one node in the directed graph.
 | `stencil` | yes | Filename of the stencil to load (for example `basic_u.vss`, `basflo_u.vss`, `server_u.vss`). |
 | `master` | yes | Master name within that stencil (for example `Rectangle`, `Process`, `Server`). |
 | `url` | no | If set, the dropped shape gets a hyperlink with this address. |
-| `width` | no | Width of the shape in inches. Set both `width` and `height`, or neither: setting only one raises `ArgumentException`. With neither, the shape keeps its master's size. Added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)). |
+| `width` | no | Width of the shape in inches. Set both `width` and `height`, or neither: setting only one raises `ArgumentException`. With neither, the shape keeps its master's size. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)). |
 | `height` | no | Height of the shape in inches. See `width`. |
 
 A `<shape>` can also contain `<customprop>` children:
@@ -119,7 +119,7 @@ Each `<customprop>` is added to the dropped shape's custom-properties section us
 
 ### Custom property types
 
-`<customprop>` also takes these optional attributes, added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)):
+`<customprop>` also takes these optional attributes, added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)):
 
 | Attribute | Notes |
 | --- | --- |
@@ -137,7 +137,7 @@ A `<customprop>` works the same way under a `<connector>`.
 
 ### `<hyperlink>`
 
-A `<shape>` can contain any number of `<hyperlink>` children, in addition to the `url` attribute. Added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
+A `<shape>` can contain any number of `<hyperlink>` children, in addition to the `url` attribute. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
 
 | Attribute | Required? | Notes |
 | --- | --- | --- |
@@ -150,7 +150,7 @@ If the shape also has a `url` attribute, that link comes first (as `Row_1`), fol
 
 ### `<cells>`
 
-A `<shape>` or a `<connector>` can contain one `<cells>` element that sets ShapeSheet cells, for example fill, line and text formatting. Added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
+A `<shape>` or a `<connector>` can contain one `<cells>` element that sets ShapeSheet cells, for example fill, line and text formatting. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
 
 ```xml
 <shape id="n1" label="Server" stencil="server_u.vss" master="Web Server">
@@ -177,9 +177,9 @@ Each connector becomes one edge in the graph.
 | `label` | yes | Text rendered on the connector. May be empty. |
 | `color` | no | Web color (for example `#ff0000`). Defaults to black. An invalid value throws `FormatException`. |
 | `weight` | no | Line weight in points (the loader converts to inches). Defaults to `1`. |
-| `connectortype` | no | `Curved`, `Straight` or `RightAngle`, case-insensitive. Overrides the page's `connectortype` for this connector only. Added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)). |
+| `connectortype` | no | `Curved`, `Straight` or `RightAngle`, case-insensitive. Overrides the page's `connectortype` for this connector only. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)). |
 
-A `<connector>` can also contain a `<cells>` element (see above) and `<customprop>` children, which work as they do on a `<shape>`. Cells set explicitly in `<cells>` win over the `color`, `weight` and arrow defaults, and custom properties on a connector are applied to the drawn connector. Both were added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
+A `<connector>` can also contain a `<cells>` element (see above) and `<customprop>` children, which work as they do on a `<shape>`. Cells set explicitly in `<cells>` win over the `color`, `weight` and arrow defaults, and custom properties on a connector are applied to the drawn connector. Both were added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
 
 Every connector drawn from XML gets an end arrow by default; to change it, set the `LineEndArrow` cell in `<cells>`.
 

@@ -39,7 +39,7 @@ This draws a tree on the active page: a top node labelled `root` with `child1` a
 * **Element names only.** Each node is labelled with the element's name.
 * **The top node is the document element.** It is labelled with the document element's name (`root` above), and the nodes below it are its child elements. An `XmlDocument` with no document element throws `ArgumentException`.
 
-That is current source, an unreleased change after NuGet 3.1.0 ([#208](https://github.com/saveenr/VisioAutomation/issues/208)). In 3.1.0 and earlier the top node was labelled `#document`, standing in for the document element: the document element's own name (`root` above) was never drawn, and a document with no document element threw `NullReferenceException`.
+That is how it works from NuGet 3.2.0 ([#208](https://github.com/saveenr/VisioAutomation/issues/208)). In 3.1.0 and earlier the top node was labelled `#document`, standing in for the document element: the document element's own name (`root` above) was never drawn, and a document with no document element threw `NullReferenceException`.
 * **Nested elements nest.** Each element's child elements become its child nodes, recursively.
 * **Not drawn:** attributes, text nodes, comments and processing instructions. An element with only text content appears as a leaf node, without the text.
 

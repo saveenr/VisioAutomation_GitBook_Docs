@@ -10,11 +10,12 @@ These versions are documented in [`NuGet/CHANGELOG.md`](https://github.com/savee
 
 | Version | Released | Library TFM | C# language | Visio PIA baseline | PIA bundled in `.nupkg` | Release notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `3.2.0` | 2026-10-01 | `net452` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.2.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#310---2026-10-01) |
 | `3.1.0` | 2026-09-30 | `net452` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.1.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#310---2026-09-30) |
 | `3.0.0` | 2026-05-06 | `net452` | C# (latest, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.0.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#300---2026-05-07) |
 | `2.6.0` (tag only) | 2026-05-04 | `net452` | C# 8.0 | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | Tag in repo, never published end-to-end to nuget.org. Superseded by 3.0.0 two days later. |
 
-`3.0.0` was the first release published to nuget.org via the `publish-nuget.yml` CI flow under the `SevenPens` publishing identity. `3.1.0` is the current release and the recommended starting point for new consumers.
+`3.0.0` was the first release published to nuget.org via the `publish-nuget.yml` CI flow under the `SevenPens` publishing identity. `3.2.0` is the current release and the recommended starting point for new consumers.
 
 ## Pre-changelog era (2017)
 

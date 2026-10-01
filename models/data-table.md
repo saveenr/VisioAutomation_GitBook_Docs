@@ -50,7 +50,7 @@ This puts four rectangles on the active page, each 1.5 inches wide and 0.5 inche
 
 The model gives every column the same width and every row the same height. For different sizes per column or row, call `DrawDataTable` with lists (see [Two ways to draw](#two-ways-to-draw)).
 
-`CellWidth` and `CellHeight` take effect in current source, an unreleased change after NuGet 3.1.0 ([#206](https://github.com/saveenr/VisioAutomation/issues/206)). In 3.1.0 and earlier they have no effect: every cell is drawn 1 x 1 inch and only `CellSpacing` is honored.
+`CellWidth` and `CellHeight` take effect from NuGet 3.2.0 ([#206](https://github.com/saveenr/VisioAutomation/issues/206)). In 3.1.0 and earlier they have no effect: every cell is drawn 1 x 1 inch and only `CellSpacing` is honored.
 
 ## Two ways to draw
 
@@ -74,7 +74,7 @@ foreach (var shape in shapes)
 
 A column or row beyond the end of its list keeps the 1 inch default, extra entries are ignored, and a zero or negative size throws `ArgumentOutOfRangeException`.
 
-`DrawDataTableModel` draws on the `TargetPage` you pass in current source, an unreleased change after NuGet 3.1.0 ([#207](https://github.com/saveenr/VisioAutomation/issues/207)). In 3.1.0 and earlier it resolved that argument and then always drew on the active page, so pass `TargetPage.Auto` and make the page you want active first.
+From NuGet 3.2.0, `DrawDataTableModel` draws on the `TargetPage` you pass ([#207](https://github.com/saveenr/VisioAutomation/issues/207)). In 3.1.0 and earlier it resolved that argument and then always drew on the active page, so pass `TargetPage.Auto` and make the page you want active first.
 
 ## What gets drawn
 

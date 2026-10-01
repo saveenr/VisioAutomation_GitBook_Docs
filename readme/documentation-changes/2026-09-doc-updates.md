@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-10: NuGet 3.2.0 release sweep
+
+NuGet 3.2.0 shipped. The notes that described its changes as "unreleased after 3.1.0" are now plain version statements: the new directed graph XML options on the [Directed graph XML format](../../directed-graph-xml.md) page, the data table cell sizes and target page on [Data table model](../../models/data-table.md), the XML model root on [XML model](../../models/xml-model.md), and `DrawOrgChart` no longer resizing the page you pass on [Org chart model](../../models/org-charts.md) and the `client.Model` reference. The [Version compatibility](../../version-compatibility.md) page has a 3.2.0 row.
+
 ## 2026-10: The directed graph XML template option now uses the template
 
 The [Directed graph XML format](../../directed-graph-xml.md) page no longer says the `template` option only opens a docked stencil. In releases after NuGet 3.1.0 the drawing is created from the template, a stencil file raises an error, and the page describes the earlier behavior as a note ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). The note should become a plain version statement when the next release ships.
