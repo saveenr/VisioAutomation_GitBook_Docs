@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: DOM render performance as a list
+
+The Render performance section of the [DOM](../../models/dom.md) page now lists the four settings (`DeferRecalc`, `ScreenUpdating`, `EnableAutoConnect` and `LiveDynamics`) as bullets, each with its type, default and the Visio property it maps to, instead of one long paragraph.
+
 ## 2026-09: Why the org chart model creates a new document
 
 The [Org chart model](../../models/org-charts.md) page now explains why it always creates a new document: Visio's org chart shapes run an add-on that accepts only a document created from the Organization Chart template, and dropping the position shape into a blank document fails with "You must open the Organization Chart template to use this shape."

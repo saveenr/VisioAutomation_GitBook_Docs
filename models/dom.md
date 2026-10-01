@@ -158,14 +158,23 @@ foreach (var s in page_node.Shapes)
 
 ## Render performance
 
-While a `Page` renders, it temporarily applies a set of Visio application settings and restores the originals afterward. Every `Page` has a read-only `RenderPerformanceSettings` property that controls them. Its fields are nullable (`null` means leave the setting alone): `EnableAutoConnect` (`bool?`), `LiveDynamics` (`bool?`), `ScreenUpdating` (`short?`) and `DeferRecalc` (`short?`). The defaults a new `Page` sets are `DeferRecalc = 0`, `ScreenUpdating = 1`, `EnableAutoConnect = false` and `LiveDynamics = false`.
+While a `Page` renders, it temporarily changes four Visio application settings to make rendering faster, then restores your original values afterward.
+
+The settings are on each `Page`'s read-only `RenderPerformanceSettings` property. Each one is nullable, and `null` means leave that setting alone. A new `Page` starts with these values:
+
+* **`DeferRecalc`** (`short?`, default `0`): Visio's `Application.DeferRecalc`. `0` leaves recalculation as normal. A nonzero value defers recalculating shape formulas while the page renders.
+* **`ScreenUpdating`** (`short?`, default `1`): Visio's `Application.ScreenUpdating`. `1` keeps the window redrawing. It is left on because turning it off can break page resizing.
+* **`EnableAutoConnect`** (`bool?`, default `false`): Visio's `Application.Settings.EnableAutoConnect`. `false` turns off AutoConnect while shapes are dropped.
+* **`LiveDynamics`** (`bool?`, default `false`): Visio's `Application.LiveDynamics`. `false` stops connectors from rerouting live as shapes change.
+
+To change one, set it before you call `Render`:
 
 ```csharp
 var page_node = new VADOM.Page();
 page_node.RenderPerformanceSettings.DeferRecalc = 1;   // adjust before Render
 ```
 
-`ScreenUpdating` is left on by default because turning it off can break page resizing.
+Only `Page.Render` applies these settings, so [`ShapeList.Render`](#where-the-output-goes) does not.
 
 ## See also
 
