@@ -80,7 +80,7 @@ renderer.Render(visioPage, d);
 | `Direction` | `MsaglDirection` | `TopToBottom` | Which way the graph flows: `TopToBottom`, `BottomToTop`, `LeftToRight`, `RightToLeft`. |
 | `UseDynamicConnectors` | `bool` | `true` | `true` uses Visio's dynamic connectors, which re-route when shapes move. `false` keeps the geometry MSAGL computed. See [Connector style](#connector-style-dynamic-vs-routed). |
 | `ScalingFactor` | `double` | `14` | Converts between document inches and MSAGL's layout units: node sizes are multiplied by it before layout and the result is divided by it afterward. MSAGL's own spacing (node and layer separation, margins) is fixed in MSAGL units and is not scaled, so larger values give tighter gaps relative to node size and a smaller page, and smaller values give looser spacing. |
-| `DefaultShapeSize` | `Size` | `1.0 x 0.75` | Size in inches for any node whose `Size` is not set. |
+| `DefaultShapeSize` | `Size` | `1.0 x 0.75` | A fallback node size in inches. In practice it does not apply: a node with no `Size` is laid out and drawn at the size of its master. Set `Size` on the node to override the master's size. |
 | `PageBorderWidth` | `Size` | `0.5 x 0.5` | Margin in inches left around the finished drawing when the page is resized to fit its contents. |
 
 ## How the layout works
@@ -89,7 +89,7 @@ The layout is a layered (Sugiyama) layout from MSAGL. It places nodes in success
 
 * **Direction is a rotation.** The graph is laid out as if flowing top to bottom, and `Direction` rotates the finished layout. `LeftToRight` therefore uses the same layering with the axes turned.
 * **Every edge reserves a label box.** Each edge is given room for a label whether or not it has one. That reserved space takes part in the layout and widens the gaps between layers.
-* **Node sizes come from you.** The layout uses each node's `Size` (or `DefaultShapeSize`) to place nodes. It does not measure text, so a node whose text is larger than its `Size` will still be laid out at its `Size`.
+* **Node sizes are fixed before layout.** The layout uses each node's `Size`, or the size of its master when `Size` is not set, to place nodes. It does not measure text, so a node whose text is larger than that size will still be laid out at that size.
 * **Unconnected nodes are placed too.** Disconnected parts of the graph are laid out separately and then packed together.
 
 ## Custom properties on nodes
