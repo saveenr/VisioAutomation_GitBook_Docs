@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Introduction to models page
+
+Added an [Introduction to models](../../models/introduction.md) page at the top of the Diagram models section. It explains what a model is (an in-memory structure that you build and then render), why that keeps you close to the document you want, and that the [DOM](../../models/dom.md) is the foundation where the Visio-specific and performance work lives. It lists every model and says which ones do not go through the DOM: Box, Container and Form pages. The [Layout models](../../models/layouts.md) overview and the Container layout page no longer say that every layout draws through the DOM.
+
 ## 2026-09: Data models page
 
 Added a [Data models](../../models/data.md) page for the two models that draw existing .NET data: the [Data table model](../../models/data-table.md) and the [XML model](../../models/xml-model.md). It compares them and says what they share, and the two pages are now nested beneath it in the table of contents. No existing page changed.

@@ -24,4 +24,4 @@ IVisio.Page page = layout.Render(visioDoc);
 ## See also
 
 * [Layout models](layouts.md) (the overview and comparison of all the layouts)
-* [DOM](dom.md) (the underlying shape model the layouts emit into)
+* [DOM](dom.md) (the general-purpose shape model; the container layout does not use it and drops its shapes directly)

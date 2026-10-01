@@ -87,6 +87,7 @@
 
 ## Diagram models
 
+* [Introduction to models](models/introduction.md)
 * [DOM](models/dom.md)
 * [Layout models](models/layouts.md)
   * [Tree layout model](models/layouts-tree.md)

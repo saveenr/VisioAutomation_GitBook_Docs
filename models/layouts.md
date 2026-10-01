@@ -1,6 +1,6 @@
 # Layout models
 
-The `VisioAutomation.Models.Layouts` namespace adds **algorithmic placement** on top of the [DOM](dom.md). Instead of specifying X/Y for every shape, you describe the structure (a tree of nodes, a rows-by-columns grid, packed boxes, columns of container items) and the layout engine assigns coordinates and connects shapes for you.
+The `VisioAutomation.Models.Layouts` namespace adds **algorithmic placement**. Most of the layouts draw through the [DOM](dom.md); see [Introduction to models](introduction.md) for the exceptions. Instead of specifying X/Y for every shape, you describe the structure (a tree of nodes, a rows-by-columns grid, packed boxes, columns of container items) and the layout engine assigns coordinates and connects shapes for you.
 
 There are four general-purpose layouts in this namespace plus a directed-graph layout that wraps Microsoft Automatic Graph Layout (MSAGL).
 
@@ -22,7 +22,8 @@ The tree layout opens `basic_u.vss` for shape masters and `connec_u.vss` for con
 
 ## See also
 
-* [DOM](dom.md) (the underlying shape model the layouts emit into)
+* [Introduction to models](introduction.md) (what a model is, and which ones build on the DOM)
+* [DOM](dom.md) (the underlying shape model that the tree, grid and directed graph layouts draw through)
 * [Layout styles](layout-styles.md) (Visio's own page-level layout feature, applied to any page and separate from the layouts described here)
 * [Directed graph layout model](directed-graph.md) (general graphs via MSAGL, for non-tree edges)
 * [Org chart model](org-charts.md) (turn-key org-chart generator that shares the internal tree-layout engine rather than the public Tree API)
