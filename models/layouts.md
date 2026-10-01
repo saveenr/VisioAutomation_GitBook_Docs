@@ -8,7 +8,7 @@ There are four general-purpose layouts in this namespace plus a directed-graph l
 | :--- | :--- | :--- |
 | Tree | `VisioAutomation.Models.Layouts.Tree` | Hierarchies with one root, parent-child edges only. |
 | Grid | `VisioAutomation.Models.Layouts.Grid` | Uniform rows and columns of identical shapes (heatmaps, calendars, lattice diagrams). |
-| Box | `VisioAutomation.Models.Layouts.Box` | Nested rectangles with directional packing (UML-style box diagrams). Geometry only. |
+| Box | `VisioAutomation.Models.Layouts.Box` | Nested rectangles with directional packing. Geometry only. |
 | Container | `VisioAutomation.Models.Layouts.Container` | Side-by-side columns of labelled items, each column wrapped in a Visio container shape. |
 | Directed graph | `VisioAutomation.Models.Layouts.DirectedGraph` | General graphs with cycles, multiple roots, or non-tree edges. See [Directed graph](directed-graph.md). |
 
@@ -69,6 +69,18 @@ Use when the data is a tree of rectangular regions packed in a particular direct
 
 The model is a tree of `Container` nodes, where each container has a `Direction` (the axis along which its children pack) and a list of children. Each child is either another `Container` (for nesting) or a `Box` (a leaf rectangle of a given size). Each container has `PaddingLeft`, `PaddingRight`, `PaddingTop` and `PaddingBottom` (all 0.125 by default) and a `ChildSpacing` (also 0.125 by default) inserted between adjacent children.
 
+`Direction` takes one of four values. It sets both the axis children pack along and the edge the first child starts against:
+
+| Direction | Axis | First child is placed |
+| --- | --- | --- |
+| `LeftToRight` | horizontal | at the left edge, with later children to its right |
+| `RightToLeft` | horizontal | at the right edge, with later children to its left |
+| `BottomToTop` | vertical | at the bottom edge, with later children above it |
+| `TopToBottom` | vertical | at the top edge, with later children below it |
+
+In a horizontal container, a child shorter than the container is positioned by its `VAlignToParent` (`Top`, `Center` or `Bottom`; default `Top`). In a vertical container, a child narrower than the container is positioned by its `HAlignToParent` (`Left`, `Center` or `Right`; default `Left`).
+
+
 ```csharp
 using VABOX = VisioAutomation.Models.Layouts.Box;
 
@@ -94,6 +106,8 @@ layout.PerformLayout();
 ```
 
 Containers can nest: a child container packs its own children along its own direction, and the parent treats it as a single rectangle whose size is the bounding box of its packed contents. The layout is a nested stack-and-pad packer; it does not size boxes proportionally the way a treemap does.
+
+Nested `RightToLeft` containers are fixed in current source ([#202](https://github.com/saveenr/VisioAutomation/issues/202)), an unreleased change after NuGet 3.0.0. In the published 3.0.0 package, a `RightToLeft` container placed anywhere other than the root misplaces its children whenever its origin Y differs from its X, for example one nested inside a vertical container. The root container is always placed at (0, 0), so it was not affected.
 
 `PerformLayout()` is computational only; it doesn't talk to Visio. To render, walk the tree and emit DOM shapes (or use the rectangles for any other purpose, e.g. a JPEG or SVG). The separation makes Box layout useful for non-Visio output too.
 
