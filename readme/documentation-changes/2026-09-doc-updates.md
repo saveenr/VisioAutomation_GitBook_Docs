@@ -6,7 +6,7 @@ Some section names in the table of contents did not match how Visio uses the ter
 
 ## 2026-09: Layouts page split into an overview and one page per layout
 
-[Layouts](../../models/layouts.md) is now a short overview with the comparison table. [Tree layout](../../models/layouts-tree.md), [Grid layout](../../models/layouts-grid.md), [Box layout](../../models/layouts-box.md) and [Container layout](../../models/layouts-container.md) each have their own page, nested under it in the table of contents. The text of each section moved unchanged, the overview is still the page at `models/layouts.md`, and links that pointed at the old `#tree-layout` and `#grid-layout` sections now go to the new pages.
+[Layouts](../../models/layouts.md) is now a short overview with the comparison table. [Tree layout](../../models/layouts-tree.md), [Grid layout](../../models/layouts-grid.md), [Box layout](../../models/layouts-box.md) and [Container layout](../../models/layouts-container.md) each have their own page, nested under it in the table of contents. The text of each section moved unchanged, the overview is still the page at `models/layouts.md`, and links that pointed at the old `#tree-layout` and `#grid-layout` sections now go to the new pages. [Directed graph](../../models/directed-graph.md), with its [XML format](../../directed-graph-xml.md) page nested beneath it, also moved under Layouts so every layout is in one place.
 
 ## 2026-09: Models documentation accuracy pass
 

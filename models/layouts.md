@@ -2,7 +2,7 @@
 
 The `VisioAutomation.Models.Layouts` namespace adds **algorithmic placement** on top of the [DOM](dom.md). Instead of specifying X/Y for every shape, you describe the structure (a tree of nodes, a rows-by-columns grid, packed boxes, columns of container items) and the layout engine assigns coordinates and connects shapes for you.
 
-There are four general-purpose layouts in this namespace plus a directed-graph layout that wraps Microsoft Automatic Graph Layout (MSAGL) and is documented separately on the [Directed graph](directed-graph.md) page.
+There are four general-purpose layouts in this namespace plus a directed-graph layout that wraps Microsoft Automatic Graph Layout (MSAGL).
 
 | Layout | Namespace | Best for |
 | :--- | :--- | :--- |
@@ -10,11 +10,11 @@ There are four general-purpose layouts in this namespace plus a directed-graph l
 | [Grid](layouts-grid.md) | `VisioAutomation.Models.Layouts.Grid` | Uniform rows and columns of identical shapes (heatmaps, calendars, lattice diagrams). |
 | [Box](layouts-box.md) | `VisioAutomation.Models.Layouts.Box` | Nested rectangles with directional packing. Geometry only. |
 | [Container](layouts-container.md) | `VisioAutomation.Models.Layouts.Container` | Side-by-side columns of labelled items, each column wrapped in a Visio container shape. |
-| Directed graph | `VisioAutomation.Models.Layouts.DirectedGraph` | General graphs with cycles, multiple roots, or non-tree edges. See [Directed graph](directed-graph.md). |
+| [Directed graph](directed-graph.md) | `VisioAutomation.Models.Layouts.DirectedGraph` | General graphs with cycles, multiple roots, or non-tree edges. |
 
 Tree, Grid, Container and directed graph each render a Visio drawing. Box is geometry only: it computes rectangles and leaves drawing to you. The differences are in the input data structure and the geometry algorithm.
 
-Each layout has its own page: [Tree](layouts-tree.md), [Grid](layouts-grid.md), [Box](layouts-box.md) and [Container](layouts-container.md).
+Each layout has its own page: [Tree](layouts-tree.md), [Grid](layouts-grid.md), [Box](layouts-box.md), [Container](layouts-container.md) and [Directed graph](directed-graph.md).
 
 ## Default masters and stencils
 
