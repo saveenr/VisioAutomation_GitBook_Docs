@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-10: DrawOrgChart no longer resizes the target page
+
+The [Org chart model](../../models/org-charts.md) page and the `DrawOrgChart` row of the [`client.Model`](../../visio-scripting/model.md) reference now say that the page you pass to `DrawOrgChart` is not changed. In NuGet 3.1.0 and earlier the call also resized that page to fit its own contents, which was not the chart's page. This is fixed in an unreleased change after 3.1.0 ([#219](https://github.com/saveenr/VisioAutomation/issues/219)); the notes should become plain version statements when the next release ships.
+
 ## 2026-09: Directed graph XML format: corrected the "not supported" list
 
 The "What's not supported in XML" section of the [Directed graph XML format](../../directed-graph-xml.md) page listed layer separation as unsupported, although `layerseparation` has been supported since NuGet 3.1.0, and an "edge routing strategy" option that does not exist in the model. Both are gone. The bullet now names the options that really are missing from the XML (`PageBorderWidth` and `DefaultShapeSize`) and points to [#225](https://github.com/saveenr/VisioAutomation/issues/225) for the full list.
