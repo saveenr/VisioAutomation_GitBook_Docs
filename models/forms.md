@@ -14,6 +14,8 @@ The form page model always creates a **new document**.
 
 It does not use the [DOM](dom.md), so the [render performance settings](dom.md#render-performance) do not apply.
 
+The library's own use of it is in the VisioScripting developer commands: `client.Developer.DrawInteropEnumDocumentation()` builds a `FormDocument` with a page of values for each Visio interop enum, and returns the new document. These are internal documentation tools that happen to be public, not a general way to draw forms.
+
 ## Hello-world
 
 A one-page document with a title and body:
