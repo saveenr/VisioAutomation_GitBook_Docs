@@ -58,7 +58,18 @@ Per-page rendering knobs.
 | `scalingfactor` | `double` | yes | none | Scale applied around the MSAGL layout. Node sizes are multiplied by this value before layout and the results are divided by it afterward, so node sizes are unchanged in inches. MSAGL's own separation constants (node and layer separation, margins) are fixed in MSAGL units and are not scaled, so after the division they shrink to roughly (fixed value / factor) inches. A larger value therefore gives tighter gaps relative to node size and a smaller page; a smaller value gives looser spacing. Most in-repo fixtures use `20`; one uses `5`. Omitting the attribute throws `ArgumentException` (the programmatic default of `14` does not apply to XML). |
 | `direction` | `TopToBottom` \| `BottomToTop` \| `LeftToRight` \| `RightToLeft` | no | `TopToBottom` | Which way the graph flows. Case-insensitive. |
 | `connectortype` | `Curved` \| `Straight` \| `RightAngle` | no | `Curved` | Connector style applied to every edge on the page. Case-insensitive. Per-edge override is not supported. |
+| `layerseparation` | `double` | no | none (MSAGL's default) | Minimum distance in inches between layers (rows for `TopToBottom`, columns for `LeftToRight`). A non-numeric value throws `FormatException`. |
+| `edgelabelboxwidth` | `double` | no | `1.0` | Width in inches reserved for each edge's label, for every edge whether or not it has a label. |
+| `edgelabelboxheight` | `double` | no | `0.5` | Height in inches reserved for each edge's label. Smaller values give tighter gaps between layers. |
 | `layout` | `Sugiyama` | no | none | Parsed only if present, then discarded. Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
+
+`layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` are in current source and are an unreleased addition after NuGet 3.0.0; older packages ignore them. If you set only one of the two label box attributes, the other keeps its default. For what they do, see [Tightening the layout](models/directed-graph.md#tightening-the-layout).
+
+```xml
+<renderoptions usedynamicconnectors="false" scalingfactor="20"
+               direction="LeftToRight" layerseparation="0.25"
+               edgelabelboxwidth="0.8" edgelabelboxheight="0.12" />
+```
 
 ## `<shape>` (under `<shapes>`)
 
