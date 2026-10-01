@@ -1,12 +1,20 @@
 # 2026-09 doc updates
 
+## 2026-09: Table of contents sections reorganized
+
+Some section names in the table of contents did not match how Visio uses the terms, so the sidebar was regrouped. "Shape data" has a specific meaning in Visio (custom properties), so that section is now **Shapes**, and the [Geometry](../../geometry.md) page moved into it. [Connection points](../../connection-points.md) and [Connectors](../../connectors.md) moved to a new **Connections** section. "Formatting and layout" is now **Formatting**. [Analyzers](../../analyzers.md) moved out of Diagnostics into a new **Diagram analysis** section. Only the grouping changed: no page was added or removed.
+
+## 2026-09: Layouts page split into an overview and one page per layout
+
+[Layouts](../../models/layouts.md) is now a short overview with the comparison table. [Tree layout](../../models/layouts-tree.md), [Grid layout](../../models/layouts-grid.md), [Box layout](../../models/layouts-box.md) and [Container layout](../../models/layouts-container.md) each have their own page, nested under it in the table of contents. The text of each section moved unchanged, the overview is still the page at `models/layouts.md`, and links that pointed at the old `#tree-layout` and `#grid-layout` sections now go to the new pages.
+
 ## 2026-09: Models documentation accuracy pass
 
 Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project was reviewed against the source, and the claims that no longer matched were corrected. All C# snippets on the changed pages were compile-checked afterwards, and the PowerShell examples added in this period were run against a live Visio. The main corrections:
 
 * **[Directed graph](../../models/directed-graph.md)** and **[Directed graph XML format](../../directed-graph-xml.md)**: the note on `scalingfactor` had the spacing backwards (a larger value gives tighter gaps relative to node size). `usedynamicconnectors` and `scalingfactor` are required in XML, as are the `<renderoptions>`, `<shapes>` and `<connectors>` elements. `MsaglRenderer.Render` uses the renderer's own options and does not read the ones stored on the layout. A node with no `Size` takes the size of its master, so `DefaultShapeSize` does not apply in practice. The Directed graph page also gained a layout options reference and a "How the layout works" section, and the XML page gained a "Failure modes" section.
 * **[Declarative DOM](../../models/dom.md)**: removed an unsupported claim that rendering is a single undo step; corrected the descriptions of `RenderPerformanceSettings`, the node hierarchy, `Connect` and connector endpoints; added the `using VisioAutomation.Extensions;` that the `OpenStencil` snippet needs.
-* **[Layouts](../../models/layouts.md)**: added the **Container layout**, which had no coverage; corrected the Box example coordinates, the Grid example (it needs `PerformLayout()`) and the claims about which layout settings and masters are configurable; documented the four Box `Direction` values and the default child alignment.
+* **[Layouts](../../models/layouts.md)** ([Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/layouts-box.md) and [Container](../../models/layouts-container.md)): added the **Container layout**, which had no coverage; corrected the Box example coordinates, the Grid example (it needs `PerformLayout()`) and the claims about which layout settings and masters are configurable; documented the four Box `Direction` values and the default child alignment.
 * **[Layout styles](../../models/layout-styles.md)**: corrected the `CompactTreeDirection` and `ConnectorStyle` value lists, which cells `Apply` writes, and the per-style defaults.
 * **[Org charts](../../models/org-charts.md)** and **[Form pages](../../models/forms.md)**: an org chart is always drawn into a new document, its XML schema is now documented, and a form page has two text blocks.
 

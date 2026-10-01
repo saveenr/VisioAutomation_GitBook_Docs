@@ -8,7 +8,7 @@ This page summarizes notable changes to the **VisioAutomation** documentation so
 
 ## 2026-09: Models documentation accuracy pass
 
-Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project was reviewed against the source and corrected, including a `scalingfactor` explanation that had the spacing backwards, an unsupported undo claim, wrong Box and Grid examples, and incomplete layout-style enum lists. The [Container layout](../../models/layouts.md) now has coverage, and the [Org charts](../../models/org-charts.md) XML schema is documented. See [2026-09 doc updates](2026-09-doc-updates.md) for the full list.
+Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project was reviewed against the source and corrected, including a `scalingfactor` explanation that had the spacing backwards, an unsupported undo claim, wrong Box and Grid examples, and incomplete layout-style enum lists. The [Container layout](../../models/layouts-container.md) now has coverage, and the [Org charts](../../models/org-charts.md) XML schema is documented. See [2026-09 doc updates](2026-09-doc-updates.md) for the full list.
 
 ## 2026-09: Data table model and XML model
 
