@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-10: The directed graph XML template option now uses the template
+
+The [Directed graph XML format](../../directed-graph-xml.md) page no longer says the `template` option only opens a docked stencil. In releases after NuGet 3.1.0 the drawing is created from the template, a stencil file raises an error, and the page describes the earlier behavior as a note ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). The note should become a plain version statement when the next release ships.
+
 ## 2026-10: Directed graph XML format: new options
 
 The [Directed graph XML format](../../directed-graph-xml.md) page documents the options added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)): a `<documentoptions>` element (`template`, `borderwidth`, `borderheight`); `width` and `height` on `<shape>`; `<hyperlink>` and `<cells>` children; `type`, `label`, `prompt` and `format` on `<customprop>`; and, on `<connector>`, `connectortype`, `<cells>` and `<customprop>`. The "What's not supported in XML" list now names only what is still missing, including `PageBorderWidth` and `DefaultShapeSize`, which would have no effect if exposed. The `template` option inherits a bug in how templates are applied ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). These notes should become plain version statements when the next release ships.

@@ -42,7 +42,7 @@ An optional element, placed directly under `<directedgraph>` before the `<page>`
 
 | Attribute | Type | Default | Notes |
 | --- | --- | --- | --- |
-| `template` | string | none | Passed to the same code as `New-VisioDocument -Template`. See the note below. |
+| `template` | string | none | A Visio template file name (for example `basflo_u.vstx`; use `.vst` before Visio 2013). The drawing is created from it. See the note below. |
 | `borderwidth` | `double` | `1.0` | Margin in inches on each of the left and right sides of the drawing, on every page. |
 | `borderheight` | `double` | `1.0` | Margin in inches above and below the drawing, on every page. |
 
@@ -55,7 +55,7 @@ If you set only one of the two border attributes, the other keeps its default. T
 </directedgraph>
 ```
 
-**About `template`.** The value is handed to `NewDocumentFromTemplate`, which currently opens the file as a docked stencil and returns a blank drawing instead of basing the drawing on the template ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). So it can open a file next to the drawing, but it does not give the drawing the template's pages or settings.
+**About `template`.** The value is handed to `NewDocumentFromTemplate`, the same code as `New-VisioDocument -Template`. In releases after NuGet 3.1.0 it creates the drawing from the template, so the drawing gets the template's page setup, styles and settings, and the stencils in the template's workspace open and dock. A stencil file (`.vss` or `.vssx`) is not a template and raises `ArgumentException`. In NuGet 3.1.0 and earlier the file was instead opened as a separate docked stencil (an empty one in Visio 2013 and later) beside a blank drawing, so the drawing was not based on the template ([#229](https://github.com/saveenr/VisioAutomation/issues/229)).
 
 ## `<page>`
 
