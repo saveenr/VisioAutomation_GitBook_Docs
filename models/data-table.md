@@ -2,7 +2,7 @@
 
 `VisioAutomation.Models.Data.DataTableModel` draws a `System.Data.DataTable` as a grid of rectangles, one per cell, with the cell value as the shape text. Use it to get tabular data onto a Visio page quickly: a lookup table beside a diagram, a legend, or a quick look at a query result.
 
-It is deliberately minimal. There is no header row and no per-cell formatting. If you need those, build a [`GridLayout`](layouts.md) directly.
+It is deliberately minimal. There is no header row and no per-cell formatting. If you need those, build a [`GridLayout`](layouts-grid.md) directly.
 
 ## Hello-world
 
@@ -78,7 +78,7 @@ Calling `DrawDataTable` with a null `DataTable`, `widths` or `heights` throws `A
 
 ## Cell sizes
 
-Every cell is 1 x 1 inch unless you set a size. `DataTableModel` applies `CellWidth` and `CellHeight` to every column and row; `DrawDataTable` applies the entries of its `widths` and `heights` lists to individual columns and rows. For per-cell text formatting or other control, use `GridLayout` directly; see [Layouts](layouts.md#grid-layout).
+Every cell is 1 x 1 inch unless you set a size. `DataTableModel` applies `CellWidth` and `CellHeight` to every column and row; `DrawDataTable` applies the entries of its `widths` and `heights` lists to individual columns and rows. For per-cell text formatting or other control, use `GridLayout` directly; see [Grid layout](layouts-grid.md).
 
 In NuGet 3.1.0 and earlier, sizes are not applied: every cell is 1 x 1 inch, the `widths` and `heights` arguments to `DrawDataTable` must be non-null but their values are not read, and `CellWidth` and `CellHeight` have no effect. To size columns and rows in those versions, use `GridLayout`, whose `Columns[i].Width` and `Rows[i].Height` do take effect.
 
@@ -110,5 +110,5 @@ See the [Out-VisioApplication cmdlet page](https://saveenr.gitbook.io/visiopower
 ## See also
 
 * [client.Model](../visio-scripting/model.md) (the `DrawDataTable` and `DrawDataTableModel` methods)
-* [Layouts](layouts.md) (the `GridLayout` that draws the table, with per-row and per-column sizing)
+* [Grid layout](layouts-grid.md) (the `GridLayout` that draws the table, with per-row and per-column sizing)
 * [XML model](xml-model.md) (the other `Models.Data` type)
