@@ -90,6 +90,8 @@
 * [Layout styles](models/layout-styles.md)
 * [Org charts](models/org-charts.md)
 * [Form pages](models/forms.md)
+* [Data table model](models/data-table.md)
+* [XML model](models/xml-model.md)
 
 ## Diagnostics
 
