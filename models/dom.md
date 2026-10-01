@@ -158,41 +158,9 @@ foreach (var s in page_node.Shapes)
 
 ## Render performance
 
-While a `Page` renders, it temporarily changes four Visio application settings to make rendering faster, then restores your original values afterward.
+A `Page` makes Visio render faster by temporarily changing a few Visio application settings while it renders, and restoring them afterward. The settings are exposed on the page's `RenderPerformanceSettings` property, but you should not need to touch them: the defaults are what the library's own layouts and models use, and they work well. Leave them alone unless you have a specific reason.
 
-The settings are on each `Page`'s read-only `RenderPerformanceSettings` property. Each one is nullable, and `null` means leave that setting alone. A new `Page` starts with these values:
-
-* **`DeferRecalc`**: Visio's `Application.DeferRecalc`, which decides whether Visio recalculates cell formulas during a series of actions.
-  * Type: `short?`
-  * Default: `0`
-  * `0`: Visio recalculates formulas as needed.
-  * Any nonzero value: Visio defers recalculating formulas until the render is finished.
-* **`ScreenUpdating`**: Visio's `Application.ScreenUpdating`, which decides whether the window is redrawn during a series of actions.
-  * Type: `short?`
-  * Default: `1`
-  * `1` (any nonzero value): Visio redraws the window as normal. This is the default because turning screen updating off can break page resizing.
-  * `0`: Visio does not redraw the window while the page renders.
-* **`EnableAutoConnect`**: Visio's `Application.Settings.EnableAutoConnect`, which turns Visio's AutoConnect feature on or off. Visio itself has it on by default.
-  * Type: `bool?`
-  * Default: `false`
-  * `false`: AutoConnect is off while the page renders.
-  * `true`: AutoConnect is on.
-* **`LiveDynamics`**: Visio's `Application.LiveDynamics`, which decides how often Visio recalculates shape properties during drag operations.
-  * Type: `bool?`
-  * Default: `false`
-  * `false`: Visio recalculates only after the mouse button is released.
-  * `true`: Visio recalculates on every mouse move, which raises more events such as `CellChanged`. Add-ins that respond to those events can run faster with `false`.
-
-Each of these is documented in Microsoft's Visio reference: [`DeferRecalc`](https://learn.microsoft.com/en-us/office/vba/api/Visio.Application.DeferRecalc), [`ScreenUpdating`](https://learn.microsoft.com/en-us/office/vba/api/Visio.Application.ScreenUpdating), [`EnableAutoConnect`](https://learn.microsoft.com/en-us/office/vba/api/Visio.ApplicationSettings.EnableAutoConnect) and [`LiveDynamics`](https://learn.microsoft.com/en-us/office/vba/api/visio.application.livedynamics).
-
-To change one, set it before you call `Render`:
-
-```csharp
-var page_node = new VADOM.Page();
-page_node.RenderPerformanceSettings.DeferRecalc = 1;   // adjust before Render
-```
-
-Only `Page.Render` applies these settings, so [`ShapeList.Render`](#where-the-output-goes) does not.
+If you want to understand exactly what is being done, or want to experiment, see [DOM render performance](dom-render-performance.md).
 
 ## See also
 

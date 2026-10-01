@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: DOM render performance moved to its own page
+
+The details of the four render performance settings (`DeferRecalc`, `ScreenUpdating`, `EnableAutoConnect` and `LiveDynamics`) moved from the [DOM](../../models/dom.md) page to a new page beneath it, [DOM render performance](../../models/dom-render-performance.md). The DOM page's Render performance section now says the settings exist, that the defaults work well, and that most people should leave them alone, and links to the new page for anyone who wants the details or wants to experiment.
+
 ## 2026-09: DOM render performance as a list
 
 The Render performance section of the [DOM](../../models/dom.md) page now lists the four settings (`DeferRecalc`, `ScreenUpdating`, `EnableAutoConnect` and `LiveDynamics`) as bullets, each with its type, default and the Visio property it maps to, instead of one long paragraph.

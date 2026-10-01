@@ -89,6 +89,7 @@
 
 * [Introduction to models](models/introduction.md)
 * [DOM](models/dom.md)
+  * [DOM render performance](models/dom-render-performance.md)
 * [Layout models](models/layouts.md)
   * [Tree layout model](models/layouts-tree.md)
   * [Grid layout model](models/layouts-grid.md)
