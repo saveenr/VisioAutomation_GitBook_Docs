@@ -82,15 +82,36 @@ renderer.Render(visioPage, d);
 | `ScalingFactor` | `double` | `14` | Converts between document inches and MSAGL's layout units: node sizes are multiplied by it before layout and the result is divided by it afterward. MSAGL's own spacing (node and layer separation, margins) is fixed in MSAGL units and is not scaled, so larger values give tighter gaps relative to node size and a smaller page, and smaller values give looser spacing. |
 | `DefaultShapeSize` | `Size` | `1.0 x 0.75` | A fallback node size in inches. In practice it does not apply: a node with no `Size` is laid out and drawn at the size of its master. Set `Size` on the node to override the master's size. |
 | `PageBorderWidth` | `Size` | `0.5 x 0.5` | Margin in inches left around the finished drawing when the page is resized to fit its contents. |
+| `EdgeLabelBoxSize` | `Size` | `1.0 x 0.5` | Space in inches reserved for each edge's label, for every edge whether or not it has a label. Smaller values give tighter gaps between layers. See [Tightening the layout](#tightening-the-layout). |
+| `LayerSeparation` | `double?` | `null` | Minimum distance in inches between layers (rows for `TopToBottom`, columns for `LeftToRight`). `null` uses MSAGL's own default. The value is in inches whatever the `ScalingFactor`. |
+
+`EdgeLabelBoxSize` and `LayerSeparation` are in current source and are an unreleased addition after NuGet 3.0.0. In the published 3.0.0 package the label box is fixed at 1.0 x 0.5 and there is no layer separation setting.
 
 ## How the layout works
 
 The layout is a layered (Sugiyama) layout from MSAGL. It places nodes in successive layers, which are rows for `TopToBottom` and columns for `LeftToRight`, then positions the nodes within each layer and routes the edges. A few details that affect what you see:
 
 * **Direction is a rotation.** The graph is laid out as if flowing top to bottom, and `Direction` rotates the finished layout. `LeftToRight` therefore uses the same layering with the axes turned.
-* **Every edge reserves a label box.** Each edge is given room for a label whether or not it has one. That reserved space takes part in the layout and widens the gaps between layers.
+* **Every edge reserves a label box.** Each edge is given room for a label whether or not it has one. That reserved space takes part in the layout and widens the gaps between layers. Its size is `EdgeLabelBoxSize`.
 * **Node sizes are fixed before layout.** The layout uses each node's `Size`, or the size of its master when `Size` is not set, to place nodes. It does not measure text, so a node whose text is larger than that size will still be laid out at that size.
 * **Unconnected nodes are placed too.** Disconnected parts of the graph are laid out separately and then packed together.
+
+## Tightening the layout
+
+If the gaps between layers are larger than you want, two options help:
+
+* **`EdgeLabelBoxSize`** is the main lever when most edges have no label, because the space it reserves widens every layer gap. Shrinking it reclaims that space. It only reserves room; it does not resize label text, so keep it large enough for your longest edge label or labels may crowd nearby shapes.
+* **`LayerSeparation`** sets the minimum distance between layers directly, in inches.
+
+```csharp
+var renderer = new VADG.MsaglRenderer();
+renderer.LayoutOptions.Direction = VADG.MsaglDirection.LeftToRight;
+renderer.LayoutOptions.EdgeLabelBoxSize = new VA.Core.Size(0.8, 0.12);   // room for short labels only
+renderer.LayoutOptions.LayerSeparation = 0.25;                           // inches between layers
+renderer.Render(visioPage, d);
+```
+
+Both options can also be set from XML with the `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` attributes; see [Directed graph XML format](../directed-graph-xml.md#renderoptions). If you render through `Client.Model.DrawDirectedGraphDocument`, set them on the layout's `LayoutOptions`, which that method copies to its renderer.
 
 ## Custom properties on nodes
 
