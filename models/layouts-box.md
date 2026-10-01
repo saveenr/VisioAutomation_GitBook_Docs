@@ -49,4 +49,4 @@ Nested `RightToLeft` containers were fixed in NuGet 3.1.0 ([#202](https://github
 ## See also
 
 * [Layout models](layouts.md) (the overview and comparison of all the layouts)
-* [DOM model](dom.md) (emit DOM shapes from the rectangles this layout computes)
+* [DOM](dom.md) (emit DOM shapes from the rectangles this layout computes)

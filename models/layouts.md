@@ -22,7 +22,7 @@ The tree layout opens `basic_u.vss` for shape masters and `connec_u.vss` for con
 
 ## See also
 
-* [DOM model](dom.md) (the underlying shape model the layouts emit into)
+* [DOM](dom.md) (the underlying shape model the layouts emit into)
 * [Layout styles](layout-styles.md) (Visio's own page-level layout feature, applied to any page and separate from the layouts described here)
 * [Directed graph layout model](directed-graph.md) (general graphs via MSAGL, for non-tree edges)
 * [Org chart model](org-charts.md) (turn-key org-chart generator that shares the internal tree-layout engine rather than the public Tree API)

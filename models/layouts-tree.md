@@ -30,6 +30,6 @@ The layout always uses Visio's "Rectangle" master from `basic_u.vss` for nodes a
 ## See also
 
 * [Layout models](layouts.md) (the overview and comparison of all the layouts)
-* [DOM model](dom.md) (the underlying shape model the layouts emit into)
+* [DOM](dom.md) (the underlying shape model the layouts emit into)
 * [Org chart model](org-charts.md) (shares the internal tree-layout engine rather than this public Tree API)
 * [XML model](xml-model.md) (draws an XML document's structure with the tree layout)

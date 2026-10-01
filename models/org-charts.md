@@ -145,6 +145,6 @@ The rules the loader applies:
 
 ## See also
 
-* [DOM model](dom.md) (the underlying shape model the renderer emits into)
+* [DOM](dom.md) (the underlying shape model the renderer emits into)
 * [Layout models](layouts.md) (Tree, Grid, and Box layouts; the org-chart renderer uses an internal tree layout under the hood)
 * [Layout styles](layout-styles.md) (Visio's page-level auto-layout, which can be applied on top of an org chart for re-flow on edit)

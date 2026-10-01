@@ -87,7 +87,7 @@
 
 ## Diagram models
 
-* [DOM model](models/dom.md)
+* [DOM](models/dom.md)
 * [Layout models](models/layouts.md)
   * [Tree layout model](models/layouts-tree.md)
   * [Grid layout model](models/layouts-grid.md)

@@ -20,5 +20,5 @@ There are two document models:
 * [Org chart model](org-charts.md) (a tree of people, with the org chart template, XML loading and styling options)
 * [Form page model](forms.md) (printable pages with a title and body)
 * [Layout models](layouts.md) (arranging shapes on a page; the [directed graph](directed-graph.md) layout has its own `DirectedGraphDocument`, which also renders into a new document)
-* [DOM model](dom.md) (the underlying shape model)
+* [DOM](dom.md) (the underlying shape model)
 * [client.Model](../visio-scripting/model.md) (the `DrawOrgChart` and `LoadOrgChartFromXml` methods)
