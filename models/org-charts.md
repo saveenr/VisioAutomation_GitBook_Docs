@@ -21,7 +21,7 @@ orgchart.OrgCharts.Add(ceo);
 orgchart.Render(visioApp);
 ```
 
-`OrgCharts` is a `List<Node>`; see _Multiple charts in one document_ below for the current behavior with more than one root. The render call requires an `IVisio.Application`, not a page or document, because it creates a new document from the org-chart template every time. Output always goes to that new document, never onto an existing page.
+`OrgCharts` is a `List<Node>`; add more than one root to get one chart per page (see _Multiple charts in one document_ below). The render call requires an `IVisio.Application`, not a page or document, because it creates a new document from the org-chart template every time. Output always goes to that new document, never onto an existing page.
 
 From VisioScripting, `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` does the same thing. The `TargetPage` only supplies the `Application`; the chart is rendered into a new document, and the target page is then resized to fit its own contents.
 
@@ -100,7 +100,24 @@ The renderer auto-picks the right pair based on the running Visio's major versio
 
 ## Multiple charts in one document
 
-`OrgChartDocument.OrgCharts` is a list and the renderer creates one page per root. However, in the current source every page is built from the first root's tree (a known issue), so adding more than one root does not yet produce distinct charts per page. Use a single root per document. Loading from XML only ever produces one root.
+`OrgChartDocument.OrgCharts` is a list and the renderer creates one page per root, each showing that root's own tree:
+
+```csharp
+var orgchart = new VAORGCHART.OrgChartDocument();
+
+var team_a = new VAORGCHART.Node("A");
+team_a.Children.Add(new VAORGCHART.Node("B"));
+
+var team_x = new VAORGCHART.Node("X");
+team_x.Children.Add(new VAORGCHART.Node("Y"));
+
+orgchart.OrgCharts.Add(team_a);   // page 1
+orgchart.OrgCharts.Add(team_x);   // page 2
+
+orgchart.Render(visioApp);
+```
+
+This is fixed in current source ([#201](https://github.com/saveenr/VisioAutomation/issues/201)) and is an unreleased change after NuGet 3.0.0. In the published 3.0.0 package every page is built from the first root's tree, so extra roots do not produce distinct charts; use a single root per document there. Loading from XML only ever produces one root.
 
 ## Loading from XML
 
