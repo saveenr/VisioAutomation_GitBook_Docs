@@ -87,18 +87,18 @@
 
 ## Diagram models
 
-* [Declarative DOM](models/dom.md)
-* [Layouts](models/layouts.md)
-  * [Tree layout](models/layouts-tree.md)
-  * [Grid layout](models/layouts-grid.md)
-  * [Box layout](models/layouts-box.md)
-  * [Container layout](models/layouts-container.md)
-  * [Directed graph](models/directed-graph.md)
+* [Declarative DOM model](models/dom.md)
+* [Layout models](models/layouts.md)
+  * [Tree layout model](models/layouts-tree.md)
+  * [Grid layout model](models/layouts-grid.md)
+  * [Box layout model](models/layouts-box.md)
+  * [Container layout model](models/layouts-container.md)
+  * [Directed graph layout model](models/directed-graph.md)
     * [Directed graph XML format](directed-graph-xml.md)
 * [Layout styles](models/layout-styles.md)
 * [Document models](models/documents.md)
-  * [Org charts](models/org-charts.md)
-  * [Form pages](models/forms.md)
+  * [Org chart model](models/org-charts.md)
+  * [Form page model](models/forms.md)
 * [Data table model](models/data-table.md)
 * [XML model](models/xml-model.md)
 

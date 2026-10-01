@@ -1,4 +1,4 @@
-# Box layout
+# Box layout model
 
 Use when the data is a tree of rectangular regions packed in a particular direction (left-to-right, top-to-bottom, etc.) inside a parent rectangle. The output is positioned rectangles. The layout has no Visio rendering of its own: you walk its `Nodes` and emit DOM shapes (or anything else) from the rectangles yourself.
 
@@ -48,5 +48,5 @@ Nested `RightToLeft` containers were fixed in NuGet 3.1.0 ([#202](https://github
 
 ## See also
 
-* [Layouts](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM](dom.md) (emit DOM shapes from the rectangles this layout computes)
+* [Layout models](layouts.md) (the overview and comparison of all the layouts)
+* [Declarative DOM model](dom.md) (emit DOM shapes from the rectangles this layout computes)

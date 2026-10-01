@@ -1,4 +1,4 @@
-# Form pages
+# Form page model
 
 `VisioAutomation.Models.Documents.Forms` is a small generator for **printable, document-style Visio pages**: think one-pagers with a title, a body, and a margin. The output is a Visio document where each page has two fixed-width text blocks, a title block (7.5 x 0.5 inches) and a body block (7.5 inches wide, filling the height down to the bottom margin), suitable for printing or PDF export.
 
@@ -97,6 +97,6 @@ For mixed cases, render with Forms first then drop into `FormPage.VisioPage` to 
 
 ## See also
 
-* [Declarative DOM](dom.md) (general-purpose declarative shape model)
+* [Declarative DOM model](dom.md) (general-purpose declarative shape model)
 * [Text formatting](../text-formatting.md) (the cell vocabulary `TextBlock` writes to)
 * [Page cells](../page-cells.md) (page-level cells that affect text rendering)

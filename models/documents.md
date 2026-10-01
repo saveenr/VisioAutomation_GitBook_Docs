@@ -6,8 +6,8 @@ There are two document models:
 
 | Model | Namespace | Best for | Entry point |
 | :--- | :--- | :--- | :--- |
-| [Org charts](org-charts.md) | `VisioAutomation.Models.Documents.OrgCharts` | A reporting structure: a tree of people drawn with Visio's org chart template. | `OrgChartDocument.Render(app)`, or `Client.Model.DrawOrgChart(...)` from VisioScripting. Can be loaded from `<orgchart>` XML. |
-| [Form pages](forms.md) | `VisioAutomation.Models.Documents.Forms` | Printable, document-style pages with a title and a body. | `FormDocument.Render(app)`, which returns the new `IVisio.Document`. VisioScripting has no method that draws a `FormDocument` for you, and there is no XML loader. |
+| [Org chart model](org-charts.md) | `VisioAutomation.Models.Documents.OrgCharts` | A reporting structure: a tree of people drawn with Visio's org chart template. | `OrgChartDocument.Render(app)`, or `Client.Model.DrawOrgChart(...)` from VisioScripting. Can be loaded from `<orgchart>` XML. |
+| [Form page model](forms.md) | `VisioAutomation.Models.Documents.Forms` | Printable, document-style pages with a title and a body. | `FormDocument.Render(app)`, which returns the new `IVisio.Document`. VisioScripting has no method that draws a `FormDocument` for you, and there is no XML loader. |
 
 ## What they have in common
 
@@ -17,8 +17,8 @@ There are two document models:
 
 ## See also
 
-* [Org charts](org-charts.md) (a tree of people, with the org chart template, XML loading and styling options)
-* [Form pages](forms.md) (printable pages with a title and body)
-* [Layouts](layouts.md) (arranging shapes on a page; the [directed graph](directed-graph.md) layout has its own `DirectedGraphDocument`, which also renders into a new document)
-* [Declarative DOM](dom.md) (the underlying shape model)
+* [Org chart model](org-charts.md) (a tree of people, with the org chart template, XML loading and styling options)
+* [Form page model](forms.md) (printable pages with a title and body)
+* [Layout models](layouts.md) (arranging shapes on a page; the [directed graph](directed-graph.md) layout has its own `DirectedGraphDocument`, which also renders into a new document)
+* [Declarative DOM model](dom.md) (the underlying shape model)
 * [client.Model](../visio-scripting/model.md) (the `DrawOrgChart` and `LoadOrgChartFromXml` methods)

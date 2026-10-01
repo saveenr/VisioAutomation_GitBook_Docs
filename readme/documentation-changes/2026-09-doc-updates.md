@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Model pages renamed to say "model"
+
+The pages in the Diagram models section are about the models, not about the things they draw, so their titles now say so: [Layout models](../../models/layouts.md) (was Layouts), [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/layouts-box.md), [Container](../../models/layouts-container.md) and [Directed graph](../../models/directed-graph.md) layout model, [Org chart model](../../models/org-charts.md), [Form page model](../../models/forms.md) and [Declarative DOM model](../../models/dom.md). Layout styles and the Directed graph XML format keep their names because they are a Visio feature and a file format rather than models. Page addresses did not change, so existing links still work.
+
 ## 2026-09: Where layout styles are used
 
 [Layout styles](../../models/layout-styles.md) gained a "Where layout styles are used" section: a style is applied to a page, so it is used by the DOM `Page.Layout`, `client.Page.LayoutPage`, the `Format-VisioPage -LayoutStyle` cmdlet and the Visio-based directed graph renderer, and not only by a layout type. The [Directed graph](../../models/directed-graph.md) page gained a matching "Laying out with Visio instead of MSAGL" section that describes that renderer and what it does not apply. The [Layouts](../../models/layouts.md) overview no longer says layout styles are used by directed graph and other style-driven renderers, which overstated it.

@@ -1,4 +1,4 @@
-# Declarative DOM
+# Declarative DOM model
 
 The **Document Object Model** under `VisioAutomation.Models.Dom` is the highest-level authoring API in the library. Build an in-memory tree of plain objects describing the diagram you want, then call `Render()` to materialize it as actual Visio shapes in one batch. The model decouples diagram authoring from per-shape COM bookkeeping, and makes diagrams composable from helpers and loops.
 
@@ -160,6 +160,6 @@ page_node.RenderPerformanceSettings.DeferRecalc = 1;   // adjust before Render
 * [Drawing primitives](../extensions/drawing.md) (the imperative-style equivalent)
 * [Custom properties](../custom-properties.md) (formula-vs-literal, typed setters)
 * [Shape cells](../shape-cells.md) (the cell vocabulary used by the `Cells` property on each node)
-* [Layouts](layouts.md) (algorithmic placement on top of the DOM)
-* [Directed graph](directed-graph.md) (graph-shaped diagrams via MSAGL)
-* [Org charts](org-charts.md) (turn-key org-chart generator over the DOM)
+* [Layout models](layouts.md) (algorithmic placement on top of the DOM)
+* [Directed graph layout model](directed-graph.md) (graph-shaped diagrams via MSAGL)
+* [Org chart model](org-charts.md) (turn-key org-chart generator over the DOM)

@@ -1,4 +1,4 @@
-# Container layout
+# Container layout model
 
 Use when you want several labelled columns of items, each column wrapped in a Visio container shape. `ContainerLayout` is independent of the Box layout: it arranges one column per container, with the container's items stacked top to bottom inside it. (`Layouts.Container.Container` and `Layouts.Box.Container` are unrelated types that happen to share a name.)
 
@@ -23,5 +23,5 @@ IVisio.Page page = layout.Render(visioDoc);
 
 ## See also
 
-* [Layouts](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM](dom.md) (the underlying shape model the layouts emit into)
+* [Layout models](layouts.md) (the overview and comparison of all the layouts)
+* [Declarative DOM model](dom.md) (the underlying shape model the layouts emit into)

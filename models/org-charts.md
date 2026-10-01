@@ -1,4 +1,4 @@
-# Org charts
+# Org chart model
 
 `VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels.
 
@@ -145,6 +145,6 @@ The rules the loader applies:
 
 ## See also
 
-* [Declarative DOM](dom.md) (the underlying shape model the renderer emits into)
-* [Layouts](layouts.md) (Tree, Grid, and Box layouts; the org-chart renderer uses an internal tree layout under the hood)
+* [Declarative DOM model](dom.md) (the underlying shape model the renderer emits into)
+* [Layout models](layouts.md) (Tree, Grid, and Box layouts; the org-chart renderer uses an internal tree layout under the hood)
 * [Layout styles](layout-styles.md) (Visio's page-level auto-layout, which can be applied on top of an org chart for re-flow on edit)

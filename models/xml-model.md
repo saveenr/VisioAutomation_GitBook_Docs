@@ -2,7 +2,7 @@
 
 `VisioAutomation.Models.Data.XmlModel` draws the **structure** of a `System.Xml.XmlDocument` as a tree: one node per element, with parent-child connectors. Use it to get a quick picture of how an XML document is nested.
 
-It shows element names only. Attributes, text content and comments are not drawn, so it is a structure viewer, not a data viewer. For XML that describes a diagram in its own right, see [Directed graph XML format](../directed-graph-xml.md) or [Org charts](org-charts.md).
+It shows element names only. Attributes, text content and comments are not drawn, so it is a structure viewer, not a data viewer. For XML that describes a diagram in its own right, see [Directed graph XML format](../directed-graph-xml.md) or [Org chart model](org-charts.md).
 
 ## Hello-world
 
@@ -33,7 +33,7 @@ That is current source, an unreleased change after NuGet 3.1.0 ([#208](https://g
 * **Nested elements nest.** Each element's child elements become its child nodes, recursively.
 * **Not drawn:** attributes, text nodes, comments and processing instructions. An element with only text content appears as a leaf node, without the text.
 
-Layout is the default tree layout (top to bottom, with fixed separations); see [Tree layout](layouts-tree.md).
+Layout is the default tree layout (top to bottom, with fixed separations); see [Tree layout model](layouts-tree.md).
 
 ## From PowerShell
 
@@ -57,6 +57,6 @@ See the [Out-VisioApplication cmdlet page](https://saveenr.gitbook.io/visiopower
 ## See also
 
 * [client.Model](../visio-scripting/model.md) (the `DrawXmlModel` method)
-* [Tree layout](layouts-tree.md) (the tree layout that draws the structure)
+* [Tree layout model](layouts-tree.md) (the tree layout that draws the structure)
 * [Data table model](data-table.md) (the other `Models.Data` type)
-* [Directed graph XML format](../directed-graph-xml.md) and [Org charts](org-charts.md) (XML formats that describe a diagram)
+* [Directed graph XML format](../directed-graph-xml.md) and [Org chart model](org-charts.md) (XML formats that describe a diagram)

@@ -1,4 +1,4 @@
-# Tree layout
+# Tree layout model
 
 Use when the data is a true tree: one root, no cycles, every node has at most one parent. Build a `Drawing` whose `Root` is a `Node`, recursively attach `Children`, then `Render(page)`. The layout decides positions; you only specify size (and only if you don't want the default).
 
@@ -29,7 +29,7 @@ The layout always uses Visio's "Rectangle" master from `basic_u.vss` for nodes a
 
 ## See also
 
-* [Layouts](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM](dom.md) (the underlying shape model the layouts emit into)
-* [Org charts](org-charts.md) (shares the internal tree-layout engine rather than this public Tree API)
+* [Layout models](layouts.md) (the overview and comparison of all the layouts)
+* [Declarative DOM model](dom.md) (the underlying shape model the layouts emit into)
+* [Org chart model](org-charts.md) (shares the internal tree-layout engine rather than this public Tree API)
 * [XML model](xml-model.md) (draws an XML document's structure with the tree layout)

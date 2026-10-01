@@ -1,4 +1,4 @@
-# Directed graph layout
+# Directed graph layout model
 
 `VisioAutomation.Models.Layouts.DirectedGraph` is a graph-shaped layout built on top of [Microsoft Automatic Graph Layout (MSAGL)](https://www.nuget.org/packages/Microsoft.Automatic.Graph.Layout). Use it for diagrams that don't fit a tree shape: graphs with cycles, multiple roots, parallel edges, or arbitrary connectivity. The layout engine assigns coordinates; you only describe nodes and edges.
 
@@ -184,6 +184,6 @@ It is much simpler than the MSAGL renderer. It uses each node's master and label
 
 * [Directed graph XML format](../directed-graph-xml.md) (the XML wire format and its render-options schema)
 * [Layout styles](layout-styles.md) (additional styling primitives layered on top of layouts)
-* [Layouts](layouts.md) (Tree, Grid, and Box layouts for non-graph data)
-* [Declarative DOM](dom.md) (the underlying shape model the renderer emits into)
+* [Layout models](layouts.md) (Tree, Grid, and Box layouts for non-graph data)
+* [Declarative DOM model](dom.md) (the underlying shape model the renderer emits into)
 * [Custom properties](../custom-properties.md) (formula-vs-literal, typed setters)

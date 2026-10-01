@@ -1,4 +1,4 @@
-# Grid layout
+# Grid layout model
 
 Use when the data is a uniform rectangular grid of identical shapes. The layout takes a column count, a row count, a cell size and a master (an `IVisio.Master` you have already loaded), and drops that master at every grid cell.
 
@@ -20,6 +20,6 @@ grid.Render(visioPage);
 
 ## See also
 
-* [Layouts](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM](dom.md) (the underlying shape model the layouts emit into)
+* [Layout models](layouts.md) (the overview and comparison of all the layouts)
+* [Declarative DOM model](dom.md) (the underlying shape model the layouts emit into)
 * [Data table model](data-table.md) (draws a `DataTable` with a grid layout)
