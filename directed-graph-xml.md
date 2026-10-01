@@ -42,21 +42,23 @@ A `<directedgraph>` can contain one or more `<page>` elements. Each `<page>` bec
 
 A `<page>` contains exactly:
 
-* one `<renderoptions>` element (optional content, see below),
+* one `<renderoptions>` element (see below),
 * one `<shapes>` container with `<shape>` children,
 * one `<connectors>` container with `<connector>` children.
+
+All three child elements are required. A missing one makes the loader throw a `NullReferenceException`; an empty `<connectors></connectors>` is fine. Element and attribute names are lowercase and case-sensitive. Only the enum values of `direction`, `connectortype` and `layout` are case-insensitive.
 
 ## `<renderoptions>`
 
 Per-page rendering knobs.
 
-| Attribute | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `usedynamicconnectors` | `bool` | required | If `true`, connectors are dropped from the page's "Dynamic Connector" master and route around shapes. If `false`, MSAGL routes the edge geometry directly. |
-| `scalingfactor` | `double` | required | Multiplier on MSAGL's coordinates. Larger values produce more spread-out layouts. The in-repo fixtures use `20`. |
-| `direction` | `TopToBottom` \| `BottomToTop` \| `LeftToRight` \| `RightToLeft` | `TopToBottom` | Which way the graph flows. Case-insensitive. |
-| `connectortype` | `Curved` \| `Straight` \| `RightAngle` | `Curved` | Connector style applied to every edge on the page. Case-insensitive. Per-edge override is not supported. |
-| `layout` | `Sugiyama` | (optional) | Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
+| Attribute | Type | Required? | Default | Notes |
+| --- | --- | --- | --- | --- |
+| `usedynamicconnectors` | `bool` | yes | none | If `true`, connectors are dropped from the page's "Dynamic Connector" master and route around shapes. If `false`, MSAGL routes the edge geometry directly. The programmatic default does not apply to XML: omitting the attribute throws `ArgumentException`. |
+| `scalingfactor` | `double` | yes | none | Scale applied around the MSAGL layout. Node sizes are multiplied by this value before layout and the results are divided by it afterward, so node sizes are unchanged in inches. MSAGL's own separation constants (node and layer separation, margins) are fixed in MSAGL units and are not scaled, so after the division they shrink to roughly (fixed value / factor) inches. A larger value therefore gives tighter gaps relative to node size and a smaller page; a smaller value gives looser spacing. Most in-repo fixtures use `20`; one uses `5`. Omitting the attribute throws `ArgumentException` (the programmatic default of `14` does not apply to XML). |
+| `direction` | `TopToBottom` \| `BottomToTop` \| `LeftToRight` \| `RightToLeft` | no | `TopToBottom` | Which way the graph flows. Case-insensitive. |
+| `connectortype` | `Curved` \| `Straight` \| `RightAngle` | no | `Curved` | Connector style applied to every edge on the page. Case-insensitive. Per-edge override is not supported. |
+| `layout` | `Sugiyama` | no | none | Parsed only if present, then discarded. Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
 
 ## `<shape>` (under `<shapes>`)
 
@@ -79,7 +81,7 @@ A `<shape>` can also contain `<customprop>` children:
 </shape>
 ```
 
-Each `<customprop>` is added to the dropped shape's custom-properties section using `name` as the row name and `value` as the value formula.
+Each `<customprop>` is added to the dropped shape's custom-properties section using `name` as the row name and `value` as the value. The loader stores it as a string-typed custom property (the value is quoted in the cell). Only a value that begins with `=` is kept as a raw formula. Both `name` and `value` are required.
 
 ## `<connector>` (under `<connectors>`)
 
@@ -88,11 +90,21 @@ Each connector becomes one edge in the graph.
 | Attribute | Required? | Notes |
 | --- | --- | --- |
 | `id` | yes | Unique within the page. |
-| `from` | yes | Source shape's `id`. Must match a `<shape>` in the same page. |
-| `to` | yes | Destination shape's `id`. Must match a `<shape>` in the same page. |
+| `from` | yes | Source shape's `id`. Must match a `<shape>` in the same page (see the failure modes below). |
+| `to` | yes | Destination shape's `id`. Must match a `<shape>` in the same page (see the failure modes below). |
 | `label` | yes | Text rendered on the connector. May be empty. |
-| `color` | no | Web color (for example `#ff0000`). Defaults to black. |
+| `color` | no | Web color (for example `#ff0000`). Defaults to black. An invalid value throws `FormatException`. |
 | `weight` | no | Line weight in points (the loader converts to inches). Defaults to `1`. |
+
+Every connector drawn from XML gets an end arrow; there is no attribute to change this.
+
+### Failure modes
+
+Validation happens at render time, not at load time:
+
+* A `from` or `to` that matches no shape in the page loads without error, but rendering throws `ArgumentException` ("Connector's From/To node is null"). The loader notes such problems only in verbose output.
+* Duplicate shape ids throw `ArgumentException` while the document is loaded.
+* Duplicate connector ids throw when the edge is added to the graph.
 
 ## What's not supported in XML
 

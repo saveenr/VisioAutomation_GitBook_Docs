@@ -2,40 +2,40 @@
 
 `VisioAutomation.Models.LayoutStyles` is a thin wrapper over Visio's built-in **page-level layout** feature: the same one accessible from Visio's *Design* tab as "Re-Layout Page" with its choice of style. The wrapper exposes the layouts as typed C# classes so you can configure them programmatically and apply them to a page in one call.
 
-This is distinct from the algorithmic [`Layouts/`](layouts.md) namespace. The `Layouts/` types compute coordinates client-side and emit shapes; `LayoutStyles/` instead **configures Visio** to do the layout itself by writing the relevant cells on the page sheet (`AvenueSizeX`, `AvenueSizeY`, `RouteStyle`, `LineRouteExt`) and calling `Page.Layout()`. The result is a page that Visio re-flows whenever the user moves shapes around, not a one-shot static rendering.
+This is distinct from the algorithmic [`Layouts/`](layouts.md) namespace. The `Layouts/` types compute coordinates client-side and emit shapes; `LayoutStyles/` instead **configures Visio** to do the layout itself by writing the relevant cells on the page sheet (`AvenueSizeX`, `AvenueSizeY`, `LineRouteExt`, `PlaceStyle`, and in most cases `RouteStyle`) and calling `Page.Layout()` once. The result is Visio's own layout of the page rather than coordinates computed by this library.
 
-When in doubt: use `Layouts/` for one-shot output; use `LayoutStyles/` when you want Visio's interactive auto-layout behavior to keep working post-render.
+When in doubt: use `Layouts/` when you want the library to compute and emit the shapes; use `LayoutStyles/` when you want Visio's own layout engine to place existing shapes.
 
 ## The base class
 
-Every layout style inherits from `LayoutStyleBase`, which exposes four cross-cutting properties:
+Every layout style inherits from `LayoutStyleBase`, which exposes four cross-cutting properties. Each subclass also writes the `PlaceStyle` cell, which selects the layout type, and that is why the styles differ.
 
 | Property | Type | Maps to | Default |
 | :--- | :--- | :--- | :--- |
-| `ConnectorStyle` | `ConnectorStyle` | `RouteStyle` cell | (style-specific) |
+| `ConnectorStyle` | `ConnectorStyle` | `RouteStyle` cell (see limits below) | (style-specific, see the styles table) |
 | `ConnectorAppearance` | `ConnectorAppearance` | `LineRouteExt` cell | `Default` |
 | `AvenueSizeX` | `double` | `AvenueSizeX` cell | `0.375` |
 | `AvenueSizeY` | `double` | `AvenueSizeY` cell | `0.375` |
 
-`Apply(page)` is the single entry point: it writes the cells to the target page's `PageSheet` and triggers a `Layout()` call. After `Apply` returns, Visio has re-flowed the page using the configured style.
+`Apply(page)` is the single entry point: it writes the cells to the target page's `PageSheet` and calls `page.Layout()` once. After `Apply` returns, Visio has laid out the page using the configured style.
 
 ## The styles
 
 Five concrete styles ship in the box. Each maps to one of Visio's named auto-layout modes.
 
-| Style | Class | Extra properties |
-| :--- | :--- | :--- |
-| Hierarchy | `HierarchyLayoutStyle` | `LayoutDirection`, `HorizontalAlignment`, `VerticalAlignment` |
-| Flowchart | `FlowchartLayoutStyle` | `LayoutDirection` |
-| Compact tree | `CompactTreeLayout` | `Direction` (a `CompactTreeDirection` enum, distinct from `LayoutDirection`) |
-| Circular | `CircularLayoutStyle` | (base properties only) |
-| Radial | `RadialLayoutStyle` | (base properties only) |
+| Style | Class | Extra properties | Default `ConnectorStyle` |
+| :--- | :--- | :--- | :--- |
+| Hierarchy | `HierarchyLayoutStyle` | `LayoutDirection` (default `BottomToTop`, the enum's first value), `HorizontalAlignment` (default `Center`), `VerticalAlignment` (default `Middle`) | `OrganizationChart` |
+| Flowchart | `FlowchartLayoutStyle` | `LayoutDirection` (default `TopToBottom`) | `Flowchart` |
+| Compact tree | `CompactTreeLayout` | `Direction` (a `CompactTreeDirection` enum, default `DownThenRight`) | `OrganizationChart` |
+| Circular | `CircularLayoutStyle` | (base properties only) | `CenterToCenter` |
+| Radial | `RadialLayoutStyle` | (base properties only) | `RightAngle` |
 
-`LayoutDirection` is a four-value enum: `TopToBottom`, `BottomToTop`, `LeftToRight`, `RightToLeft`. `CompactTreeDirection` is structurally similar but typed separately because Visio treats compact-tree direction as a different enum internally.
+`LayoutDirection` is a four-value enum: `BottomToTop`, `TopToBottom`, `LeftToRight`, `RightToLeft`. `CompactTreeDirection` is a different, eight-value enum that names a primary and a secondary direction: `DownThenLeft`, `DownThenRight`, `UpThenLeft`, `UpThenRigtht` (the misspelling is in the source), `LeftThenDown`, `LeftThenUp`, `RightThenDown` and `RightThenUp`.
 
 ## Hello-world
 
-Apply a hierarchy layout to the active page, top-to-bottom, with right-angle connectors:
+Apply a hierarchy layout to the active page, top-to-bottom, with org-chart connector routing:
 
 ```csharp
 using VALAY = VisioAutomation.Models.LayoutStyles;
@@ -54,7 +54,7 @@ style.Apply(visioPage);
 
 ## Picking a `ConnectorStyle`
 
-`ConnectorStyle` controls the abstract routing logic Visio uses; it determines the `RouteStyle` cell value. Common values:
+`ConnectorStyle` controls the abstract routing logic Visio uses; it determines the `RouteStyle` cell value. The ten values are:
 
 | Value | When to use |
 | :--- | :--- |
@@ -65,16 +65,25 @@ style.Apply(visioPage);
 | `Straight` | Force straight lines. |
 | `CenterToCenter` | Connect shape centers; ignores edge points. |
 | `Network` | Mesh-network-style routing. |
+| `SimpleHorizontalVertical` | Simple routing that runs horizontal then vertical. |
+| `SimpleVerticalHorizontal` | Simple routing that runs vertical then horizontal. |
+| `Tree` | Tree-style routing. |
 
-For `Flowchart`, `OrganizationChart`, and `Simple`, the chosen `LayoutDirection` further specialises the cell value (Visio has separate cell values for each direction, e.g. `visLORouteFlowchartNS` vs. `visLORouteFlowchartWE`).
+For `Flowchart`, `OrganizationChart`, and `Simple` on the hierarchy and flowchart styles, the chosen `LayoutDirection` further specialises the cell value (Visio has separate cell values for each direction, e.g. `visLORouteFlowchartNS` vs. `visLORouteFlowchartWE`).
+
+There are limits on what is written:
+
+* `RightAngle`, `Straight`, `CenterToCenter` and `Network` write `RouteStyle` on every style.
+* On `CompactTreeLayout`, `CircularLayoutStyle` and `RadialLayoutStyle`, the other values (`OrganizationChart`, `Flowchart`, `Simple`, `SimpleHorizontalVertical`, `SimpleVerticalHorizontal`, `Tree`) map to nothing, so `RouteStyle` is simply not written.
+* On `HierarchyLayoutStyle` and `FlowchartLayoutStyle`, `SimpleHorizontalVertical`, `SimpleVerticalHorizontal` and `Tree` throw `ArgumentOutOfRangeException`.
 
 ## `ConnectorAppearance`
 
-This controls what existing connectors look like after re-layout. Values: `Default` (leave alone), `Straight` (force straight segments), `Curved` (force NURBS-style curves). It maps to the `LineRouteExt` page cell.
+This controls what existing connectors look like after re-layout. Values: `Default` (sets the default routing, `visLORouteExtDefault`), `Straight` (force straight segments), `Curved` (force NURBS-style curves). It maps to the `LineRouteExt` page cell.
 
 ## When to apply
 
-`Apply()` is destructive in the sense that it overwrites `RouteStyle` / `LineRouteExt` / avenue cells on the page sheet. The shapes themselves don't move until you call `Page.Layout()` (which `Apply` does for you), but the page-sheet cells change immediately.
+`Apply()` overwrites the layout cells (`PlaceStyle`, `LineRouteExt`, the avenue cells and, where applicable, `RouteStyle`) on the page sheet and then calls `Page.Layout()` once, which is what moves the shapes.
 
 The typical pattern is:
 
@@ -82,7 +91,7 @@ The typical pattern is:
 2. Choose and configure a `LayoutStyleBase` subclass.
 3. Call `Apply(page)`.
 
-If you re-apply with a different style later, the previous style's cells are overwritten, so styles don't accumulate.
+If you re-apply with a different style later, the cells written by both are overwritten with the new values. A cell the new style doesn't write (for example `RouteStyle` on a compact tree) keeps its earlier value.
 
 ## See also
 

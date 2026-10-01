@@ -1,6 +1,6 @@
 # Form pages
 
-`VisioAutomation.Models.Documents.Forms` is a small generator for **printable, document-style Visio pages**: think one-pagers with a title, a body, and a margin. The output is a Visio document where each page has a single fixed-size text block with a title and a paragraph, suitable for printing or PDF export.
+`VisioAutomation.Models.Documents.Forms` is a small generator for **printable, document-style Visio pages**: think one-pagers with a title, a body, and a margin. The output is a Visio document where each page has two fixed-width text blocks, a title block (7.5 x 0.5 inches) and a body block (7.5 inches wide, filling the height down to the bottom margin), suitable for printing or PDF export.
 
 This is a niche but useful escape hatch for using Visio as a layout-and-print engine when full Word or LaTeX would be overkill, and you already have the data in a Visio-adjacent pipeline.
 
@@ -29,7 +29,7 @@ form.Pages.Add(page);
 form.Render(visioApp);
 ```
 
-`Render(IVisio.Application)` creates a new Visio document, sets the document-level metadata (`Subject`, `Title`, `Creator`, `Company`), then walks `Pages` and draws each one.
+`Render(IVisio.Application)` creates a new Visio document (and returns it as an `IVisio.Document`), sets the document-level metadata (`Subject`, `Title`, `Creator`, `Company`), then walks `Pages` and draws each one.
 
 ## Per-page properties
 
@@ -45,7 +45,7 @@ form.Render(visioApp);
 | `TitleTextSize` | `15.0` | Title font size in points. |
 | `BodyTextSize` | `8.0` | Body font size in points. |
 | `BodyParaSpacingAfter` | `0.0` | Trailing spacing (points) between paragraphs in the body. |
-| `DefaultFont` | `Segoe UI` | Font for both title and body. Resolved through Visio's font table at render. |
+| `DefaultFont` | `Segoe UI` | Font for both title and body. Looked up by name in the document's font table at render; the lookup throws if the font is not installed or known to the document, with no fallback. |
 
 After render, `FormPage.VisioPage` holds the underlying COM object so you can perform follow-up edits (e.g. add a header, drop a corporate logo).
 
@@ -68,7 +68,7 @@ The renderer also deletes the implicit blank first page that `Documents.Add("")`
 
 ## InteractiveRenderer and TextBlock
 
-Internally `FormPage.Draw()` constructs an `InteractiveRenderer` that emits `TextBlock` shapes one after another, each on its own line. Both types are public; you can use them directly if you want to lay out a page with multiple text blocks of different sizes:
+Internally `FormPage.Draw()` constructs an `InteractiveRenderer` that emits `TextBlock` shapes. Each `AddShape` call advances the insertion point to the right, so blocks stay on the same line until you call `Linefeed()` explicitly (as the snippet below does). Both types are public; you can use them directly if you want to lay out a page with multiple text blocks of different sizes:
 
 ```csharp
 var renderer = new VAFORMS.InteractiveRenderer(visioDoc);

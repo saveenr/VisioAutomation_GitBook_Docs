@@ -1,8 +1,8 @@
 # Org charts
 
-`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)`, and you get a Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels.
+`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels.
 
-The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around and Visio's auto-layout will keep the connections tidy..
+The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around, and the dynamic connectors stay glued to their shapes and re-route when shapes are moved.
 
 ## Hello-world
 
@@ -21,11 +21,13 @@ orgchart.OrgCharts.Add(ceo);
 orgchart.Render(visioApp);
 ```
 
-`OrgCharts` is a `List<Node>`; the API supports multiple roots in one document (each renders to its own page). The render call requires an `IVisio.Application`, not a page or document, because it creates a new document from the org-chart template every time.
+`OrgCharts` is a `List<Node>`; see _Multiple charts in one document_ below for the current behavior with more than one root. The render call requires an `IVisio.Application`, not a page or document, because it creates a new document from the org-chart template every time. Output always goes to that new document, never onto an existing page.
+
+From VisioScripting, `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` does the same thing. The `TargetPage` only supplies the `Application`; the chart is rendered into a new document, and the target page is then resized to fit its own contents.
 
 ## Building a tree
 
-Each `Node` has a `Children` list; nesting is done by adding to it. Names go into the constructor:
+Each `Node` has a `Children` list; nesting is done by adding to it. Names go into the constructor (the text can also be changed afterwards through the settable `Node.Text` property):
 
 ```csharp
 var ceo = new VAORGCHART.Node("Alex (CEO)");
@@ -67,7 +69,7 @@ lead1.Url = "https://example.internal/people/casey";
 orgchart.OrgChartLayoutOptions.Direction = VAORGCHART.OrgChartLayoutDirection.Right;
 ```
 
-`Down` (top-down) is the conventional org-chart shape and what most renders should pick.
+`Down` (top-down) is the conventional org-chart shape and what most renders should pick. Note that only `Down` is exercised by the test suite and known to work; the source carries a TODO for the other directions, so treat `Up`, `Left` and `Right` as unverified.
 
 ## Connector style
 
@@ -92,25 +94,37 @@ The renderer auto-picks the right pair based on the running Visio's major versio
 
 ## Page sizing
 
-`OrgChartLayoutOptions.PageBorderWidth` controls the border around the chart. The renderer sizes the page to fit the laid-out tree plus this border on every side, and sets `ResizeToFit` so Visio will keep the page sized to contents as the user adds shapes.
+`OrgChartLayoutOptions.PageBorderWidth` controls the border around the chart. The renderer first sizes the page to the laid-out tree plus twice this border, then performs a one-off resize-to-fit of the page contents at render time using a margin of twice this value. The page is not kept resized as the user adds shapes later.
 
-`DefaultNodeSize` controls the size of any `Node` that doesn't have a `Size` set explicitly. The first child without a size will be drawn at this size; setting `Size` on the root (or on each node) overrides it per-shape.
+`DefaultNodeSize` (default `Size(2, 0.5)`) controls the size of every `Node` that doesn't have a `Size` set explicitly. Setting `Size` on a node overrides it for that shape.
 
 ## Multiple charts in one document
 
-`OrgChartDocument.OrgCharts` is a list; adding more than one root produces a multi-page document, one chart per page. This is useful for "departments side by side" or "before / after" comparisons in a single deliverable.
-
-```csharp
-orgchart.OrgCharts.Add(eng_root);
-orgchart.OrgCharts.Add(sales_root);
-orgchart.Render(app);   // produces a 2-page document
-```
+`OrgChartDocument.OrgCharts` is a list and the renderer creates one page per root. However, in the current source every page is built from the first root's tree (a known issue), so adding more than one root does not yet produce distinct charts per page. Use a single root per document. Loading from XML only ever produces one root.
 
 ## Loading from XML
 
-In current source, build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is internal in current source.
+In current source, build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is internal in current source. Then draw the result with `client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)`.
 
-The XML schema is illustrated by the source fixtures under `VTest/datafiles/orgchart_*.xml`; inline construction is more common for programmatic use.
+The schema is illustrated by the fixture `VTest/datafiles/orgchart_1.xml`; inline construction is more common for programmatic use.
+
+```xml
+<orgchart>
+  <shape id="0" name="Akuma" />
+  <shape id="1" name="Ryu" parentid="0"/>
+  <shape id="2" name="Ken" parentid="0"/>
+  <shape id="3" name="Chun-Li" parentid="2"/>
+</orgchart>
+```
+
+The rules the loader applies:
+
+* The root element is `<orgchart>`; its children are `<shape>` elements. Elements with any other name are ignored.
+* `id` and `name` are required (a missing attribute throws). `parentid` is optional.
+* The first `<shape>` becomes the sole root of the chart.
+* A shape is attached to its parent only if the `parentid` has already appeared earlier in the file. Parents must be listed before their children; otherwise the shape is silently left unattached.
+* There are no `url` or `size` attributes.
+* A document with zero `<shape>` elements loads, but `Render` then throws because the chart has no root.
 
 ## See also
 

@@ -36,7 +36,9 @@ renderer.Render(visioPage, d);
 
 `AddNode` returns a `Node` whose properties (`Size`, `Cells`, `CustomProperties`) you set before render. Unconnected nodes are valid and appear in the layout.
 
-`AddEdge` returns an `Edge`. Each edge carries a `ConnectorType`: `Curved` (the default), `Straight`, or `RightAngle`.
+`AddEdge` returns an `Edge`. Each edge carries a `ConnectorType`: `Curved` (the default), `Straight`, or `RightAngle`. The enum also has a `Default` value, which the renderer treats the same as `RightAngle`.
+
+The `ConnectorType` only takes effect with dynamic connectors (see below). With `UseDynamicConnectors = false` the renderer draws MSAGL's Bezier geometry, ignores `ConnectorType`, and draws edge labels as separate rectangles.
 
 ## Connector style: dynamic vs. routed
 
@@ -61,13 +63,34 @@ d.LayoutOptions.Direction = VADG.MsaglDirection.LeftToRight;
 
 Supported values: `TopToBottom` (default), `BottomToTop`, `LeftToRight`, `RightToLeft`.
 
-The renderer copies its options from the layout when rendering, so passing the same `LayoutOptions` object to both is the typical pattern. If you construct the renderer's options separately, copy `LayoutOptions` over:
+`MsaglRenderer.Render(page, layout)` uses the renderer's own `LayoutOptions`; it does **not** read the options stored on the layout. Only `Client.Model.DrawDirectedGraphDocument` (and so the XML path) copies each layout's `LayoutOptions` to its renderer. When you call `Render` directly, copy the options over yourself:
 
 ```csharp
 var renderer = new VADG.MsaglRenderer();
 renderer.LayoutOptions = d.LayoutOptions;
 renderer.Render(visioPage, d);
 ```
+
+## Layout options reference
+
+`MsaglOptions` holds every setting that affects how the graph is laid out. Defaults are shown below.
+
+| Property | Type | Default | What it does |
+| --- | --- | --- | --- |
+| `Direction` | `MsaglDirection` | `TopToBottom` | Which way the graph flows: `TopToBottom`, `BottomToTop`, `LeftToRight`, `RightToLeft`. |
+| `UseDynamicConnectors` | `bool` | `true` | `true` uses Visio's dynamic connectors, which re-route when shapes move. `false` keeps the geometry MSAGL computed. See [Connector style](#connector-style-dynamic-vs-routed). |
+| `ScalingFactor` | `double` | `14` | Converts between document inches and MSAGL's layout units: node sizes are multiplied by it before layout and the result is divided by it afterward. MSAGL's own spacing (node and layer separation, margins) is fixed in MSAGL units and is not scaled, so larger values give tighter gaps relative to node size and a smaller page, and smaller values give looser spacing. |
+| `DefaultShapeSize` | `Size` | `1.0 x 0.75` | Size in inches for any node whose `Size` is not set. |
+| `PageBorderWidth` | `Size` | `0.5 x 0.5` | Margin in inches left around the finished drawing when the page is resized to fit its contents. |
+
+## How the layout works
+
+The layout is a layered (Sugiyama) layout from MSAGL. It places nodes in successive layers, which are rows for `TopToBottom` and columns for `LeftToRight`, then positions the nodes within each layer and routes the edges. A few details that affect what you see:
+
+* **Direction is a rotation.** The graph is laid out as if flowing top to bottom, and `Direction` rotates the finished layout. `LeftToRight` therefore uses the same layering with the axes turned.
+* **Every edge reserves a label box.** Each edge is given room for a label whether or not it has one. That reserved space takes part in the layout and widens the gaps between layers.
+* **Node sizes come from you.** The layout uses each node's `Size` (or `DefaultShapeSize`) to place nodes. It does not measure text, so a node whose text is larger than its `Size` will still be laid out at its `Size`.
+* **Unconnected nodes are placed too.** Disconnected parts of the graph are laid out separately and then packed together.
 
 ## Custom properties on nodes
 
