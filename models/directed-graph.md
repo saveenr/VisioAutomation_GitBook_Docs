@@ -170,7 +170,7 @@ var styling = new VA.Models.Layouts.DirectedGraph.DirectedGraphStyling();
 client.Model.DrawDirectedGraphDocument(dg_doc, styling);
 ```
 
-`<renderoptions>` attributes on each `<page>` map to `LayoutOptions` properties (`direction`, `usedynamicconnectors`, `scalingfactor`, `connectortype`, `layout`). The `layout` attribute currently accepts `Sugiyama`-only; any other value raises `ArgumentException` at load time.
+`<renderoptions>` attributes on each `<page>` map to `LayoutOptions` properties (`direction`, `usedynamicconnectors`, `scalingfactor`, `connectortype`, `layout`). The `layout` attribute currently accepts `Sugiyama`-only; any other value raises `ArgumentException` at load time. The XML can also set document options (border and template), shape sizes, hyperlinks, ShapeSheet cells and typed custom properties, and each connector can set its own `connectortype`; the options added in an unreleased change after NuGet 3.1.0 are marked on the [Directed graph XML format](../directed-graph-xml.md) page.
 
 ## Multi-page directed-graph documents
 

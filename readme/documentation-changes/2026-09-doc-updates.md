@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-10: Directed graph XML format: new options
+
+The [Directed graph XML format](../../directed-graph-xml.md) page documents the options added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)): a `<documentoptions>` element (`template`, `borderwidth`, `borderheight`); `width` and `height` on `<shape>`; `<hyperlink>` and `<cells>` children; `type`, `label`, `prompt` and `format` on `<customprop>`; and, on `<connector>`, `connectortype`, `<cells>` and `<customprop>`. The "What's not supported in XML" list now names only what is still missing, including `PageBorderWidth` and `DefaultShapeSize`, which would have no effect if exposed. The `template` option inherits a bug in how templates are applied ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). These notes should become plain version statements when the next release ships.
+
 ## 2026-10: DrawOrgChart no longer resizes the target page
 
 The [Org chart model](../../models/org-charts.md) page and the `DrawOrgChart` row of the [`client.Model`](../../visio-scripting/model.md) reference now say that the page you pass to `DrawOrgChart` is not changed. In NuGet 3.1.0 and earlier the call also resized that page to fit its own contents, which was not the chart's page. This is fixed in an unreleased change after 3.1.0 ([#219](https://github.com/saveenr/VisioAutomation/issues/219)); the notes should become plain version statements when the next release ships.
