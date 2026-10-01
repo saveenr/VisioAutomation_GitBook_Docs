@@ -162,10 +162,28 @@ While a `Page` renders, it temporarily changes four Visio application settings t
 
 The settings are on each `Page`'s read-only `RenderPerformanceSettings` property. Each one is nullable, and `null` means leave that setting alone. A new `Page` starts with these values:
 
-* **`DeferRecalc`** (`short?`, default `0`): Visio's `Application.DeferRecalc`. `0` leaves recalculation as normal. A nonzero value defers recalculating shape formulas while the page renders.
-* **`ScreenUpdating`** (`short?`, default `1`): Visio's `Application.ScreenUpdating`. `1` keeps the window redrawing. It is left on because turning it off can break page resizing.
-* **`EnableAutoConnect`** (`bool?`, default `false`): Visio's `Application.Settings.EnableAutoConnect`. `false` turns off AutoConnect while shapes are dropped.
-* **`LiveDynamics`** (`bool?`, default `false`): Visio's `Application.LiveDynamics`. `false` stops connectors from rerouting live as shapes change.
+* **`DeferRecalc`**: Visio's `Application.DeferRecalc`, which decides whether Visio recalculates cell formulas during a series of actions.
+  * Type: `short?`
+  * Default: `0`
+  * `0`: Visio recalculates formulas as needed.
+  * Any nonzero value: Visio defers recalculating formulas until the render is finished.
+* **`ScreenUpdating`**: Visio's `Application.ScreenUpdating`, which decides whether the window is redrawn during a series of actions.
+  * Type: `short?`
+  * Default: `1`
+  * `1` (any nonzero value): Visio redraws the window as normal. This is the default because turning screen updating off can break page resizing.
+  * `0`: Visio does not redraw the window while the page renders.
+* **`EnableAutoConnect`**: Visio's `Application.Settings.EnableAutoConnect`, which turns Visio's AutoConnect feature on or off. Visio itself has it on by default.
+  * Type: `bool?`
+  * Default: `false`
+  * `false`: AutoConnect is off while the page renders.
+  * `true`: AutoConnect is on.
+* **`LiveDynamics`**: Visio's `Application.LiveDynamics`, which decides how often Visio recalculates shape properties during drag operations.
+  * Type: `bool?`
+  * Default: `false`
+  * `false`: Visio recalculates only after the mouse button is released.
+  * `true`: Visio recalculates on every mouse move, which raises more events such as `CellChanged`. Add-ins that respond to those events can run faster with `false`.
+
+Each of these is documented in Microsoft's Visio reference: [`DeferRecalc`](https://learn.microsoft.com/en-us/office/vba/api/Visio.Application.DeferRecalc), [`ScreenUpdating`](https://learn.microsoft.com/en-us/office/vba/api/Visio.Application.ScreenUpdating), [`EnableAutoConnect`](https://learn.microsoft.com/en-us/office/vba/api/Visio.ApplicationSettings.EnableAutoConnect) and [`LiveDynamics`](https://learn.microsoft.com/en-us/office/vba/api/visio.application.livedynamics).
 
 To change one, set it before you call `Render`:
 
