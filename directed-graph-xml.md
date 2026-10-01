@@ -124,7 +124,9 @@ The following can be set programmatically on the in-memory `DirectedGraphLayout`
 * Per-edge `connectortype` override. The page-level setting applies to every edge.
 * Per-shape size or styling beyond the master template.
 * Layout algorithms other than Sugiyama.
-* MSAGL's finer-grained layered-layout knobs (layer separation, edge routing strategy, etc.).
+* The page border (`PageBorderWidth`) and the default node size (`DefaultShapeSize`). Layer separation and the edge label box sizes are supported, through `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` on `<renderoptions>`.
+
+The full list of model options the XML cannot express is tracked in [#225](https://github.com/saveenr/VisioAutomation/issues/225).
 
 If you need any of these, load the XML, mutate the resulting `DirectedGraphDocument` from C#, then render via `Client.Model.DrawDirectedGraphDocument`.
 
