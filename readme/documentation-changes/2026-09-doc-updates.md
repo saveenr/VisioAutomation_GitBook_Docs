@@ -2,7 +2,7 @@
 
 ## 2026-09: Where layout styles are used
 
-[Layout styles](../../models/layout-styles.md) gained a "Where layout styles are used" section: a style is applied to a page, so it is used by the DOM `Page.Layout`, `client.Page.LayoutPage`, the `Format-VisioPage -LayoutStyle` cmdlet and the Visio-based directed graph renderer, and not only by a layout type. The [Layouts](../../models/layouts.md) overview no longer says layout styles are used by directed graph and other style-driven renderers, which overstated it.
+[Layout styles](../../models/layout-styles.md) gained a "Where layout styles are used" section: a style is applied to a page, so it is used by the DOM `Page.Layout`, `client.Page.LayoutPage`, the `Format-VisioPage -LayoutStyle` cmdlet and the Visio-based directed graph renderer, and not only by a layout type. The [Directed graph](../../models/directed-graph.md) page gained a matching "Laying out with Visio instead of MSAGL" section that describes that renderer and what it does not apply. The [Layouts](../../models/layouts.md) overview no longer says layout styles are used by directed graph and other style-driven renderers, which overstated it.
 
 ## 2026-09: Document models page for Org charts and Form pages
 

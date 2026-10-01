@@ -166,6 +166,20 @@ A `DirectedGraphDocument` holds multiple `DirectedGraphLayout` instances, one pe
 
 For one-page programmatic graphs the `MsaglRenderer.Render(page, layout)` overload above is enough; for multi-page documents the path through `Client.Model.DrawDirectedGraphDocument(dg_doc, styling)` handles page creation.
 
+## Laying out with Visio instead of MSAGL
+
+`MsaglRenderer` is the renderer that VisioScripting, PowerShell and the XML path use. The namespace also has a second one, `VisioLayoutRenderer`, which skips MSAGL and lets Visio's own [layout style](layout-styles.md) arrange the shapes:
+
+```csharp
+var renderer = new VADG.VisioLayoutRenderer();
+renderer.LayoutOptions.VisioLayoutStyle = new VisioAutomation.Models.LayoutStyles.HierarchyLayoutStyle();
+renderer.Render(visioPage, d);
+```
+
+It drops each node's master on the page, connects the edges, applies the layout style and resizes the page to fit with a 0.5 inch margin. `LayoutOptions.VisioLayoutStyle` defaults to a top-to-bottom flowchart style; set it to `null` to skip the layout and leave the shapes in a row.
+
+It is much simpler than the MSAGL renderer. It uses each node's master and label and each edge's endpoints and label, and it takes the connector master from `Styling.EdgeMasterName` and `Styling.EdgeStencilName`. It does **not** apply a node's `Size`, `Cells` or `CustomProperties`, an edge's `ConnectorType`, or the layout options on this page (`Direction`, `ScalingFactor` and the others), because those belong to MSAGL. It is available only from code: `DrawDirectedGraphDocument`, the XML loader and `Out-VisioApplication` always use MSAGL.
+
 ## See also
 
 * [Directed graph XML format](../directed-graph-xml.md) (the XML wire format and its render-options schema)
