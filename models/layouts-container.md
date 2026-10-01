@@ -24,4 +24,4 @@ IVisio.Page page = layout.Render(visioDoc);
 ## See also
 
 * [Layout models](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM model](dom.md) (the underlying shape model the layouts emit into)
+* [DOM model](dom.md) (the underlying shape model the layouts emit into)

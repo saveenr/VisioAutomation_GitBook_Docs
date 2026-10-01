@@ -97,7 +97,7 @@ If you re-apply with a different style later, the cells written by both are over
 
 A layout style is not tied to a particular layout type. It is applied to a page, so anything that works with a page can use one:
 
-* **[Declarative DOM model](dom.md):** set `Layout` on a DOM `Page` node. `Render` draws the shapes, then applies the style, then resizes the page if you asked it to.
+* **[DOM model](dom.md):** set `Layout` on a DOM `Page` node. `Render` draws the shapes, then applies the style, then resizes the page if you asked it to.
 * **VisioScripting:** `client.Page.LayoutPage(TargetPages, LayoutStyleBase)` applies a style to the resolved pages in one undo step. See [client.Page](../visio-scripting/page.md).
 * **PowerShell:** the [`Format-VisioPage`](https://saveenr.gitbook.io/visiopowershell/cmdlets/pages/format-visiopage) cmdlet takes a style object through its `-LayoutStyle` parameter.
 * **Directed graph, Visio-based renderer:** `VisioLayoutRenderer` lays out a [directed graph](directed-graph.md#laying-out-with-visio-instead-of-msagl) with a layout style instead of MSAGL. Its `VisioLayoutOptions.VisioLayoutStyle` defaults to a top-to-bottom flowchart. The `MsaglRenderer` that VisioScripting and PowerShell use does not use layout styles, so this is the only layout type that does.
@@ -106,6 +106,6 @@ A layout style is not tied to a particular layout type. It is applied to a page,
 
 * [Layout models](layouts.md) (algorithmic placement: Tree, Grid, Box, Container and directed graph)
 * [Directed graph layout model](directed-graph.md) (graph-shaped layout via MSAGL)
-* [Declarative DOM model](dom.md) (`Page.Layout` applies a style when a DOM page renders)
+* [DOM model](dom.md) (`Page.Layout` applies a style when a DOM page renders)
 * [client.Page](../visio-scripting/page.md) (`LayoutPage` applies a style to pages)
 * [Page cells](../page-cells.md) (the `PageLayoutCells` and related cell groups that this namespace writes to)

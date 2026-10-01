@@ -1,6 +1,6 @@
 # client.Model
 
-`client.Model` renders the higher-level diagram models onto a page: data tables, grids, tree-shaped XML, org charts, and MSAGL-laid-out directed graphs. The model objects themselves live in `VisioAutomation.Models`; see [Declarative DOM model](../models/dom.md), [Directed graph layout model](../models/directed-graph.md), [Org chart model](../models/org-charts.md), [Data table model](../models/data-table.md) and [XML model](../models/xml-model.md) for the model surface.
+`client.Model` renders the higher-level diagram models onto a page: data tables, grids, tree-shaped XML, org charts, and MSAGL-laid-out directed graphs. The model objects themselves live in `VisioAutomation.Models`; see [DOM model](../models/dom.md), [Directed graph layout model](../models/directed-graph.md), [Org chart model](../models/org-charts.md), [Data table model](../models/data-table.md) and [XML model](../models/xml-model.md) for the model surface.
 
 ## Methods
 
@@ -42,7 +42,7 @@ client.Model.DrawDirectedGraphDocument(dgdoc, new VisioAutomation.Models.Layouts
 
 ## See also
 
-- [Declarative DOM model](../models/dom.md): the building blocks for arbitrary shape models.
+- [DOM model](../models/dom.md): the building blocks for arbitrary shape models.
 - [Directed graph layout model](../models/directed-graph.md): the directed-graph model type.
 - [Org chart model](../models/org-charts.md): the org-chart model type.
 - [Data table model](../models/data-table.md): the `DataTableModel` type.

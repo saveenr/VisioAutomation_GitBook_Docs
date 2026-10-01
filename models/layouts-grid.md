@@ -21,5 +21,5 @@ grid.Render(visioPage);
 ## See also
 
 * [Layout models](layouts.md) (the overview and comparison of all the layouts)
-* [Declarative DOM model](dom.md) (the underlying shape model the layouts emit into)
+* [DOM model](dom.md) (the underlying shape model the layouts emit into)
 * [Data table model](data-table.md) (draws a `DataTable` with a grid layout)

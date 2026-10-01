@@ -97,6 +97,6 @@ For mixed cases, render with Forms first then drop into `FormPage.VisioPage` to 
 
 ## See also
 
-* [Declarative DOM model](dom.md) (general-purpose declarative shape model)
+* [DOM model](dom.md) (general-purpose declarative shape model)
 * [Text formatting](../text-formatting.md) (the cell vocabulary `TextBlock` writes to)
 * [Page cells](../page-cells.md) (page-level cells that affect text rendering)

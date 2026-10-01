@@ -2,7 +2,7 @@
 
 ## 2026-09: Model pages renamed to say "model"
 
-The pages in the Diagram models section are about the models, not about the things they draw, so their titles now say so: [Layout models](../../models/layouts.md) (was Layouts), [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/layouts-box.md), [Container](../../models/layouts-container.md) and [Directed graph](../../models/directed-graph.md) layout model, [Org chart model](../../models/org-charts.md), [Form page model](../../models/forms.md) and [Declarative DOM model](../../models/dom.md). Layout styles and the Directed graph XML format keep their names because they are a Visio feature and a file format rather than models. Page addresses did not change, so existing links still work.
+The pages in the Diagram models section are about the models, not about the things they draw, so their titles now say so: [Layout models](../../models/layouts.md) (was Layouts), [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/layouts-box.md), [Container](../../models/layouts-container.md) and [Directed graph](../../models/directed-graph.md) layout model, [Org chart model](../../models/org-charts.md), [Form page model](../../models/forms.md) and [DOM model](../../models/dom.md). Layout styles and the Directed graph XML format keep their names because they are a Visio feature and a file format rather than models. Page addresses did not change, so existing links still work.
 
 ## 2026-09: Where layout styles are used
 
