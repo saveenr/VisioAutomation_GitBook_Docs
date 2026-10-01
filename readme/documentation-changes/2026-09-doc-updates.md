@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Directed graph XML format: corrected the "not supported" list
+
+The "What's not supported in XML" section of the [Directed graph XML format](../../directed-graph-xml.md) page listed layer separation as unsupported, although `layerseparation` has been supported since NuGet 3.1.0, and an "edge routing strategy" option that does not exist in the model. Both are gone. The bullet now names the options that really are missing from the XML (`PageBorderWidth` and `DefaultShapeSize`) and points to [#225](https://github.com/saveenr/VisioAutomation/issues/225) for the full list.
+
 ## 2026-09: DOM render performance moved to its own page
 
 The details of the four render performance settings (`DeferRecalc`, `ScreenUpdating`, `EnableAutoConnect` and `LiveDynamics`) moved from the [DOM](../../models/dom.md) page to a new page beneath it, [DOM render performance](../../models/dom-render-performance.md). The DOM page's Render performance section now says the settings exist, that the defaults work well, and that most people should leave them alone, and links to the new page for anyone who wants the details or wants to experiment.
