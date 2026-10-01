@@ -22,7 +22,7 @@ This draws a tree on the active page: a top node labelled `root` with `child1` a
 
 ## The model
 
-`XmlModel` has a single property, `XmlDocument` (a `System.Xml.XmlDocument`). `client.Model.DrawXmlModel(TargetPage, XmlModel)` builds a [tree layout](layouts.md#tree-layout) from it and renders it onto the target page.
+`XmlModel` has a single property, `XmlDocument` (a `System.Xml.XmlDocument`). `client.Model.DrawXmlModel(TargetPage, XmlModel)` builds a [tree layout](layouts-tree.md) from it and renders it onto the target page.
 
 ## What gets drawn
 
@@ -33,7 +33,7 @@ That is current source, an unreleased change after NuGet 3.1.0 ([#208](https://g
 * **Nested elements nest.** Each element's child elements become its child nodes, recursively.
 * **Not drawn:** attributes, text nodes, comments and processing instructions. An element with only text content appears as a leaf node, without the text.
 
-Layout is the default tree layout (top to bottom, with fixed separations); see [Layouts](layouts.md#tree-layout).
+Layout is the default tree layout (top to bottom, with fixed separations); see [Tree layout](layouts-tree.md).
 
 ## From PowerShell
 
@@ -57,6 +57,6 @@ See the [Out-VisioApplication cmdlet page](https://saveenr.gitbook.io/visiopower
 ## See also
 
 * [client.Model](../visio-scripting/model.md) (the `DrawXmlModel` method)
-* [Layouts](layouts.md) (the tree layout that draws the structure)
+* [Tree layout](layouts-tree.md) (the tree layout that draws the structure)
 * [Data table model](data-table.md) (the other `Models.Data` type)
 * [Directed graph XML format](../directed-graph-xml.md) and [Org charts](org-charts.md) (XML formats that describe a diagram)

@@ -84,7 +84,11 @@
 ## Diagram models
 
 * [Declarative DOM](models/dom.md)
-* [Layouts: Tree, Grid, Box](models/layouts.md)
+* [Layouts](models/layouts.md)
+  * [Tree layout](models/layouts-tree.md)
+  * [Grid layout](models/layouts-grid.md)
+  * [Box layout](models/layouts-box.md)
+  * [Container layout](models/layouts-container.md)
 * [Directed graph](models/directed-graph.md)
 * [Directed graph XML format](directed-graph-xml.md)
 * [Layout styles](models/layout-styles.md)
