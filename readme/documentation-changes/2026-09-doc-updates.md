@@ -1,0 +1,31 @@
+# 2026-09 doc updates
+
+## 2026-09: Models documentation accuracy pass
+
+Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project was reviewed against the source, and the claims that no longer matched were corrected. All C# snippets on the changed pages were compile-checked afterwards, and the PowerShell examples added in this period were run against a live Visio. The main corrections:
+
+* **[Directed graph](../../models/directed-graph.md)** and **[Directed graph XML format](../../directed-graph-xml.md)**: the note on `scalingfactor` had the spacing backwards (a larger value gives tighter gaps relative to node size). `usedynamicconnectors` and `scalingfactor` are required in XML, as are the `<renderoptions>`, `<shapes>` and `<connectors>` elements. `MsaglRenderer.Render` uses the renderer's own options and does not read the ones stored on the layout. A node with no `Size` takes the size of its master, so `DefaultShapeSize` does not apply in practice. The Directed graph page also gained a layout options reference and a "How the layout works" section, and the XML page gained a "Failure modes" section.
+* **[Declarative DOM](../../models/dom.md)**: removed an unsupported claim that rendering is a single undo step; corrected the descriptions of `RenderPerformanceSettings`, the node hierarchy, `Connect` and connector endpoints; added the `using VisioAutomation.Extensions;` that the `OpenStencil` snippet needs.
+* **[Layouts](../../models/layouts.md)**: added the **Container layout**, which had no coverage; corrected the Box example coordinates, the Grid example (it needs `PerformLayout()`) and the claims about which layout settings and masters are configurable; documented the four Box `Direction` values and the default child alignment.
+* **[Layout styles](../../models/layout-styles.md)**: corrected the `CompactTreeDirection` and `ConnectorStyle` value lists, which cells `Apply` writes, and the per-style defaults.
+* **[Org charts](../../models/org-charts.md)** and **[Form pages](../../models/forms.md)**: an org chart is always drawn into a new document, its XML schema is now documented, and a form page has two text blocks.
+
+Two source bugs found during the review were filed and fixed: the org chart renderer drew the first root on every page ([#201](https://github.com/saveenr/VisioAutomation/issues/201)), and Box layouts placed nested `RightToLeft` containers wrongly ([#202](https://github.com/saveenr/VisioAutomation/issues/202)). The pages describe both the fixed behavior and the earlier behavior.
+
+## 2026-09: New pages for the data table and XML models
+
+Added [Data table model](../../models/data-table.md) and [XML model](../../models/xml-model.md) under **Diagram models**. These two renderable models had appeared only as one-line rows in the [client.Model](../../visio-scripting/model.md) table, where three rows and an example comment were also corrected. Each page has C# and PowerShell examples.
+
+Writing them exposed three behaviors that looked unintended, so each was filed and fixed in the source: data table cell sizes were ignored ([#206](https://github.com/saveenr/VisioAutomation/issues/206)), `DrawDataTableModel` always drew on the active page ([#207](https://github.com/saveenr/VisioAutomation/issues/207)), and the XML tree showed `#document` instead of the document element's name ([#208](https://github.com/saveenr/VisioAutomation/issues/208)). The pages describe the fixed behavior, which is in current source and unreleased after NuGet 3.1.0, together with what 3.1.0 and earlier do.
+
+## 2026-09: Directed graph spacing options
+
+Documented the two new options for tightening directed-graph layouts, `EdgeLabelBoxSize` and `LayerSeparation`, and the matching XML attributes `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight`. They are in the options table and a new "Tightening the layout" section on [Directed graph](../../models/directed-graph.md), and in the `<renderoptions>` table of the [XML format](../../directed-graph-xml.md) page. They were added in NuGet 3.1.0.
+
+## 2026-09: Post-release sweep for VisioAutomation 3.1.0
+
+VisioAutomation2010 3.1.0 was published on 2026-09-30. Notes that called a change "unreleased after NuGet 3.0.0" or "in current source" now say which version it landed in, and keep the 3.0.0 workaround for readers who are still on that package. This covers the facade loaders, the spacing options and XML attributes, and the org chart and Box fixes above. [Version compatibility](../../version-compatibility.md) gained a `3.1.0` row, and 3.1.0 is now named as the recommended starting point.
+
+## 2026-09: Compiling page matches the current build baseline
+
+[Compiling](../../compiling.md) now describes the current toolchain: Visual Studio 2026, the .NET 10 SDK selected by `global.json`, an explicit C# 14 language version, and the SLNX solution. It no longer says Visual Studio 2026 is unsupported. Reference assemblies and the Visio interop assembly come from NuGet, so no Developer Pack install is needed, and Visio itself is required only to run the tests.

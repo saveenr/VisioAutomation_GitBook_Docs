@@ -3,6 +3,7 @@
 * [Introduction](README.md)
   * [Related projects](readme/related-projects.md)
   * [Documentation updates](readme/documentation-changes/README.md)
+    * [2026-09 doc updates](readme/documentation-changes/2026-09-doc-updates.md)
     * [2026-05 doc updates](readme/documentation-changes/2026-05-doc-updates.md)
   * [Getting started](readme/getting-started.md)
 
