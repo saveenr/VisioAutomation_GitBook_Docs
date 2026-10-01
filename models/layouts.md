@@ -8,7 +8,7 @@ There are three general-purpose layouts here plus a directed-graph layout that w
 | :--- | :--- | :--- |
 | [Tree](layouts-tree.md) | `VisioAutomation.Models.Layouts.Tree` | Hierarchies with one root, parent-child edges only. |
 | [Grid](layouts-grid.md) | `VisioAutomation.Models.Layouts.Grid` | Uniform rows and columns of identical shapes (heatmaps, calendars, lattice diagrams). |
-| [Container](layouts-container.md) | `VisioAutomation.Models.Layouts.Container` | Side-by-side columns of labelled items, each column wrapped in a Visio container shape. |
+| [Container](layouts-container.md) | `VisioAutomation.Models.Layouts.Container` | Side-by-side columns of labelled items, each column drawn on a plain rectangle (not a Visio container shape). |
 | [Directed graph layout model](directed-graph.md) | `VisioAutomation.Models.Layouts.DirectedGraph` | General graphs with cycles, multiple roots, or non-tree edges. |
 
 Each of these renders a Visio drawing. The differences are in the input data structure and the geometry algorithm.

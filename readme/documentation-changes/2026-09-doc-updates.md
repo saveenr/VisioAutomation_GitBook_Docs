@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Container layout no longer described as using Visio containers
+
+The [Container layout model](../../models/layouts-container.md) page and the [Layout models](../../models/layouts.md) overview said each column was wrapped in a Visio container shape. It is a plain rectangle behind the items, and the `ContainerMaster` option is never read. The pages now say so, and the open question is tracked in [#221](https://github.com/saveenr/VisioAutomation/issues/221).
+
 ## 2026-09: Where the output goes, on every model page
 
 The [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Container](../../models/layouts-container.md), [Directed graph](../../models/directed-graph.md), [Org chart](../../models/org-charts.md), [Form page](../../models/forms.md), [Data table](../../models/data-table.md) and [XML](../../models/xml-model.md) pages each gained a "Where the output goes" section in the same form as the [DOM](../../models/dom.md) one: what the model produces, how to get it, and what it does to the page you give it. It states plainly that the tree layout, the XML model, the MSAGL directed graph renderer and the data table model resize the page they draw on. The [`client.Model`](../../visio-scripting/model.md) reference rows for `DrawDataTable`, `DrawGrid`, `DrawXmlModel` and `DrawOrgChart` say the same, and the [Introduction to models](../../models/introduction.md) page no longer claims every DOM-based model gets the render performance settings.
