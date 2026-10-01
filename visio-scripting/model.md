@@ -6,8 +6,8 @@
 
 | Method                                                                                                          | Returns                          | Notes                                                                                |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------ |
-| `DrawDataTable(TargetPage, DataTable, IList<double> widths, IList<double> heights, Size cellspacing)`           | `List<IVisio.Shape>`             | Renders a `System.Data.DataTable` as a grid of 1 x 1 inch rectangles, one cell per value. |
-| `DrawDataTableModel(TargetPage, DataTableModel)`                                                                | `void`                           | Draws the model's `DataTable` on the active page using its `CellSpacing`.             |
+| `DrawDataTable(TargetPage, DataTable, IList<double> widths, IList<double> heights, Size cellspacing)`           | `List<IVisio.Shape>`             | Renders a `System.Data.DataTable` as a grid of rectangles, one cell per value, with the given column widths and row heights. |
+| `DrawDataTableModel(TargetPage, DataTableModel)`                                                                | `void`                           | Draws the model's `DataTable` on the target page using its `CellWidth`, `CellHeight` and `CellSpacing`. |
 | `DrawGrid(TargetPage, GridLayout)`                                                                              | `void`                           | Renders an arbitrary `GridLayout`.                                                   |
 | `DrawXmlModel(TargetPage, XmlModel)`                                                                            | `void`                           | Renders the element structure of an XML document as a tree (one node per element).   |
 | `DrawOrgChart(TargetPage, OrgChartDocument)`                                                                    | `void`                           | Renders an org-chart model; resizes the page to fit when done.                       |
@@ -29,8 +29,8 @@ dt.Columns.Add("Role");
 dt.Rows.Add("Alice", "Owner");
 dt.Rows.Add("Bob", "Reviewer");
 
-var widths = new[] { 1.5, 1.5 };     // required, but not used for sizing; cells are 1 x 1 inch
-var heights = new[] { 0.5, 0.5 };
+var widths = new[] { 1.5, 1.5 };     // column widths in inches
+var heights = new[] { 0.5, 0.5 };    // row heights in inches
 var spacing = new VisioAutomation.Core.Size(0.05, 0.05);
 client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt, widths, heights, spacing);
 
