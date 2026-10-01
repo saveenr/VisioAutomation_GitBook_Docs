@@ -52,17 +52,21 @@
   * [client.UserDefinedCell](visio-scripting/user-defined-cell.md)
   * [client.View](visio-scripting/view.md)
 
-## Shape data
+## Shapes
 
 * [User-defined cells](user-defined-cells.md)
 * [Custom properties](custom-properties.md)
 * [Hyperlinks](hyperlinks.md)
 * [Lock cells](lock-cells.md)
 * [Control handles](control-handles.md)
+* [Geometry](geometry.md)
+
+## Connections
+
 * [Connection points](connection-points.md)
 * [Connectors](connectors.md)
 
-## Formatting and layout
+## Formatting
 
 * [Shape cells](shape-cells.md)
   * [Shape XForm cells](shape-xform-cells.md)
@@ -79,7 +83,6 @@
   * [Paragraph cells](text/paragraph.md)
   * [Text-block cells](text/block.md)
   * [Tab stops](text/tab-stops.md)
-* [Geometry](geometry.md)
 
 ## Diagram models
 
@@ -93,9 +96,12 @@
 * [Data table model](models/data-table.md)
 * [XML model](models/xml-model.md)
 
-## Diagnostics
+## Diagram analysis
 
 * [Analyzers](analyzers.md)
+
+## Diagnostics
+
 * [Visio error log](logging.md)
 * [Exception types](exceptions.md)
 
