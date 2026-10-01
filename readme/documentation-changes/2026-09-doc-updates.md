@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Why the org chart model creates a new document
+
+The [Org chart model](../../models/org-charts.md) page now explains why it always creates a new document: Visio's org chart shapes run an add-on that accepts only a document created from the Organization Chart template, and dropping the position shape into a blank document fails with "You must open the Organization Chart template to use this shape."
+
 ## 2026-09: Container layout no longer described as using Visio containers
 
 The [Container layout model](../../models/layouts-container.md) page and the [Layout models](../../models/layouts.md) overview said each column was wrapped in a Visio container shape. It is a plain rectangle behind the items, and the `ContainerMaster` option is never read. The pages now say so, and the open question is tracked in [#221](https://github.com/saveenr/VisioAutomation/issues/221).

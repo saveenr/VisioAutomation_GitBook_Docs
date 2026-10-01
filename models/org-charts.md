@@ -1,6 +1,6 @@
 # Org chart model
 
-`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels.
+`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels. The document is always new because Visio's org chart shapes only work in a document created from its Organization Chart template (see [Where the output goes](#where-the-output-goes)).
 
 The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around, and the dynamic connectors stay glued to their shapes and re-route when shapes are moved.
 
@@ -12,6 +12,8 @@ The org chart model always creates a **new document**. It never draws onto a pag
 | :--- | :--- | :--- |
 | A new document, one page per org chart | `OrgChartDocument.Render(visioApp)` | Creates a new document from the org chart template and adds one page for each root in `OrgCharts`. It takes the application, not a page or a document. |
 | The same, from VisioScripting or PowerShell | `client.Model.DrawOrgChart(targetPage, orgChartDocument)`, or `Out-VisioApplication` | The `TargetPage` only supplies the application. The chart still goes into a new document, and the page you passed is then resized to fit its own contents, which is not the chart's page ([#219](https://github.com/saveenr/VisioAutomation/issues/219)). |
+
+**Why a new document.** Visio's org chart shapes are not ordinary masters. The position shape runs Visio's own org chart add-on when it is dropped, and the add-on accepts only a document created from the Organization Chart template, which sets up document and page settings that a blank document does not have. Opening the org chart stencil in a blank document is not enough: dropping the position shape there fails with the message "You must open the Organization Chart template to use this shape." Creating a document from a template means creating a new document, so the model cannot draw onto a page you already have. It is also why the `TargetPage` passed to `DrawOrgChart` can only supply the application.
 
 The document is rendered through the DOM's `Document.Render`, so the [render performance settings](dom.md#render-performance) apply.
 
