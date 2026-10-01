@@ -27,13 +27,13 @@ Each node carries the data needed to materialize itself. `Document`, `Page`, `Pa
 
 You can render from any level of the tree, and whichever level you start from, its children render too. What differs is **where the output lands**: a new document, new pages in a document you already have, or an existing page.
 
-| You call | The output is | What it does |
+| Desired output | How to get it | Notes |
 | :--- | :--- | :--- |
-| `Document.Render(app)` | A **new Visio document**. | Creates the document, blank or from a template. The first `Page` node is rendered into the document's initial page, and each remaining `Page` node is added as a new page. |
-| `Page.Render(doc)` or `PageList.Render(doc)` | **New pages in an existing document.** | Adds one new page per `Page` node, after the pages that are already there. Nothing existing is changed. |
-| `PageList.Render(startPage)` | **An existing page, then new pages.** | Renders the first `Page` node into `startPage` and adds a new page to its document for each of the others. `Document.Render` uses this. |
-| `Page.Render(visioPage)` | **An existing page**, filled in. | Draws the shapes and also applies the page-level settings: the page's name and size, its page and layout cells, the optional layout style, and the optional resize to fit. |
-| `ShapeList.Render(visioPage)` | **Shapes only, on an existing page.** | Draws the shapes and changes nothing about the page itself. |
+| A **new Visio document**. | `Document.Render(app)` | Creates the document, blank or from a template. The first `Page` node is rendered into the document's initial page, and each remaining `Page` node is added as a new page. |
+| **New pages in an existing document.** | `Page.Render(doc)` or `PageList.Render(doc)` | Adds one new page per `Page` node, after the pages that are already there. Nothing existing is changed. |
+| **An existing page, then new pages.** | `PageList.Render(startPage)` | Renders the first `Page` node into `startPage` and adds a new page to its document for each of the others. `Document.Render` uses this. |
+| **An existing page**, filled in. | `Page.Render(visioPage)` | Draws the shapes and also applies the page-level settings: the page's name and size, its page and layout cells, the optional layout style, and the optional resize to fit. |
+| **Shapes only, on an existing page.** | `ShapeList.Render(visioPage)` | Draws the shapes and changes nothing about the page itself. |
 
 ```csharp
 // New document (blank here; the constructor can also take a template)
