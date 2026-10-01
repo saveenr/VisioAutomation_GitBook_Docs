@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Document models page for Org charts and Form pages
+
+Added a [Document models](../../models/documents.md) page for the two models that describe a whole Visio document and create it: [Org charts](../../models/org-charts.md) and [Form pages](../../models/forms.md). It explains what they have in common, compares them in a table, and the two pages are now nested beneath it in the table of contents. No existing page changed.
+
 ## 2026-09: Table of contents sections reorganized
 
 Some section names in the table of contents did not match how Visio uses the terms, so the sidebar was regrouped. "Shape data" has a specific meaning in Visio (custom properties), so that section is now **Shapes**, and the [Geometry](../../geometry.md) page moved into it. [Connection points](../../connection-points.md) and [Connectors](../../connectors.md) moved to a new **Connections** section. "Formatting and layout" is now **Formatting**. [Analyzers](../../analyzers.md) moved out of Diagnostics into a new **Diagram analysis** section. Only the grouping changed: no page was added or removed.

@@ -96,8 +96,9 @@
   * [Directed graph](models/directed-graph.md)
     * [Directed graph XML format](directed-graph-xml.md)
 * [Layout styles](models/layout-styles.md)
-* [Org charts](models/org-charts.md)
-* [Form pages](models/forms.md)
+* [Document models](models/documents.md)
+  * [Org charts](models/org-charts.md)
+  * [Form pages](models/forms.md)
 * [Data table model](models/data-table.md)
 * [XML model](models/xml-model.md)
 
