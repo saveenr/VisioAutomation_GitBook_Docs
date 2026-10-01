@@ -23,7 +23,40 @@ Document  (not a Node; the root)
 
 Each node carries the data needed to materialize itself. `Document`, `Page`, `PageList` and `ShapeList` have a `Render()` method; the individual shape nodes do not, and are drawn when their containing `ShapeList` renders. `Shape` instances reference a master by name or by `IVisio.Master`. The geometric primitives (`Rectangle`, `Oval`, `Line`, `PolyLine`, `BezierCurve`) carry their own coordinates and don't need a master.
 
-A render happens at any level: rendering a `Document` creates a new Visio document; rendering a `Page` adds a page to an existing document; rendering a `ShapeList` drops shapes into an already-open page. Whichever level you start from, the children render too.
+## Where the output goes
+
+You can render from any level of the tree, and whichever level you start from, its children render too. What differs is **where the output lands**: a new document, new pages in a document you already have, or an existing page.
+
+| You call | The output is | What it does |
+| :--- | :--- | :--- |
+| `Document.Render(app)` | A **new Visio document**. | Creates the document, blank or from a template. The first `Page` node is rendered into the document's initial page, and each remaining `Page` node is added as a new page. |
+| `Page.Render(doc)` or `PageList.Render(doc)` | **New pages in an existing document.** | Adds one new page per `Page` node, after the pages that are already there. Nothing existing is changed. |
+| `PageList.Render(startPage)` | **An existing page, then new pages.** | Renders the first `Page` node into `startPage` and adds a new page to its document for each of the others. `Document.Render` uses this. |
+| `Page.Render(visioPage)` | **An existing page**, filled in. | Draws the shapes and also applies the page-level settings: the page's name and size, its page and layout cells, the optional layout style, and the optional resize to fit. |
+| `ShapeList.Render(visioPage)` | **Shapes only, on an existing page.** | Draws the shapes and changes nothing about the page itself. |
+
+```csharp
+// New document (blank here; the constructor can also take a template)
+var doc_node = new VADOM.Document();
+doc_node.Pages.Add(page_node);
+IVisio.Document newDoc = doc_node.Render(visioApp);
+
+// New page in a document you already have
+IVisio.Page newPage = page_node.Render(visioDoc);
+
+// An existing page, including its page-level settings
+page_node.Render(visioPage);
+
+// Only the shapes, onto an existing page
+shape_list.Render(visioPage);
+```
+
+A few details:
+
+* **Starting from a template.** `VADOM.Document` also accepts a template filename and measurement system in its constructor, so a render can start from a Visio template (`.vst` / `.vstx`) instead of a blank document.
+* **A document with no pages.** Rendering a `Document` that has no `Page` nodes still creates the document, with its one empty initial page.
+* **Existing pages are not cleared.** Rendering into an existing page adds shapes alongside whatever is already there.
+* **Performance settings.** The temporary Visio settings described under [Render performance](#render-performance) are applied by `Page.Render`, so they apply to every call above except `ShapeList.Render`. A `ShapeList` render still drops shapes and writes cell values in bulk, but it does not change the application settings.
 
 After rendering, each DOM node has its `VisioShape` (or `VisioPage`) property populated, so you can pull the underlying COM object out for further work.
 
@@ -105,27 +138,6 @@ rect.CustomProperties["Owner"] = owner;
 ```
 
 For the formula-vs-literal distinction and the typed setters, see the [Custom properties](../custom-properties.md) page.
-
-## Rendering at three levels
-
-`Render()` is overloaded so the same node tree can target different containers:
-
-```csharp
-// Render a ShapeList directly into an already-open page
-shape_list.Render(visioPage);
-
-// Render a Page node, creating a new page in an existing document
-var newPage = page_node.Render(visioDoc);
-
-// Render a Document node, creating a brand-new Visio document
-var doc_node = new VADOM.Document();
-doc_node.Pages.Add(page_node);
-var newDoc = doc_node.Render(visioApp);
-```
-
-`VADOM.Document` also accepts a template filename and measurement system in its constructor, so a render can start from a Visio template (`.vst` / `.vstx`) instead of a blank document.
-
-When rendering a `Document`, the new Visio document's first page is reused for the first `Page` node, and a page is added for each remaining node. Rendering a `Page` node on its own (`page_node.Render(visioDoc)`) always adds a new page.
 
 ## After render: round-tripping
 

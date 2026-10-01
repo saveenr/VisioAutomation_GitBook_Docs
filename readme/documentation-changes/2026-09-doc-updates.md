@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: DOM page: where the output goes
+
+The [DOM](../../models/dom.md) page has a new "Where the output goes" section that replaces the one-paragraph description of rendering at any level and the old "Rendering at three levels" section. It lists every `Render` call and what each produces: a new document, new pages in an existing document, an existing page with its page-level settings, or only shapes on an existing page. That adds two calls the page had left out, `Page.Render(visioPage)` and `PageList.Render`, and says which calls apply the render performance settings (all except `ShapeList.Render`).
+
 ## 2026-09: Box layout moved out of the Layout models
 
 The Box layout page is now [Box geometry](../../models/box-geometry.md), a separate page in the Diagram models section instead of a child of [Layout models](../../models/layouts.md). It computes rectangles and draws nothing, nothing else in the library uses it, and listing it beside Tree and Grid suggested an equivalent choice. Its page opens by saying so and points to the layouts that do draw. The Layout models overview now describes three general-purpose layouts plus the directed graph. The page address changed from `layouts-box` to `box-geometry`. The longer-term question is tracked in [#218](https://github.com/saveenr/VisioAutomation/issues/218).
