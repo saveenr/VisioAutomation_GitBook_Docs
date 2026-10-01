@@ -4,6 +4,16 @@
 
 It is deliberately minimal. There is no header row and no per-cell formatting. If you need those, build a [`GridLayout`](layouts-grid.md) directly.
 
+## Where the output goes
+
+The data table model draws onto a page that already exists, and then **resizes that page**.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| Shapes on an existing page, with the page resized | `client.Model.DrawDataTableModel(targetPage, model)`, `client.Model.DrawDataTable(...)`, or `Out-VisioApplication` from PowerShell | Draws one rectangle per cell with the [grid layout](layouts-grid.md), then resizes the page to fit everything on it, including shapes that were already there. Shapes already on the page are not moved. |
+
+The shapes are drawn through the DOM's `ShapeList.Render`, so the [render performance settings](dom.md#render-performance) do not apply. The resize is done by the VisioScripting methods, not by the grid layout itself: calling `client.Model.DrawGrid` with the same grid would not resize the page.
+
 ## Hello-world
 
 ```csharp

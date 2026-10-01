@@ -4,6 +4,16 @@
 
 This is a niche but useful escape hatch for using Visio as a layout-and-print engine when full Word or LaTeX would be overkill, and you already have the data in a Visio-adjacent pipeline.
 
+## Where the output goes
+
+The form page model always creates a **new document**.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| A new document, one page per form page | `FormDocument.Render(visioApp)` | Creates a blank document, sets its subject, title, creator and company, adds one page per `FormPage`, and removes the empty first page. Returns the new `IVisio.Document`. VisioScripting and PowerShell have no method that draws a `FormDocument` for you. |
+
+It does not use the [DOM](dom.md), so the [render performance settings](dom.md#render-performance) do not apply.
+
 ## Hello-world
 
 A one-page document with a title and body:

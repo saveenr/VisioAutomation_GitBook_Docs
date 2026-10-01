@@ -2,6 +2,18 @@
 
 Use when the data is a true tree: one root, no cycles, every node has at most one parent. Build a `Drawing` whose `Root` is a `Node`, recursively attach `Children`, then `Render(page)`. The layout decides positions; you only specify size (and only if you don't want the default).
 
+## Where the output goes
+
+The tree layout draws onto a page that already exists, and it **resizes that page**.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| Shapes on an existing page | `Drawing.Render(visioPage)` | Draws the nodes and connectors, then sets the page's size to the tree's bounds plus a 0.5 inch border. Shapes already on the page are not moved, so the page is sized to the tree and not to them. |
+
+The tree is drawn through the [DOM](dom.md), so its [render performance settings](dom.md#render-performance) apply.
+
+## Example
+
 ```csharp
 using VATREE = VisioAutomation.Models.Layouts.Tree;
 using VA = VisioAutomation;

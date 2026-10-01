@@ -4,6 +4,17 @@
 
 The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around, and the dynamic connectors stay glued to their shapes and re-route when shapes are moved.
 
+## Where the output goes
+
+The org chart model always creates a **new document**. It never draws onto a page you already have.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| A new document, one page per org chart | `OrgChartDocument.Render(visioApp)` | Creates a new document from the org chart template and adds one page for each root in `OrgCharts`. It takes the application, not a page or a document. |
+| The same, from VisioScripting or PowerShell | `client.Model.DrawOrgChart(targetPage, orgChartDocument)`, or `Out-VisioApplication` | The `TargetPage` only supplies the application. The chart still goes into a new document, and the page you passed is then resized to fit its own contents, which is not the chart's page ([#219](https://github.com/saveenr/VisioAutomation/issues/219)). |
+
+The document is rendered through the DOM's `Document.Render`, so the [render performance settings](dom.md#render-performance) apply.
+
 ## Hello-world
 
 A single-node "org chart":

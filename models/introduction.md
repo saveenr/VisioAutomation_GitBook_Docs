@@ -26,7 +26,7 @@ The [DOM](dom.md) is the fundamental model. It describes pages, shapes, connecto
 * **Batched drawing.** Shapes are dropped onto a page in bulk, and their cell values are written in bulk, instead of one COM call at a time.
 * **Render performance settings.** While a page renders, the DOM temporarily changes Visio application settings (deferred recalculation, auto-connect, live dynamics, screen updating) and restores the originals afterward.
 
-Most of the other models build on the DOM. They work out *what* should be drawn and *where*, produce a DOM page, and hand it to the DOM to render, so they get the same behavior without repeating it. The [layout models](layouts.md) [Tree](layouts-tree.md), [Grid](layouts-grid.md) and [Directed graph](directed-graph.md) do this, and so do the [Org chart model](org-charts.md) and both [data models](data.md) (through the grid and tree layouts).
+Most of the other models build on the DOM. They work out *what* should be drawn and *where*, produce a DOM page, and hand it to the DOM to render, so they share its shape dropping and cell writing without repeating it. Most of them also get its render performance settings. The exception is the Grid layout, and so the data table model that uses it: they render only the shapes, so they get the batching but not the settings. The [layout models](layouts.md) [Tree](layouts-tree.md), [Grid](layouts-grid.md) and [Directed graph](directed-graph.md) do this, and so do the [Org chart model](org-charts.md) and both [data models](data.md) (through the grid and tree layouts).
 
 Three models do **not** go through the DOM:
 
@@ -44,6 +44,8 @@ Three models do **not** go through the DOM:
 | [Data models](data.md) | Data you already have: a `DataTable` or an `XmlDocument`. | A picture of that data on a page. See [Data table](data-table.md) and [XML](xml-model.md). |
 | [Box geometry](box-geometry.md) | Nested rectangles packed in a direction. | Rectangles only. It draws nothing, and nothing else in the library uses it. |
 | [Layout styles](layout-styles.md) | Not a model. Visio's own page-level layout feature. | A re-arranged page, applied after or instead of a layout model. |
+
+Each model's page has a "Where the output goes" section that says what the model produces (a new document, new pages, or shapes on an existing page) and what it does to the page you give it.
 
 ## See also
 

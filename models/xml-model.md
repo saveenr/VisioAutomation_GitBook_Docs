@@ -4,6 +4,16 @@
 
 It shows element names only. Attributes, text content and comments are not drawn, so it is a structure viewer, not a data viewer. For XML that describes a diagram in its own right, see [Directed graph XML format](../directed-graph-xml.md) or [Org chart model](org-charts.md).
 
+## Where the output goes
+
+The XML model draws onto a page that already exists, and it **resizes that page**.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| Shapes on an existing page, with the page resized | `client.Model.DrawXmlModel(targetPage, model)`, or `Out-VisioApplication` from PowerShell | Draws the element tree with the [tree layout](layouts-tree.md), which sets the page's size to the tree's bounds plus a 0.5 inch border. Shapes already on the page are not moved, so the page is sized to the tree and not to them. |
+
+The tree is drawn through the [DOM](dom.md), so its [render performance settings](dom.md#render-performance) apply.
+
 ## Hello-world
 
 ```csharp

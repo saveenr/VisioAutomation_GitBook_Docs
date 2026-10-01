@@ -2,6 +2,18 @@
 
 Use when you want several labelled columns of items, each column wrapped in a Visio container shape. `ContainerLayout` is independent of the [Box geometry](box-geometry.md) type: it arranges one column per container, with the container's items stacked top to bottom inside it. (`Layouts.Container.Container` and `Layouts.Box.Container` are unrelated types that happen to share a name.)
 
+## Where the output goes
+
+The container layout is the only layout that takes a **document** and not a page. It always adds a page of its own.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| One new page in an existing document | `ContainerLayout.Render(visioDoc)` | Adds a page to the document, draws the containers and items on it, resizes the page to fit its contents, and changes the active window's zoom to fit the page. Returns the new page. It cannot draw onto a page that already exists. |
+
+It does not use the [DOM](dom.md), so the [render performance settings](dom.md#render-performance) do not apply.
+
+## Example
+
 ```csharp
 using VACONT = VisioAutomation.Models.Layouts.Container;
 using IVisio = Microsoft.Office.Interop.Visio;
