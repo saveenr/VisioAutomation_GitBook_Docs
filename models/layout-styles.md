@@ -104,7 +104,7 @@ A layout style is not tied to a particular layout type. It is applied to a page,
 
 ## See also
 
-* [Layout models](layouts.md) (algorithmic placement: Tree, Grid, Box, Container and directed graph)
+* [Layout models](layouts.md) (algorithmic placement: Tree, Grid, Container and directed graph)
 * [Directed graph layout model](directed-graph.md) (graph-shaped layout via MSAGL)
 * [DOM](dom.md) (`Page.Layout` applies a style when a DOM page renders)
 * [client.Page](../visio-scripting/page.md) (`LayoutPage` applies a style to pages)

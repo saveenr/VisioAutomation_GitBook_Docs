@@ -92,7 +92,6 @@
 * [Layout models](models/layouts.md)
   * [Tree layout model](models/layouts-tree.md)
   * [Grid layout model](models/layouts-grid.md)
-  * [Box layout model](models/layouts-box.md)
   * [Container layout model](models/layouts-container.md)
   * [Directed graph layout model](models/directed-graph.md)
     * [Directed graph XML format](directed-graph-xml.md)
@@ -102,6 +101,7 @@
 * [Data models](models/data.md)
   * [Data table model](models/data-table.md)
   * [XML model](models/xml-model.md)
+* [Box geometry](models/box-geometry.md)
 * [Layout styles](models/layout-styles.md)
 
 ## Diagram analysis

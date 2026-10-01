@@ -30,7 +30,7 @@ Most of the other models build on the DOM. They work out *what* should be drawn 
 
 Three models do **not** go through the DOM:
 
-* **[Box layout](layouts-box.md)** draws nothing. It only computes rectangles, and you draw them yourself, with the DOM or otherwise.
+* **[Box geometry](box-geometry.md)** draws nothing. It only computes rectangles, and you draw them yourself, with the DOM or otherwise. It is not one of the layout models.
 * **[Container layout](layouts-container.md)** drops its shapes and writes their formatting directly, so it does not get the DOM's render performance settings.
 * **[Form page model](forms.md)** builds pages and text blocks directly, also without the DOM.
 
@@ -39,9 +39,10 @@ Three models do **not** go through the DOM:
 | Model | What you describe | What it produces |
 | :--- | :--- | :--- |
 | [DOM](dom.md) | Pages, shapes, connectors and cells. | Any drawing. The foundation the others build on. |
-| [Layout models](layouts.md) | Structure only: a tree, a grid, boxes, columns or a graph. | Shapes placed by an algorithm. See [Tree](layouts-tree.md), [Grid](layouts-grid.md), [Box](layouts-box.md), [Container](layouts-container.md) and [Directed graph](directed-graph.md). |
+| [Layout models](layouts.md) | Structure only: a tree, a grid, columns or a graph. | Shapes placed by an algorithm. See [Tree](layouts-tree.md), [Grid](layouts-grid.md), [Container](layouts-container.md) and [Directed graph](directed-graph.md). |
 | [Document models](documents.md) | A whole document: an org chart or a set of form pages. | A new Visio document. See [Org chart](org-charts.md) and [Form page](forms.md). |
 | [Data models](data.md) | Data you already have: a `DataTable` or an `XmlDocument`. | A picture of that data on a page. See [Data table](data-table.md) and [XML](xml-model.md). |
+| [Box geometry](box-geometry.md) | Nested rectangles packed in a direction. | Rectangles only. It draws nothing, and nothing else in the library uses it. |
 | [Layout styles](layout-styles.md) | Not a model. Visio's own page-level layout feature. | A re-arranged page, applied after or instead of a layout model. |
 
 ## See also

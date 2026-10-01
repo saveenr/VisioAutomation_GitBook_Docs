@@ -1,6 +1,8 @@
-# Box layout model
+# Box geometry
 
-Use when the data is a tree of rectangular regions packed in a particular direction (left-to-right, top-to-bottom, etc.) inside a parent rectangle. The output is positioned rectangles. The layout has no Visio rendering of its own: you walk its `Nodes` and emit DOM shapes (or anything else) from the rectangles yourself.
+`VisioAutomation.Models.Layouts.Box` computes **rectangles**. It is not one of the [layout models](layouts.md): it draws nothing, there is no VisioScripting method or cmdlet that draws it, and nothing else in the library uses it. Reach for it only when you want positioned rectangles to draw yourself (with the [DOM](dom.md), the [imperative API](../extensions/drawing.md), or even a non-Visio output). If you want shapes placed on a page for you, use the [Tree](layouts-tree.md), [Grid](layouts-grid.md), [Container](layouts-container.md) or [Directed graph](directed-graph.md) layout instead. What the Box layout is for is still being discussed in [#218](https://github.com/saveenr/VisioAutomation/issues/218).
+
+Use it when the data is a tree of rectangular regions packed in a particular direction (left-to-right, top-to-bottom, etc.) inside a parent rectangle. The output is positioned rectangles. The class has no Visio rendering of its own: you walk its `Nodes` and emit shapes from the rectangles yourself.
 
 The model is a tree of `Container` nodes, where each container has a `Direction` (the axis along which its children pack) and a list of children. Each child is either another `Container` (for nesting) or a `Box` (a leaf rectangle of a given size). Each container has `PaddingLeft`, `PaddingRight`, `PaddingTop` and `PaddingBottom` (all 0.125 by default) and a `ChildSpacing` (also 0.125 by default) inserted between adjacent children.
 
@@ -44,9 +46,9 @@ Containers can nest: a child container packs its own children along its own dire
 
 Nested `RightToLeft` containers were fixed in NuGet 3.1.0 ([#202](https://github.com/saveenr/VisioAutomation/issues/202)). In 3.0.0 and earlier, a `RightToLeft` container placed anywhere other than the root misplaces its children whenever its origin Y differs from its X, for example one nested inside a vertical container. The root container is always placed at (0, 0), so it was not affected.
 
-`PerformLayout()` is computational only; it doesn't talk to Visio. To render, walk the tree and emit DOM shapes (or use the rectangles for any other purpose, e.g. a JPEG or SVG). The separation makes Box layout useful for non-Visio output too.
+`PerformLayout()` is computational only; it doesn't talk to Visio. To render, walk the tree and emit DOM shapes (or use the rectangles for any other purpose, e.g. a JPEG or SVG). The separation makes it useful for non-Visio output too.
 
 ## See also
 
-* [Layout models](layouts.md) (the overview and comparison of all the layouts)
+* [Layout models](layouts.md) (the layouts that do draw shapes)
 * [DOM](dom.md) (emit DOM shapes from the rectangles this layout computes)
