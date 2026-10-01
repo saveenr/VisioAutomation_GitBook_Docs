@@ -51,6 +51,8 @@ The `Cells` property on each node mirrors the Visio ShapeSheet structure, so the
 Master-based shapes accept either a master object or a master name plus stencil name. Both styles are interchangeable; the name-based form looks the master up at render time.
 
 ```csharp
+using VisioAutomation.Extensions;   // OpenStencil is an extension method on IVisio.Documents
+
 var page_node = new VADOM.Page();
 
 // By master object (master already resolved)
