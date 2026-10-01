@@ -99,8 +99,9 @@
 * [Document models](models/documents.md)
   * [Org chart model](models/org-charts.md)
   * [Form page model](models/forms.md)
-* [Data table model](models/data-table.md)
-* [XML model](models/xml-model.md)
+* [Data models](models/data.md)
+  * [Data table model](models/data-table.md)
+  * [XML model](models/xml-model.md)
 
 ## Diagram analysis
 
