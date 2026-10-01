@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-09: Where layout styles are used
+
+[Layout styles](../../models/layout-styles.md) gained a "Where layout styles are used" section: a style is applied to a page, so it is used by the DOM `Page.Layout`, `client.Page.LayoutPage`, the `Format-VisioPage -LayoutStyle` cmdlet and the Visio-based directed graph renderer, and not only by a layout type. The [Layouts](../../models/layouts.md) overview no longer says layout styles are used by directed graph and other style-driven renderers, which overstated it.
+
 ## 2026-09: Document models page for Org charts and Form pages
 
 Added a [Document models](../../models/documents.md) page for the two models that describe a whole Visio document and create it: [Org charts](../../models/org-charts.md) and [Form pages](../../models/forms.md). It explains what they have in common, compares them in a table, and the two pages are now nested beneath it in the table of contents. No existing page changed.
