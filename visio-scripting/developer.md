@@ -44,4 +44,4 @@ System.Console.WriteLine("Wrote namespace tree to {0}", nsdoc.Name);
 - [VisioScripting.Client overview](../visio-scripting.md): how `client.Developer` fits into the facade.
 - [Namespaces](../namespaces.md): the static reference list of namespaces these methods render.
 - [Classes](../classes.md): the static reference list of classes `DrawNamespacesAndClasses` renders.
-- [Form pages](../models/forms.md): the underlying `FormDocument` model these methods build on.
+- [Form page model](../models/forms.md): the underlying `FormDocument` model these methods build on.

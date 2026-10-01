@@ -1,8 +1,20 @@
-# Directed graph layout
+# Directed graph layout model
 
 `VisioAutomation.Models.Layouts.DirectedGraph` is a graph-shaped layout built on top of [Microsoft Automatic Graph Layout (MSAGL)](https://www.nuget.org/packages/Microsoft.Automatic.Graph.Layout). Use it for diagrams that don't fit a tree shape: graphs with cycles, multiple roots, parallel edges, or arbitrary connectivity. The layout engine assigns coordinates; you only describe nodes and edges.
 
 For the XML wire format that the directed-graph loader accepts, see the separate [Directed graph XML format](../directed-graph-xml.md) page. This page covers the .NET object model.
+
+## Where the output goes
+
+A directed graph can be drawn three ways. The first two draw onto a page that already exists and **change that page**. The third creates a new document.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| Shapes on an existing page, laid out by MSAGL | `MsaglRenderer.Render(visioPage, layout)` | Sets the page's size to the layout and sets the page's routing cells (`PlaceStyle` 1, `RouteStyle` 5, `AvenueSizeX` and `AvenueSizeY` 2, `LineRouteExt` 2), then resizes the page to fit everything on it, including shapes that were already there, with a margin of `PageBorderWidth`. |
+| Shapes on an existing page, laid out by Visio | `VisioLayoutRenderer.Render(visioPage, layout)` | Applies Visio's page layout style (see [Laying out with Visio instead of MSAGL](#laying-out-with-visio-instead-of-msagl)), then resizes the page to fit with a 0.5 inch margin. |
+| A new document, one page per graph | `client.Model.DrawDirectedGraphDocument(document, styling)`, or `Out-VisioApplication` from PowerShell | Creates a new document from the `DirectedGraphDocument`'s template, draws each layout on its own page with the MSAGL renderer (the first graph goes on the new document's first page), and resizes every page to fit with the document's `BorderSize`. See [Multi-page directed-graph documents](#multi-page-directed-graph-documents). |
+
+Both renderers draw through the [DOM](dom.md), so its [render performance settings](dom.md#render-performance) apply.
 
 ## Building a graph in code
 
@@ -166,10 +178,24 @@ A `DirectedGraphDocument` holds multiple `DirectedGraphLayout` instances, one pe
 
 For one-page programmatic graphs the `MsaglRenderer.Render(page, layout)` overload above is enough; for multi-page documents the path through `Client.Model.DrawDirectedGraphDocument(dg_doc, styling)` handles page creation.
 
+## Laying out with Visio instead of MSAGL
+
+`MsaglRenderer` is the renderer that VisioScripting, PowerShell and the XML path use. The namespace also has a second one, `VisioLayoutRenderer`, which skips MSAGL and lets Visio's own [layout style](layout-styles.md) arrange the shapes:
+
+```csharp
+var renderer = new VADG.VisioLayoutRenderer();
+renderer.LayoutOptions.VisioLayoutStyle = new VisioAutomation.Models.LayoutStyles.HierarchyLayoutStyle();
+renderer.Render(visioPage, d);
+```
+
+It drops each node's master on the page, connects the edges, applies the layout style and resizes the page to fit with a 0.5 inch margin. `LayoutOptions.VisioLayoutStyle` defaults to a top-to-bottom flowchart style; set it to `null` to skip the layout and leave the shapes in a row.
+
+It is much simpler than the MSAGL renderer. It uses each node's master and label and each edge's endpoints and label, and it takes the connector master from `Styling.EdgeMasterName` and `Styling.EdgeStencilName`. It does **not** apply a node's `Size`, `Cells` or `CustomProperties`, an edge's `ConnectorType`, or the layout options on this page (`Direction`, `ScalingFactor` and the others), because those belong to MSAGL. It is available only from code: `DrawDirectedGraphDocument`, the XML loader and `Out-VisioApplication` always use MSAGL.
+
 ## See also
 
 * [Directed graph XML format](../directed-graph-xml.md) (the XML wire format and its render-options schema)
 * [Layout styles](layout-styles.md) (additional styling primitives layered on top of layouts)
-* [Layouts](layouts.md) (Tree, Grid, and Box layouts for non-graph data)
-* [Declarative DOM](dom.md) (the underlying shape model the renderer emits into)
+* [Layout models](layouts.md) (Tree, Grid and Container layouts for non-graph data)
+* [DOM](dom.md) (the underlying shape model the renderer emits into)
 * [Custom properties](../custom-properties.md) (formula-vs-literal, typed setters)

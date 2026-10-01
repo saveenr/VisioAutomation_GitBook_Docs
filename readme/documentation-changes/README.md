@@ -2,7 +2,17 @@
 
 This page summarizes notable changes to the **VisioAutomation** documentation so returning readers can find what's new without re-reading every page.
 
+[2026-09 doc updates](2026-09-doc-updates.md) - Models pages checked against the source, new data table and XML model pages, and a pass for the 3.1.0 release
+
 [2026-05 doc updates](2026-05-doc-updates.md) - A major doc overhaul after years of inactivity
+
+## 2026-09: Models documentation accuracy pass
+
+Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project was reviewed against the source and corrected, including a `scalingfactor` explanation that had the spacing backwards, an unsupported undo claim, wrong Box and Grid examples, and incomplete layout-style enum lists. The [Container layout](../../models/layouts-container.md) now has coverage, and the [Org charts](../../models/org-charts.md) XML schema is documented. See [2026-09 doc updates](2026-09-doc-updates.md) for the full list.
+
+## 2026-09: Data table model and XML model
+
+Added [Data table model](../../models/data-table.md) and [XML model](../../models/xml-model.md) under **Diagram models**, with C# and PowerShell examples. They describe both the current behavior and the fixes in source that are unreleased after NuGet 3.1.0. See [2026-09 doc updates](2026-09-doc-updates.md).
 
 ## 2026-05: Version compatibility reference
 

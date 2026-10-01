@@ -1,10 +1,11 @@
 # Table of contents
 
 * [Introduction](README.md)
+  * [Getting started](readme/getting-started.md)
   * [Related projects](readme/related-projects.md)
   * [Documentation updates](readme/documentation-changes/README.md)
+    * [2026-09 doc updates](readme/documentation-changes/2026-09-doc-updates.md)
     * [2026-05 doc updates](readme/documentation-changes/2026-05-doc-updates.md)
-  * [Getting started](readme/getting-started.md)
 
 ## Core APIs
 
@@ -52,17 +53,21 @@
   * [client.UserDefinedCell](visio-scripting/user-defined-cell.md)
   * [client.View](visio-scripting/view.md)
 
-## Shape data
+## Shapes
 
 * [User-defined cells](user-defined-cells.md)
 * [Custom properties](custom-properties.md)
 * [Hyperlinks](hyperlinks.md)
 * [Lock cells](lock-cells.md)
 * [Control handles](control-handles.md)
+* [Geometry](geometry.md)
+
+## Connections
+
 * [Connection points](connection-points.md)
 * [Connectors](connectors.md)
 
-## Formatting and layout
+## Formatting
 
 * [Shape cells](shape-cells.md)
   * [Shape XForm cells](shape-xform-cells.md)
@@ -79,23 +84,33 @@
   * [Paragraph cells](text/paragraph.md)
   * [Text-block cells](text/block.md)
   * [Tab stops](text/tab-stops.md)
-* [Geometry](geometry.md)
 
 ## Diagram models
 
-* [Declarative DOM](models/dom.md)
-* [Layouts: Tree, Grid, Box](models/layouts.md)
-* [Directed graph](models/directed-graph.md)
-* [Directed graph XML format](directed-graph-xml.md)
+* [Introduction to models](models/introduction.md)
+* [DOM](models/dom.md)
+  * [DOM render performance](models/dom-render-performance.md)
+* [Layout models](models/layouts.md)
+  * [Tree layout model](models/layouts-tree.md)
+  * [Grid layout model](models/layouts-grid.md)
+  * [Container layout model](models/layouts-container.md)
+  * [Directed graph layout model](models/directed-graph.md)
+    * [Directed graph XML format](directed-graph-xml.md)
+* [Document models](models/documents.md)
+  * [Org chart model](models/org-charts.md)
+  * [Form page model](models/forms.md)
+* [Data models](models/data.md)
+  * [Data table model](models/data-table.md)
+  * [XML model](models/xml-model.md)
+* [Box geometry](models/box-geometry.md)
 * [Layout styles](models/layout-styles.md)
-* [Org charts](models/org-charts.md)
-* [Form pages](models/forms.md)
-* [Data table model](models/data-table.md)
-* [XML model](models/xml-model.md)
+
+## Diagram analysis
+
+* [Analyzers](analyzers.md)
 
 ## Diagnostics
 
-* [Analyzers](analyzers.md)
 * [Visio error log](logging.md)
 * [Exception types](exceptions.md)
 

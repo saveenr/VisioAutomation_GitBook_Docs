@@ -1,8 +1,20 @@
-# Form pages
+# Form page model
 
 `VisioAutomation.Models.Documents.Forms` is a small generator for **printable, document-style Visio pages**: think one-pagers with a title, a body, and a margin. The output is a Visio document where each page has two fixed-width text blocks, a title block (7.5 x 0.5 inches) and a body block (7.5 inches wide, filling the height down to the bottom margin), suitable for printing or PDF export.
 
 This is a niche but useful escape hatch for using Visio as a layout-and-print engine when full Word or LaTeX would be overkill, and you already have the data in a Visio-adjacent pipeline.
+
+## Where the output goes
+
+The form page model always creates a **new document**.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| A new document, one page per form page | `FormDocument.Render(visioApp)` | Creates a blank document, sets its subject, title, creator and company, adds one page per `FormPage`, and removes the empty first page. Returns the new `IVisio.Document`. VisioScripting and PowerShell have no method that draws a `FormDocument` for you. |
+
+It does not use the [DOM](dom.md), so the [render performance settings](dom.md#render-performance) do not apply.
+
+The library's own use of it is in the VisioScripting developer commands: `client.Developer.DrawInteropEnumDocumentation()` builds a `FormDocument` with a page of values for each Visio interop enum, and returns the new document. These are internal documentation tools that happen to be public, not a general way to draw forms.
 
 ## Hello-world
 
@@ -97,6 +109,6 @@ For mixed cases, render with Forms first then drop into `FormPage.VisioPage` to 
 
 ## See also
 
-* [Declarative DOM](dom.md) (general-purpose declarative shape model)
+* [DOM](dom.md) (general-purpose declarative shape model)
 * [Text formatting](../text-formatting.md) (the cell vocabulary `TextBlock` writes to)
 * [Page cells](../page-cells.md) (page-level cells that affect text rendering)

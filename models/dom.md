@@ -1,4 +1,4 @@
-# Declarative DOM
+# DOM
 
 The **Document Object Model** under `VisioAutomation.Models.Dom` is the highest-level authoring API in the library. Build an in-memory tree of plain objects describing the diagram you want, then call `Render()` to materialize it as actual Visio shapes in one batch. The model decouples diagram authoring from per-shape COM bookkeeping, and makes diagrams composable from helpers and loops.
 
@@ -23,7 +23,40 @@ Document  (not a Node; the root)
 
 Each node carries the data needed to materialize itself. `Document`, `Page`, `PageList` and `ShapeList` have a `Render()` method; the individual shape nodes do not, and are drawn when their containing `ShapeList` renders. `Shape` instances reference a master by name or by `IVisio.Master`. The geometric primitives (`Rectangle`, `Oval`, `Line`, `PolyLine`, `BezierCurve`) carry their own coordinates and don't need a master.
 
-A render happens at any level: rendering a `Document` creates a new Visio document; rendering a `Page` adds a page to an existing document; rendering a `ShapeList` drops shapes into an already-open page. Whichever level you start from, the children render too.
+## Where the output goes
+
+You can render from any level of the tree, and whichever level you start from, its children render too. What differs is **where the output lands**: a new document, new pages in a document you already have, or an existing page.
+
+| Desired output | How to get it | Notes |
+| :--- | :--- | :--- |
+| A **new Visio document**. | `Document.Render(app)` | Creates the document, blank or from a template. The first `Page` node is rendered into the document's initial page, and each remaining `Page` node is added as a new page. |
+| **New pages in an existing document.** | `Page.Render(doc)` or `PageList.Render(doc)` | Adds one new page per `Page` node, after the pages that are already there. Nothing existing is changed. |
+| **An existing page, then new pages.** | `PageList.Render(startPage)` | Renders the first `Page` node into `startPage` and adds a new page to its document for each of the others. `Document.Render` uses this. |
+| **An existing page**, filled in. | `Page.Render(visioPage)` | Draws the shapes and also applies the page-level settings: the page's name and size, its page and layout cells, the optional layout style, and the optional resize to fit. |
+| **Shapes only, on an existing page.** | `ShapeList.Render(visioPage)` | Draws the shapes and changes nothing about the page itself. |
+
+```csharp
+// New document (blank here; the constructor can also take a template)
+var doc_node = new VADOM.Document();
+doc_node.Pages.Add(page_node);
+IVisio.Document newDoc = doc_node.Render(visioApp);
+
+// New page in a document you already have
+IVisio.Page newPage = page_node.Render(visioDoc);
+
+// An existing page, including its page-level settings
+page_node.Render(visioPage);
+
+// Only the shapes, onto an existing page
+shape_list.Render(visioPage);
+```
+
+A few details:
+
+* **Starting from a template.** `VADOM.Document` also accepts a template filename and measurement system in its constructor, so a render can start from a Visio template (`.vst` / `.vstx`) instead of a blank document.
+* **A document with no pages.** Rendering a `Document` that has no `Page` nodes still creates the document, with its one empty initial page.
+* **Existing pages are not cleared.** Rendering into an existing page adds shapes alongside whatever is already there.
+* **Performance settings.** The temporary Visio settings described under [Render performance](#render-performance) are applied by `Page.Render`, so they apply to every call above except `ShapeList.Render`. A `ShapeList` render still drops shapes and writes cell values in bulk, but it does not change the application settings.
 
 After rendering, each DOM node has its `VisioShape` (or `VisioPage`) property populated, so you can pull the underlying COM object out for further work.
 
@@ -106,27 +139,6 @@ rect.CustomProperties["Owner"] = owner;
 
 For the formula-vs-literal distinction and the typed setters, see the [Custom properties](../custom-properties.md) page.
 
-## Rendering at three levels
-
-`Render()` is overloaded so the same node tree can target different containers:
-
-```csharp
-// Render a ShapeList directly into an already-open page
-shape_list.Render(visioPage);
-
-// Render a Page node, creating a new page in an existing document
-var newPage = page_node.Render(visioDoc);
-
-// Render a Document node, creating a brand-new Visio document
-var doc_node = new VADOM.Document();
-doc_node.Pages.Add(page_node);
-var newDoc = doc_node.Render(visioApp);
-```
-
-`VADOM.Document` also accepts a template filename and measurement system in its constructor, so a render can start from a Visio template (`.vst` / `.vstx`) instead of a blank document.
-
-When rendering a `Document`, the new Visio document's first page is reused for the first `Page` node, and a page is added for each remaining node. Rendering a `Page` node on its own (`page_node.Render(visioDoc)`) always adds a new page.
-
 ## After render: round-tripping
 
 After `Render()` returns, every DOM node has its corresponding `VisioShape` / `VisioPage` populated. You can use it for follow-up work that the DOM doesn't model directly (custom selection, advanced formatting, ShapeSheet queries):
@@ -146,20 +158,15 @@ foreach (var s in page_node.Shapes)
 
 ## Render performance
 
-While a `Page` renders, it temporarily applies a set of Visio application settings and restores the originals afterward. Every `Page` has a read-only `RenderPerformanceSettings` property that controls them. Its fields are nullable (`null` means leave the setting alone): `EnableAutoConnect` (`bool?`), `LiveDynamics` (`bool?`), `ScreenUpdating` (`short?`) and `DeferRecalc` (`short?`). The defaults a new `Page` sets are `DeferRecalc = 0`, `ScreenUpdating = 1`, `EnableAutoConnect = false` and `LiveDynamics = false`.
+A `Page` makes Visio render faster by temporarily changing a few Visio application settings while it renders, and restoring them afterward. The settings are exposed on the page's `RenderPerformanceSettings` property, but you should not need to touch them: the defaults are what the library's own layouts and models use, and they work well. Leave them alone unless you have a specific reason.
 
-```csharp
-var page_node = new VADOM.Page();
-page_node.RenderPerformanceSettings.DeferRecalc = 1;   // adjust before Render
-```
-
-`ScreenUpdating` is left on by default because turning it off can break page resizing.
+If you want to understand exactly what is being done, or want to experiment, see [DOM render performance](dom-render-performance.md).
 
 ## See also
 
 * [Drawing primitives](../extensions/drawing.md) (the imperative-style equivalent)
 * [Custom properties](../custom-properties.md) (formula-vs-literal, typed setters)
 * [Shape cells](../shape-cells.md) (the cell vocabulary used by the `Cells` property on each node)
-* [Layouts](layouts.md) (algorithmic placement on top of the DOM)
-* [Directed graph](directed-graph.md) (graph-shaped diagrams via MSAGL)
-* [Org charts](org-charts.md) (turn-key org-chart generator over the DOM)
+* [Layout models](layouts.md) (algorithmic placement on top of the DOM)
+* [Directed graph layout model](directed-graph.md) (graph-shaped diagrams via MSAGL)
+* [Org chart model](org-charts.md) (turn-key org-chart generator over the DOM)
