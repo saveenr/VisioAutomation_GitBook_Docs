@@ -95,13 +95,13 @@
   * [Container layout model](models/layouts-container.md)
   * [Directed graph layout model](models/directed-graph.md)
     * [Directed graph XML format](directed-graph-xml.md)
-* [Layout styles](models/layout-styles.md)
 * [Document models](models/documents.md)
   * [Org chart model](models/org-charts.md)
   * [Form page model](models/forms.md)
 * [Data models](models/data.md)
   * [Data table model](models/data-table.md)
   * [XML model](models/xml-model.md)
+* [Layout styles](models/layout-styles.md)
 
 ## Diagram analysis
 
