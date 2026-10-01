@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-10: Directed graph XML format: new options
+
+The [Directed graph XML format](../../directed-graph-xml.md) page documents the options added in an unreleased change after NuGet 3.1.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)): a `<documentoptions>` element (`template`, `borderwidth`, `borderheight`); `width` and `height` on `<shape>`; `<hyperlink>` and `<cells>` children; `type`, `label`, `prompt` and `format` on `<customprop>`; and, on `<connector>`, `connectortype`, `<cells>` and `<customprop>`. The "What's not supported in XML" list now names only what is still missing, including `PageBorderWidth` and `DefaultShapeSize`, which would have no effect if exposed. The `template` option inherits a bug in how templates are applied ([#229](https://github.com/saveenr/VisioAutomation/issues/229)). These notes should become plain version statements when the next release ships.
+
 ## 2026-09: Directed graph XML format: corrected the "not supported" list
 
 The "What's not supported in XML" section of the [Directed graph XML format](../../directed-graph-xml.md) page listed layer separation as unsupported, although `layerseparation` has been supported since NuGet 3.1.0, and an "edge routing strategy" option that does not exist in the model. Both are gone. The bullet now names the options that really are missing from the XML (`PageBorderWidth` and `DefaultShapeSize`) and points to [#225](https://github.com/saveenr/VisioAutomation/issues/225) for the full list.
