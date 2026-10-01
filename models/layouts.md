@@ -107,7 +107,7 @@ layout.PerformLayout();
 
 Containers can nest: a child container packs its own children along its own direction, and the parent treats it as a single rectangle whose size is the bounding box of its packed contents. The layout is a nested stack-and-pad packer; it does not size boxes proportionally the way a treemap does.
 
-Nested `RightToLeft` containers are fixed in current source ([#202](https://github.com/saveenr/VisioAutomation/issues/202)), an unreleased change after NuGet 3.0.0. In the published 3.0.0 package, a `RightToLeft` container placed anywhere other than the root misplaces its children whenever its origin Y differs from its X, for example one nested inside a vertical container. The root container is always placed at (0, 0), so it was not affected.
+Nested `RightToLeft` containers were fixed in NuGet 3.1.0 ([#202](https://github.com/saveenr/VisioAutomation/issues/202)). In 3.0.0 and earlier, a `RightToLeft` container placed anywhere other than the root misplaces its children whenever its origin Y differs from its X, for example one nested inside a vertical container. The root container is always placed at (0, 0), so it was not affected.
 
 `PerformLayout()` is computational only; it doesn't talk to Visio. To render, walk the tree and emit DOM shapes (or use the rectangles for any other purpose, e.g. a JPEG or SVG). The separation makes Box layout useful for non-Visio output too.
 

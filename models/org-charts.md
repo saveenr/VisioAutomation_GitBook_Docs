@@ -117,11 +117,11 @@ orgchart.OrgCharts.Add(team_x);   // page 2
 orgchart.Render(visioApp);
 ```
 
-This is fixed in current source ([#201](https://github.com/saveenr/VisioAutomation/issues/201)) and is an unreleased change after NuGet 3.0.0. In the published 3.0.0 package every page is built from the first root's tree, so extra roots do not produce distinct charts; use a single root per document there. Loading from XML only ever produces one root.
+Rendering one chart per root was fixed in NuGet 3.1.0 ([#201](https://github.com/saveenr/VisioAutomation/issues/201)). In 3.0.0 and earlier every page is built from the first root's tree, so extra roots do not produce distinct charts; use a single root per document there. Loading from XML only ever produces one root.
 
 ## Loading from XML
 
-In current source, build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method is an unreleased addition after NuGet 3.0.0. With the published 3.0.0 package, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is internal in current source. Then draw the result with `client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)`.
+Build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method was added in NuGet 3.1.0. With 3.0.0, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is `internal` from 3.1.0 on. Then draw the result with `client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)`.
 
 The schema is illustrated by the fixture `VTest/datafiles/orgchart_1.xml`; inline construction is more common for programmatic use.
 
