@@ -1,5 +1,9 @@
 # 2026-09 doc updates
 
+## 2026-11: NuGet 4.0.0 release
+
+NuGet 4.0.0 shipped, the first release on .NET Framework 4.7.2. [Version compatibility](../../version-compatibility.md) gains the `4.0.0` row (`net472`, bundled DLLs under `lib/net472/`), a note on what projects on .NET Framework 4.5.2 through 4.7.1 should do, and a corrected link for the 3.2.0 changelog. The planned-move section there now records the move as done. [Compiling](../../compiling.md) no longer mentions the 4.5.2 reference assemblies.
+
 ## 2026-10: NuGet 3.2.0 release sweep
 
 NuGet 3.2.0 shipped. The notes that described its changes as "unreleased after 3.1.0" are now plain version statements: the new directed graph XML options on the [Directed graph XML format](../../directed-graph-xml.md) page, the data table cell sizes and target page on [Data table model](../../models/data-table.md), the XML model root on [XML model](../../models/xml-model.md), and `DrawOrgChart` no longer resizing the page you pass on [Org chart model](../../models/org-charts.md) and the `client.Model` reference. The [Version compatibility](../../version-compatibility.md) page has a 3.2.0 row.

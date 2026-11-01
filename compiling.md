@@ -9,6 +9,6 @@
 
 ## Notes
 
-The .NET Framework 4.5.2 and 4.7.2 reference assemblies are supplied by NuGet packages and restored automatically during build, as is the Visio interop assembly. No Developer Pack install is required. Projects are SDK-style and package versions are centralized in `Directory.Packages.props`.
+The .NET Framework 4.7.2 reference assemblies (used by the libraries, tests and samples) are supplied by NuGet packages and restored automatically during build, as is the Visio interop assembly. No Developer Pack install is required. Projects are SDK-style and package versions are centralized in `Directory.Packages.props`.
 
 C# 14 is selected explicitly by `LangVersion` in `Directory.Build.props`. Open `VisioAutomation_2010/VisioAutomation2010.slnx`; use Debug for development and Release for shipping packages. VisioAutomation and VisioAutomation.VDX share this toolchain while retaining their .NET Framework targets. For exact PowerShell build commands and all four test assemblies, see [BUILDING.md in the source repo](https://github.com/saveenr/VisioAutomation/blob/master/docs/BUILDING.md).
