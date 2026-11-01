@@ -10,12 +10,13 @@ These versions are documented in [`NuGet/CHANGELOG.md`](https://github.com/savee
 
 | Version | Released | Library TFM | C# language | Visio PIA baseline | PIA bundled in `.nupkg` | Release notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `3.2.0` | 2026-10-01 | `net452` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.2.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#310---2026-10-01) |
+| `4.0.0` | 2026-11-01 | `net472` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net472/` | [4.0.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#400---2026-11-01) |
+| `3.2.0` | 2026-10-01 | `net452` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.2.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#320---2026-10-01) |
 | `3.1.0` | 2026-09-30 | `net452` | C# 14 (explicit `LangVersion`, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.1.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#310---2026-09-30) |
 | `3.0.0` | 2026-05-06 | `net452` | C# (latest, SDK-style csproj) | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | [3.0.0 changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md#300---2026-05-07) |
 | `2.6.0` (tag only) | 2026-05-04 | `net452` | C# 8.0 | Visio 2010 PIA (v14) | Yes, under `lib/net452/` | Tag in repo, never published end-to-end to nuget.org. Superseded by 3.0.0 two days later. |
 
-`3.0.0` was the first release published to nuget.org via the `publish-nuget.yml` CI flow under the `SevenPens` publishing identity. `3.2.0` is the current release and the recommended starting point for new consumers.
+`3.0.0` was the first release published to nuget.org via the `publish-nuget.yml` CI flow under the `SevenPens` publishing identity. `4.0.0` is the current release and the recommended starting point for new consumers. It raised the minimum runtime to .NET Framework 4.7.2: a project that targets .NET Framework 4.5.2 through 4.7.1 cannot reference it, and should stay on `3.2.0` or move to 4.7.2. There are no removed or renamed public members in `4.0.0`.
 
 ## Pre-changelog era (2017)
 
@@ -37,7 +38,7 @@ Some properties have not changed across the package's lifetime; they apply to ev
 
 ## Future TFM moves
 
-The shipping libraries' minimum target framework will rise from `net452` to `net472` once Windows 10 LTSB 2016 leaves Extended Support on **2026-10-13**. That move is tracked in [`docs/futures/build-and-code.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/futures/build-and-code.md) and will land as part of the Phase 3 modernization (currently scoped against Visual Studio 2026's MSBuild, which has a `net462` floor).
+The shipping libraries moved from `net452` to `net472` in `4.0.0`, after Windows 10 LTSB 2016 left Extended Support on 2026-10-13. The libraries run on any Windows with .NET Framework 4.7.2, which is built in to Windows 10 version 1809 and Windows Server 2019 and later.
 
 A subsequent move to multi-targeting (`net472` plus a modern `net10.0-windows`) is on the roadmap under Milestone C but has no fixed date.
 
