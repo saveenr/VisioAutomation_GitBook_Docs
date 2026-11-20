@@ -228,3 +228,4 @@ If you need any of these, load the XML, mutate the resulting `DirectedGraphDocum
 
 * [Connectors](connectors.md): the lower-level helpers for connecting two shapes when you don't need automated layout.
 * [Stencils and masters](stencils-and-masters.md): how the `stencil` and `master` attributes resolve at runtime.
+
