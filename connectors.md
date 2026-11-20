@@ -7,6 +7,8 @@ VisioAutomation exposes connector-drawing helpers on `VisioAutomation.Shapes.Con
 Drop a connector master onto the page first, then glue its endpoints with `ConnectShapes`:
 
 ```csharp
+using VisioAutomation.Extensions;
+
 var stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
 var dyncon  = stencil.Masters["Dynamic Connector"];
 
@@ -34,6 +36,8 @@ The `manual_connection: false` argument tells the helper to call `IVisio.Shape.A
 The page-level overload connects an array of `from` shapes to an array of `to` shapes (zipped) and returns the new connector shapes. The two arrays must be the same length. Pass a connector master if you want a specific connector style; pass `null` to use AutoConnect.
 
 ```csharp
+using VisioAutomation.Extensions;
+
 var stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
 var dyncon  = stencil.Masters["Dynamic Connector"];
 

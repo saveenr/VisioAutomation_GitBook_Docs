@@ -22,6 +22,8 @@ catch (VisioAutomation.Exceptions.AutomationException ex)
 Thrown when the library asked Visio to do something and Visio refused or didn't do it. For example, `Documents.OpenStencil` throws this when the stencil file can't be opened.
 
 ```csharp
+using VisioAutomation.Extensions;
+
 try
 {
     var stencil = doc.Application.Documents.OpenStencil("missing.vss");
