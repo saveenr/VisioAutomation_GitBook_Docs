@@ -38,7 +38,7 @@ client.Connection.ConnectShapes(VisioScripting.TargetPage.Auto,
 // Inspect the resulting directed-edge graph
 var edges = client.Connection.GetDirectedEdgesOnPage(
     VisioScripting.TargetPage.Auto,
-    VisioAutomation.Analyzers.ConnectionAnalyzerOptions.None);
+    new VisioAutomation.Analyzers.ConnectionAnalyzerOptions());
 
 foreach (var e in edges)
 {

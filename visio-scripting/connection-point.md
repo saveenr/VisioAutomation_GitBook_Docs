@@ -30,10 +30,12 @@ client.ConnectionPoint.AddConnectionPoint(VisioScripting.TargetShapes.Auto,
 var dict = client.ConnectionPoint.GetConnectionPoints(VisioScripting.TargetShapes.Auto);
 foreach (var kv in dict)
 {
+    int row = 0;
     foreach (var record in kv.Value)
     {
         System.Console.WriteLine("{0} cp[{1}]: ({2}, {3})",
-            kv.Key.Name, record.Row, record.Cells.X, record.Cells.Y);
+            kv.Key.Name, row, record.X, record.Y);
+        row++;
     }
 }
 ```
