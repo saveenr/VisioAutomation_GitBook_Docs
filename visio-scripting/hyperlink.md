@@ -28,7 +28,7 @@ foreach (var kv in dict)
 {
     foreach (var record in kv.Value)
     {
-        System.Console.WriteLine("{0}: {1}", kv.Key.Name, record.Cells.Address);
+        System.Console.WriteLine("{0}: {1}", kv.Key.Name, record.Address);
     }
 }
 

@@ -28,6 +28,8 @@ using VisioAutomation.Extensions;
 ## Example
 
 ```csharp
+using System.Linq;
+
 // Build a font-name to font-ID dictionary
 var fontname_to_id = doc.Fonts.ToEnumerable()
     .ToDictionary(f => f.Name, f => f.ID);
