@@ -1,8 +1,8 @@
 # Layout models
 
-The `VisioAutomation.Models.Layouts` namespace adds **algorithmic placement**. Most of the layouts draw through the [DOM](dom.md); see [Introduction to models](introduction.md) for the exceptions. Instead of specifying X/Y for every shape, you describe the structure (a tree of nodes, a rows-by-columns grid, packed boxes, columns of container items) and the layout engine assigns coordinates and connects shapes for you.
+The `VisioAutomation.Models.Layouts` namespace adds **algorithmic placement**. Most of the layouts draw through the [DOM](dom.md); see [Introduction to models](introduction.md) for the exceptions. Instead of specifying X/Y for every shape, you describe the structure (a tree of nodes, a rows-by-columns grid, columns of container items) and the layout engine assigns coordinates and connects shapes for you.
 
-There are three general-purpose layouts here plus a directed-graph layout that wraps Microsoft Automatic Graph Layout (MSAGL). The namespace also holds a Box type, but it only computes rectangles and draws nothing, so it is documented separately as [Box geometry](box-geometry.md).
+There are three general-purpose layouts here plus a directed-graph layout that wraps Microsoft Automatic Graph Layout (MSAGL).
 
 | Layout | Namespace | Best for |
 | :--- | :--- | :--- |

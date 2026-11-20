@@ -10,9 +10,9 @@ The data table model draws onto a page that already exists, and then **resizes t
 
 | Desired output | How to get it | Notes |
 | :--- | :--- | :--- |
-| Shapes on an existing page, with the page resized | `client.Model.DrawDataTableModel(targetPage, model)`, `client.Model.DrawDataTable(...)`, or `Out-VisioApplication` from PowerShell | Draws one rectangle per cell with the [grid layout](layouts-grid.md), then resizes the page to fit everything on it, including shapes that were already there. Shapes already on the page are not moved. |
+| Shapes on an existing page, with the page resized | `client.Model.DrawDataTableModelIntoPage(targetPage, model)`, or `Out-VisioApplication` from PowerShell | Draws one rectangle per cell with the [grid layout](layouts-grid.md), then resizes the page to fit everything on it, including shapes that were already there. Shapes already on the page are not moved. |
 
-The shapes are drawn through the DOM's `ShapeList.Render`, so the [render performance settings](dom.md#render-performance) do not apply. The resize is done by the VisioScripting methods, not by the grid layout itself: calling `client.Model.DrawGrid` with the same grid would not resize the page.
+The shapes are drawn through the DOM's `ShapeList.Render`, so the [render performance settings](dom.md#render-performance) do not apply. The resize is done by the VisioScripting methods, not by the grid layout itself: calling `client.Model.DrawGridIntoPage` with the same grid would not resize the page.
 
 ## Hello-world
 
@@ -32,7 +32,7 @@ model.CellWidth = 1.5;
 model.CellHeight = 0.5;
 model.CellSpacing = 0.1;
 
-client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, model);
+client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, model);
 ```
 
 This puts four rectangles on the active page, each 1.5 inches wide and 0.5 inches high: `Alice` and `Owner` on the first row, `Bob` and `Reviewer` on the second.
@@ -48,33 +48,17 @@ This puts four rectangles on the active page, each 1.5 inches wide and 0.5 inche
 | `CellWidth` | `double` | Width in inches of every column. Default `1.0`. Must be greater than zero. |
 | `CellHeight` | `double` | Height in inches of every row. Default `1.0`. Must be greater than zero. |
 
-The model gives every column the same width and every row the same height. For different sizes per column or row, call `DrawDataTable` with lists (see [Two ways to draw](#two-ways-to-draw)).
+The model gives every column the same width and every row the same height. For different sizes per column or row, build a [`GridLayout`](layouts-grid.md) directly, whose `Columns[i].Width` and `Rows[i].Height` take effect per column and row.
 
 `CellWidth` and `CellHeight` take effect from NuGet 3.2.0 ([#206](https://github.com/saveenr/VisioAutomation/issues/206)). In 3.1.0 and earlier they have no effect: every cell is drawn 1 x 1 inch and only `CellSpacing` is honored.
 
-## Two ways to draw
+## Drawing it
 
-`client.Model` offers two entry points:
+`client.Model.DrawDataTableModelIntoPage(TargetPage, DataTableModel)` reads the model and draws it on the target page. It returns nothing.
 
-* **`DrawDataTableModel(TargetPage, DataTableModel)`** reads the model and draws it on the target page. It returns nothing.
-* **`DrawDataTable(TargetPage, DataTable, IList<double> widths, IList<double> heights, Size cellspacing)`** takes the pieces directly and returns the `List<IVisio.Shape>` it drew, which is useful when you want to format the shapes afterwards.
+Before NuGet 5.0.0 the method was named `DrawDataTableModel`, and `client.Model` also had a public `DrawDataTable(TargetPage, DataTable, widths, heights, Size)` that returned the drawn shapes. `DrawDataTable` is now internal. The old `DrawDataTableModel` name still works but is obsolete. To format the cells afterwards, select the shapes on the page and format them with the usual [shape cell](../shape-cells.md) calls, or build a [`GridLayout`](layouts-grid.md) yourself and keep its shapes.
 
-```csharp
-var widths = new[] { 2.0, 1.5 };      // inches, one per column
-var heights = new[] { 0.5, 0.25 };    // inches, one per row
-var spacing = new VisioAutomation.Core.Size(0.1, 0.1);
-
-var shapes = client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt, widths, heights, spacing);
-
-foreach (var shape in shapes)
-{
-    shape.CellsU["FillForegnd"].FormulaU = "RGB(230,230,230)";
-}
-```
-
-A column or row beyond the end of its list keeps the 1 inch default, extra entries are ignored, and a zero or negative size throws `ArgumentOutOfRangeException`.
-
-From NuGet 3.2.0, `DrawDataTableModel` draws on the `TargetPage` you pass ([#207](https://github.com/saveenr/VisioAutomation/issues/207)). In 3.1.0 and earlier it resolved that argument and then always drew on the active page, so pass `TargetPage.Auto` and make the page you want active first.
+From NuGet 3.2.0, `DrawDataTableModelIntoPage` draws on the `TargetPage` you pass ([#207](https://github.com/saveenr/VisioAutomation/issues/207)). In 3.1.0 and earlier it resolved that argument and then always drew on the active page, so pass `TargetPage.Auto` and make the page you want active first.
 
 ## What gets drawn
 
@@ -84,13 +68,13 @@ From NuGet 3.2.0, `DrawDataTableModel` draws on the `TargetPage` you pass ([#207
 * **No header row.** Column names are not drawn. To show headers, add them as the first data row.
 * **The page** is made a foreground page and resized to fit its contents afterwards. The whole draw is one undo step.
 
-Calling `DrawDataTable` with a null `DataTable`, `widths` or `heights` throws `ArgumentNullException`, and a table with no rows throws `ArgumentOutOfRangeException`.
+A model whose `DataTable` is null throws `ArgumentNullException`, and a table with no rows throws `ArgumentOutOfRangeException`.
 
 ## Cell sizes
 
-Every cell is 1 x 1 inch unless you set a size. `DataTableModel` applies `CellWidth` and `CellHeight` to every column and row; `DrawDataTable` applies the entries of its `widths` and `heights` lists to individual columns and rows. For per-cell text formatting or other control, use `GridLayout` directly; see [Grid layout model](layouts-grid.md).
+Every cell is 1 x 1 inch unless you set a size. `DataTableModel` applies `CellWidth` and `CellHeight` to every column and row. For per-column or per-row sizes, per-cell text formatting or other control, use `GridLayout` directly; see [Grid layout model](layouts-grid.md).
 
-In NuGet 3.1.0 and earlier, sizes are not applied: every cell is 1 x 1 inch, the `widths` and `heights` arguments to `DrawDataTable` must be non-null but their values are not read, and `CellWidth` and `CellHeight` have no effect. To size columns and rows in those versions, use `GridLayout`, whose `Columns[i].Width` and `Rows[i].Height` do take effect.
+In NuGet 3.1.0 and earlier, sizes are not applied: every cell is 1 x 1 inch, `CellWidth` and `CellHeight` have no effect. To size columns and rows in those versions, use `GridLayout`, whose `Columns[i].Width` and `Rows[i].Height` do take effect.
 
 ## From PowerShell
 
@@ -119,6 +103,6 @@ See the [Out-VisioApplication cmdlet page](https://saveenr.gitbook.io/visiopower
 
 ## See also
 
-* [client.Model](../visio-scripting/model.md) (the `DrawDataTable` and `DrawDataTableModel` methods)
+* [client.Model](../visio-scripting/model.md) (the `DrawDataTableModelIntoPage` method)
 * [Grid layout model](layouts-grid.md) (the `GridLayout` that draws the table, with per-row and per-column sizing)
 * [XML model](xml-model.md) (the other `Models.Data` type)

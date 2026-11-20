@@ -34,7 +34,6 @@
   * [client.Container](visio-scripting/container.md)
   * [client.Control](visio-scripting/control.md)
   * [client.CustomProperty](visio-scripting/custom-property.md)
-  * [client.Developer](visio-scripting/developer.md)
   * [client.Document](visio-scripting/document.md)
   * [client.Draw](visio-scripting/draw.md)
   * [client.Export](visio-scripting/export.md)
@@ -98,11 +97,9 @@
     * [Directed graph XML format](directed-graph-xml.md)
 * [Document models](models/documents.md)
   * [Org chart model](models/org-charts.md)
-  * [Form page model](models/forms.md)
 * [Data models](models/data.md)
   * [Data table model](models/data-table.md)
   * [XML model](models/xml-model.md)
-* [Box geometry](models/box-geometry.md)
 * [Layout styles](models/layout-styles.md)
 
 ## Diagram analysis

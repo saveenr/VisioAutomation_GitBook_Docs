@@ -6,6 +6,10 @@ This page summarizes notable changes to the **VisioAutomation** documentation so
 
 [2026-05 doc updates](2026-05-doc-updates.md) - A major doc overhaul after years of inactivity
 
+## 2026-11: NuGet 5.0.0 release
+
+NuGet 5.0.0 shipped, and the pages that described its changes as unreleased now state them as plain facts. The Box geometry, form page model and `client.Developer` pages are gone, because those APIs were removed. [client.Model](../../visio-scripting/model.md) lists the renamed draw methods (`DrawGridIntoPage`, `DrawDataTableModelIntoPage`, `DrawXmlModelIntoPage`, `DrawOrgChartDocument`) with the old names, and the [Data table model](../../models/data-table.md) page no longer describes the `DrawDataTable` method, which is now internal. Code samples that used the obsolete `.Value` member now use `Formula`. Every C# block in these docs is now compiled as part of the library's build, so a renamed or removed member in a sample fails the build. The [Version compatibility](../../version-compatibility.md) page has the new row.
+
 ## 2026-11: NuGet 4.0.0 release
 
 NuGet 4.0.0 shipped. It raises the minimum .NET Framework runtime from 4.5.2 to 4.7.2, with no removed or renamed public members. The [Version compatibility](../../version-compatibility.md) page has the new row and a note on what to do for projects on older frameworks, and the [Compiling](../../compiling.md) page now lists only the 4.7.2 reference assemblies. See [2026-09 doc updates](2026-09-doc-updates.md).
@@ -24,5 +28,5 @@ Added a new [Version compatibility](../../version-compatibility.md) page (under 
 
 ## 2026-05: VisioAutomation.Models documentation (Tier 3)
 
-Closed the last remaining tier of the .NET-side doc audit by adding six pages under a new `models/` subsection of "Diagram models", covering everything in the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project. The new pages are [Declarative DOM](../../models/dom.md), [Layouts: Tree, Grid, Box](../../models/layouts.md), [Directed graph](../../models/directed-graph.md) (paired with the existing XML-format page), [Layout styles](../../models/layout-styles.md), [Org charts](../../models/org-charts.md), and [Form pages](../../models/forms.md). Each page leads with a working code snippet adapted from the in-repo `VTest.Models/` test suite, then walks through the public API surface, with cross-links to the underlying shape and layout primitives where relevant. Closes [issue #132](https://github.com/saveenr/VisioAutomation/issues/132).
+Closed the last remaining tier of the .NET-side doc audit by adding six pages under a new `models/` subsection of "Diagram models", covering everything in the [`VisioAutomation.Models`](https://github.com/saveenr/VisioAutomation/tree/master/VisioAutomation_2010/VisioAutomation.Models) project. The new pages are [Declarative DOM](../../models/dom.md), [Layouts: Tree, Grid, Box](../../models/layouts.md), [Directed graph](../../models/directed-graph.md) (paired with the existing XML-format page), [Layout styles](../../models/layout-styles.md), [Org charts](../../models/org-charts.md), and Form pages. Each page leads with a working code snippet adapted from the in-repo `VTest.Models/` test suite, then walks through the public API surface, with cross-links to the underlying shape and layout primitives where relevant. Closes [issue #132](https://github.com/saveenr/VisioAutomation/issues/132).
 
