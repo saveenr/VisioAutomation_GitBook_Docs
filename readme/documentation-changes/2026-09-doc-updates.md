@@ -42,7 +42,7 @@ The [Container layout model](../../models/layouts-container.md) page and the [La
 
 ## 2026-09: Where the output goes, on every model page
 
-The [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Container](../../models/layouts-container.md), [Directed graph](../../models/directed-graph.md), [Org chart](../../models/org-charts.md), [Form page](../../models/forms.md), [Data table](../../models/data-table.md) and [XML](../../models/xml-model.md) pages each gained a "Where the output goes" section in the same form as the [DOM](../../models/dom.md) one: what the model produces, how to get it, and what it does to the page you give it. It states plainly that the tree layout, the XML model, the MSAGL directed graph renderer and the data table model resize the page they draw on. The [`client.Model`](../../visio-scripting/model.md) reference rows for `DrawDataTable`, `DrawGrid`, `DrawXmlModel` and `DrawOrgChart` say the same, and the [Introduction to models](../../models/introduction.md) page no longer claims every DOM-based model gets the render performance settings.
+The [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Container](../../models/layouts-container.md), [Directed graph](../../models/directed-graph.md), [Org chart](../../models/org-charts.md), Form page, [Data table](../../models/data-table.md) and [XML](../../models/xml-model.md) pages each gained a "Where the output goes" section in the same form as the [DOM](../../models/dom.md) one: what the model produces, how to get it, and what it does to the page you give it. It states plainly that the tree layout, the XML model, the MSAGL directed graph renderer and the data table model resize the page they draw on. The [`client.Model`](../../visio-scripting/model.md) reference rows for `DrawDataTable`, `DrawGrid`, `DrawXmlModel` and `DrawOrgChart` say the same, and the [Introduction to models](../../models/introduction.md) page no longer claims every DOM-based model gets the render performance settings.
 
 ## 2026-09: DOM page: where the output goes
 
@@ -50,7 +50,7 @@ The [DOM](../../models/dom.md) page has a new "Where the output goes" section th
 
 ## 2026-09: Box layout moved out of the Layout models
 
-The Box layout page is now [Box geometry](../../models/box-geometry.md), a separate page in the Diagram models section instead of a child of [Layout models](../../models/layouts.md). It computes rectangles and draws nothing, nothing else in the library uses it, and listing it beside Tree and Grid suggested an equivalent choice. Its page opens by saying so and points to the layouts that do draw. The Layout models overview now describes three general-purpose layouts plus the directed graph. The page address changed from `layouts-box` to `box-geometry`. The longer-term question is tracked in [#218](https://github.com/saveenr/VisioAutomation/issues/218).
+The Box layout page is now Box geometry, a separate page in the Diagram models section instead of a child of [Layout models](../../models/layouts.md). It computes rectangles and draws nothing, nothing else in the library uses it, and listing it beside Tree and Grid suggested an equivalent choice. Its page opens by saying so and points to the layouts that do draw. The Layout models overview now describes three general-purpose layouts plus the directed graph. The page address changed from `layouts-box` to `box-geometry`. The longer-term question is tracked in [#218](https://github.com/saveenr/VisioAutomation/issues/218).
 
 ## 2026-09: Introduction to models page
 
@@ -62,7 +62,7 @@ Added a [Data models](../../models/data.md) page for the two models that draw ex
 
 ## 2026-09: Model pages renamed to say "model"
 
-The pages in the Diagram models section are about the models, not about the things they draw, so their titles now say so: [Layout models](../../models/layouts.md) (was Layouts), [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/box-geometry.md), [Container](../../models/layouts-container.md) and [Directed graph](../../models/directed-graph.md) layout model, [Org chart model](../../models/org-charts.md), [Form page model](../../models/forms.md) and [DOM](../../models/dom.md). Layout styles and the Directed graph XML format keep their names because they are a Visio feature and a file format rather than models. Page addresses did not change, so existing links still work.
+The pages in the Diagram models section are about the models, not about the things they draw, so their titles now say so: [Layout models](../../models/layouts.md) (was Layouts), [Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), Box, [Container](../../models/layouts-container.md) and [Directed graph](../../models/directed-graph.md) layout model, [Org chart model](../../models/org-charts.md), Form page model and [DOM](../../models/dom.md). Layout styles and the Directed graph XML format keep their names because they are a Visio feature and a file format rather than models. Page addresses did not change, so existing links still work.
 
 ## 2026-09: Where layout styles are used
 
@@ -70,7 +70,7 @@ The pages in the Diagram models section are about the models, not about the thin
 
 ## 2026-09: Document models page for Org charts and Form pages
 
-Added a [Document models](../../models/documents.md) page for the two models that describe a whole Visio document and create it: [Org charts](../../models/org-charts.md) and [Form pages](../../models/forms.md). It explains what they have in common, compares them in a table, and the two pages are now nested beneath it in the table of contents. No existing page changed.
+Added a [Document models](../../models/documents.md) page for the two models that describe a whole Visio document and create it: [Org charts](../../models/org-charts.md) and Form pages. It explains what they have in common, compares them in a table, and the two pages are now nested beneath it in the table of contents. No existing page changed.
 
 ## 2026-09: Table of contents sections reorganized
 
@@ -78,7 +78,7 @@ Some section names in the table of contents did not match how Visio uses the ter
 
 ## 2026-09: Layouts page split into an overview and one page per layout
 
-[Layouts](../../models/layouts.md) is now a short overview with the comparison table. [Tree layout](../../models/layouts-tree.md), [Grid layout](../../models/layouts-grid.md), [Box layout](../../models/box-geometry.md) and [Container layout](../../models/layouts-container.md) each have their own page, nested under it in the table of contents. The text of each section moved unchanged, the overview is still the page at `models/layouts.md`, and links that pointed at the old `#tree-layout` and `#grid-layout` sections now go to the new pages. [Directed graph](../../models/directed-graph.md), with its [XML format](../../directed-graph-xml.md) page nested beneath it, also moved under Layouts so every layout is in one place.
+[Layouts](../../models/layouts.md) is now a short overview with the comparison table. [Tree layout](../../models/layouts-tree.md), [Grid layout](../../models/layouts-grid.md), Box layout and [Container layout](../../models/layouts-container.md) each have their own page, nested under it in the table of contents. The text of each section moved unchanged, the overview is still the page at `models/layouts.md`, and links that pointed at the old `#tree-layout` and `#grid-layout` sections now go to the new pages. [Directed graph](../../models/directed-graph.md), with its [XML format](../../directed-graph-xml.md) page nested beneath it, also moved under Layouts so every layout is in one place.
 
 ## 2026-09: Models documentation accuracy pass
 
@@ -86,9 +86,9 @@ Every page covering the [`VisioAutomation.Models`](https://github.com/saveenr/Vi
 
 * **[Directed graph](../../models/directed-graph.md)** and **[Directed graph XML format](../../directed-graph-xml.md)**: the note on `scalingfactor` had the spacing backwards (a larger value gives tighter gaps relative to node size). `usedynamicconnectors` and `scalingfactor` are required in XML, as are the `<renderoptions>`, `<shapes>` and `<connectors>` elements. `MsaglRenderer.Render` uses the renderer's own options and does not read the ones stored on the layout. A node with no `Size` takes the size of its master, so `DefaultShapeSize` does not apply in practice. The Directed graph page also gained a layout options reference and a "How the layout works" section, and the XML page gained a "Failure modes" section.
 * **[Declarative DOM](../../models/dom.md)**: removed an unsupported claim that rendering is a single undo step; corrected the descriptions of `RenderPerformanceSettings`, the node hierarchy, `Connect` and connector endpoints; added the `using VisioAutomation.Extensions;` that the `OpenStencil` snippet needs.
-* **[Layouts](../../models/layouts.md)** ([Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), [Box](../../models/box-geometry.md) and [Container](../../models/layouts-container.md)): added the **Container layout**, which had no coverage; corrected the Box example coordinates, the Grid example (it needs `PerformLayout()`) and the claims about which layout settings and masters are configurable; documented the four Box `Direction` values and the default child alignment.
+* **[Layouts](../../models/layouts.md)** ([Tree](../../models/layouts-tree.md), [Grid](../../models/layouts-grid.md), Box and [Container](../../models/layouts-container.md)): added the **Container layout**, which had no coverage; corrected the Box example coordinates, the Grid example (it needs `PerformLayout()`) and the claims about which layout settings and masters are configurable; documented the four Box `Direction` values and the default child alignment.
 * **[Layout styles](../../models/layout-styles.md)**: corrected the `CompactTreeDirection` and `ConnectorStyle` value lists, which cells `Apply` writes, and the per-style defaults.
-* **[Org charts](../../models/org-charts.md)** and **[Form pages](../../models/forms.md)**: an org chart is always drawn into a new document, its XML schema is now documented, and a form page has two text blocks.
+* **[Org charts](../../models/org-charts.md)** and **Form pages**: an org chart is always drawn into a new document, its XML schema is now documented, and a form page has two text blocks.
 
 Two source bugs found during the review were filed and fixed: the org chart renderer drew the first root on every page ([#201](https://github.com/saveenr/VisioAutomation/issues/201)), and Box layouts placed nested `RightToLeft` containers wrongly ([#202](https://github.com/saveenr/VisioAutomation/issues/202)). The pages describe both the fixed behavior and the earlier behavior.
 

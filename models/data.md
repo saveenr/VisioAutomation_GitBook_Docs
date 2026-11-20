@@ -6,8 +6,8 @@ There are two data models:
 
 | Model | Namespace | Best for | Entry point |
 | :--- | :--- | :--- | :--- |
-| [Data table model](data-table.md) | `VisioAutomation.Models.Data` | Tabular data: a lookup table beside a diagram, a legend, or a quick look at a query result. | `client.Model.DrawDataTableModel(...)` or `DrawDataTable(...)` from VisioScripting, or `Out-VisioApplication` from PowerShell. |
-| [XML model](xml-model.md) | `VisioAutomation.Models.Data` | The nesting of an XML document, drawn as a tree of element names. | `client.Model.DrawXmlModel(...)` from VisioScripting, or `Out-VisioApplication` from PowerShell. |
+| [Data table model](data-table.md) | `VisioAutomation.Models.Data` | Tabular data: a lookup table beside a diagram, a legend, or a quick look at a query result. | `client.Model.DrawDataTableModelIntoPage(...)` from VisioScripting, or `Out-VisioApplication` from PowerShell. |
+| [XML model](xml-model.md) | `VisioAutomation.Models.Data` | The nesting of an XML document, drawn as a tree of element names. | `client.Model.DrawXmlModelIntoPage(...)` from VisioScripting, or `Out-VisioApplication` from PowerShell. |
 
 ## What they have in common
 

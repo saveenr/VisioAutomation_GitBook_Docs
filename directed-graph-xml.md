@@ -82,8 +82,8 @@ Per-page rendering knobs.
 | `layerseparation` | `double` | no | none (MSAGL's default) | Minimum distance in inches between layers (rows for `TopToBottom`, columns for `LeftToRight`). A non-numeric value throws `FormatException`. |
 | `edgelabelboxwidth` | `double` | no | `1.0` | Width in inches reserved for each edge's label, for every edge whether or not it has a label. |
 | `edgelabelboxheight` | `double` | no | `0.5` | Height in inches reserved for each edge's label. Smaller values give tighter gaps between layers. |
-| `borderwidth` | `double` | no | the document's `borderwidth` | Margin in inches on each of the left and right sides of this page's drawing. If you set either border attribute, this page uses its own margin instead of the document's. Unreleased: added after NuGet 4.0.0. |
-| `borderheight` | `double` | no | the document's `borderheight` | Margin in inches above and below this page's drawing. If you set only one of the two, the other follows the document's value. Unreleased: added after NuGet 4.0.0. |
+| `borderwidth` | `double` | no | the document's `borderwidth` | Margin in inches on each of the left and right sides of this page's drawing. If you set either border attribute, this page uses its own margin instead of the document's. Added in NuGet 5.0.0. |
+| `borderheight` | `double` | no | the document's `borderheight` | Margin in inches above and below this page's drawing. If you set only one of the two, the other follows the document's value. Added in NuGet 5.0.0. |
 | `layout` | `Sugiyama` | no | none | Parsed only if present, then discarded. Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
 
 `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` were added in NuGet 3.1.0; older packages ignore them. If you set only one of the two label box attributes, the other keeps its default. For what they do, see [Tightening the layout](models/directed-graph.md#tightening-the-layout).

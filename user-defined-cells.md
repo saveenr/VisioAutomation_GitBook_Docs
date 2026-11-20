@@ -13,7 +13,7 @@ var udcells = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(
 
 foreach (var kv in udcells)
 {
-    System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Value);
+    System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Formula);
 }
 ```
 

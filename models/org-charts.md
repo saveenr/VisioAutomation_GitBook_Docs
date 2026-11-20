@@ -1,6 +1,6 @@
 # Org chart model
 
-`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels. The document is always new because Visio's org chart shapes only work in a document created from its Organization Chart template (see [Where the output goes](#where-the-output-goes)).
+`VisioAutomation.Models.Documents.OrgCharts` is a turn-key org-chart generator. Build a tree of `Node`s, add the root to an `OrgChartDocument`, call `Render(app)` (or `Client.Model.DrawOrgChartDocument(orgChartDocument)` from VisioScripting), and you get a new Visio document with the org-chart template applied, position-shape masters dropped per node, dynamic connectors between parent and child, and per-node text labels. The document is always new because Visio's org chart shapes only work in a document created from its Organization Chart template (see [Where the output goes](#where-the-output-goes)).
 
 The generator is built on top of the [DOM](dom.md) and an internal tree layout, so the result is a real, editable Visio document, not a static export. After render the user can move shapes around, and the dynamic connectors stay glued to their shapes and re-route when shapes are moved.
 
@@ -11,7 +11,7 @@ The org chart model always creates a **new document**. It never draws onto a pag
 | Desired output | How to get it | Notes |
 | :--- | :--- | :--- |
 | A new document, one page per org chart | `OrgChartDocument.Render(visioApp)` | Creates a new document from the org chart template and adds one page for each root in `OrgCharts`. It takes the application, not a page or a document. |
-| The same, from VisioScripting or PowerShell | `client.Model.DrawOrgChart(targetPage, orgChartDocument)`, or `Out-VisioApplication` | The `TargetPage` only supplies the application. The chart still goes into a new document, and the page you passed is not changed. In NuGet 3.1.0 and earlier, the page you passed was also resized to fit its own contents, which is not the chart's page; that was fixed in NuGet 3.2.0 ([#219](https://github.com/saveenr/VisioAutomation/issues/219)). |
+| The same, from VisioScripting or PowerShell | `client.Model.DrawOrgChartDocument(orgChartDocument)`, or `Out-VisioApplication` | The application comes from the client. The chart goes into a new document, and no existing page is changed. Before NuGet 5.0.0 this method was `DrawOrgChart(targetPage, orgChartDocument)`, which took a `TargetPage` it only used to find the application; that name still works but is obsolete. In NuGet 3.1.0 and earlier, the page you passed was also resized to fit its own contents, which is not the chart's page; that was fixed in NuGet 3.2.0 ([#219](https://github.com/saveenr/VisioAutomation/issues/219)). |
 
 **Why a new document.** Visio's org chart shapes are not ordinary masters. The position shape runs Visio's own org chart add-on when it is dropped, and the add-on accepts only a document created from the Organization Chart template, which sets up document and page settings that a blank document does not have. Opening the org chart stencil in a blank document is not enough: dropping the position shape there fails with the message "You must open the Organization Chart template to use this shape." Creating a document from a template means creating a new document, so the model cannot draw onto a page you already have. It is also why the `TargetPage` passed to `DrawOrgChart` can only supply the application.
 
@@ -36,7 +36,7 @@ orgchart.Render(visioApp);
 
 `OrgCharts` is a `List<Node>`; add more than one root to get one chart per page (see _Multiple charts in one document_ below). The render call requires an `IVisio.Application`, not a page or document, because it creates a new document from the org-chart template every time. Output always goes to that new document, never onto an existing page.
 
-From VisioScripting, `Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)` does the same thing. The `TargetPage` only supplies the `Application`; the chart is rendered into a new document, and the target page is not changed. In NuGet 3.1.0 and earlier the target page was also resized to fit its own contents (fixed in NuGet 3.2.0, [#219](https://github.com/saveenr/VisioAutomation/issues/219)).
+From VisioScripting, `Client.Model.DrawOrgChartDocument(orgChartDocument)` does the same thing. The chart is rendered into a new document, and no existing page is changed. This is the name from NuGet 5.0.0; the earlier `DrawOrgChart(TargetPage, ...)` took a `TargetPage` that only supplied the application, and still works but is obsolete. In NuGet 3.1.0 and earlier the target page was also resized to fit its own contents (fixed in NuGet 3.2.0, [#219](https://github.com/saveenr/VisioAutomation/issues/219)).
 
 ## Building a tree
 
@@ -134,7 +134,7 @@ Rendering one chart per root was fixed in NuGet 3.1.0 ([#201](https://github.com
 
 ## Loading from XML
 
-Build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method was added in NuGet 3.1.0. With 3.0.0, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is `internal` from 3.1.0 on. Then draw the result with `client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgChartDocument)`.
+Build an `OrgChartDocument` from XML with `client.Model.LoadOrgChartFromXml(xml)`, where `xml` is an `XDocument`. This public facade method was added in NuGet 3.1.0. With 3.0.0, use `VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xml)` instead; that loader class is `internal` from 3.1.0 on. Then draw the result with `client.Model.DrawOrgChartDocument(orgChartDocument)`.
 
 The schema is illustrated by the fixture `VTest/datafiles/orgchart_1.xml`; inline construction is more common for programmatic use.
 
