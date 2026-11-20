@@ -65,7 +65,6 @@ Each property on `Client` returns a single command-group object. The methods on 
 | `client.Container`         | Drop a container shape around shapes.                                  | [client.Container](visio-scripting/container.md) |
 | `client.Control`           | Add, get, delete control handles on shapes.                            | [client.Control](visio-scripting/control.md) |
 | `client.CustomProperty`    | Read, write, delete custom properties (Shape Data) on shapes.          | [client.CustomProperty](visio-scripting/custom-property.md) |
-| `client.Developer`         | Render diagrams of internal types and namespaces (debug aid).          | [client.Developer](visio-scripting/developer.md) |
 | `client.Document`          | Open, close, create, find, save documents and stencils.                | [client.Document](visio-scripting/document.md) |
 | `client.Draw`              | Draw primitives: rectangles, ovals, lines, beziers, polylines.         | [client.Draw](visio-scripting/draw.md) |
 | `client.Export`            | Save pages or selections to image or HTML files.                       | [client.Export](visio-scripting/export.md) |

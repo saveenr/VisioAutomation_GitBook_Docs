@@ -25,7 +25,7 @@ These methods are currently `public` but have no known consumers as of 2026-05. 
 
 ```csharp
 var udc = new VisioAutomation.Shapes.UserDefinedCellCells();
-udc.Value = "\"42\"";          // formula, hence escaped quotes
+udc.Formula = "\"42\"";          // formula, hence escaped quotes
 udc.Prompt = "\"Answer\"";
 
 // Set user-defined cell "answer" on every selected shape
@@ -40,7 +40,7 @@ foreach (var kv in dict)
 {
     foreach (var entry in kv.Value)
     {
-        System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Value);
+        System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Formula);
     }
 }
 ```

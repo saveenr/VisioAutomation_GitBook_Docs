@@ -1,6 +1,6 @@
 # Container layout model
 
-Use when you want several labelled columns of items, each column drawn on a plain rectangle that sits behind its items. The rectangle is an ordinary shape, not a Visio container, so the items are not members of it and moving or resizing it does not move them ([#221](https://github.com/saveenr/VisioAutomation/issues/221)). `ContainerLayout` is independent of the [Box geometry](box-geometry.md) type: it arranges one column per container, with the container's items stacked top to bottom inside it. (`Layouts.Container.Container` and `Layouts.Box.Container` are unrelated types that happen to share a name.)
+Use when you want several labelled columns of items, each column drawn on a plain rectangle that sits behind its items. The rectangle is an ordinary shape, not a Visio container, so the items are not members of it and moving or resizing it does not move them ([#221](https://github.com/saveenr/VisioAutomation/issues/221)). `ContainerLayout` is independent of the Box geometry type: it arranges one column per container, with the container's items stacked top to bottom inside it. (`Layouts.Container.Container` and `Layouts.Box.Container` are unrelated types that happen to share a name.)
 
 ## Where the output goes
 
