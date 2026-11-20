@@ -46,7 +46,7 @@ An optional element, placed directly under `<directedgraph>` before the `<page>`
 | `borderwidth` | `double` | `1.0` | Margin in inches on each of the left and right sides of the drawing, on every page. |
 | `borderheight` | `double` | `1.0` | Margin in inches above and below the drawing, on every page. |
 
-If you set only one of the two border attributes, the other keeps its default. The border is applied last, when each page is resized to fit its contents, so it decides the final margin around the drawing.
+If you set only one of the two border attributes, the other keeps its default. The border is applied last, when each page is resized to fit its contents, so it decides the final margin around the drawing, unless a page sets its own border on its `<renderoptions>` element (see below).
 
 ```xml
 <directedgraph>
@@ -82,6 +82,8 @@ Per-page rendering knobs.
 | `layerseparation` | `double` | no | none (MSAGL's default) | Minimum distance in inches between layers (rows for `TopToBottom`, columns for `LeftToRight`). A non-numeric value throws `FormatException`. |
 | `edgelabelboxwidth` | `double` | no | `1.0` | Width in inches reserved for each edge's label, for every edge whether or not it has a label. |
 | `edgelabelboxheight` | `double` | no | `0.5` | Height in inches reserved for each edge's label. Smaller values give tighter gaps between layers. |
+| `borderwidth` | `double` | no | the document's `borderwidth` | Margin in inches on each of the left and right sides of this page's drawing. If you set either border attribute, this page uses its own margin instead of the document's. Unreleased: added after NuGet 4.0.0. |
+| `borderheight` | `double` | no | the document's `borderheight` | Margin in inches above and below this page's drawing. If you set only one of the two, the other follows the document's value. Unreleased: added after NuGet 4.0.0. |
 | `layout` | `Sugiyama` | no | none | Parsed only if present, then discarded. Currently only `Sugiyama` is accepted; any other value raises `ArgumentException`. The attribute exists so that future layout algorithms can be opted into without breaking existing XML. |
 
 `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` were added in NuGet 3.1.0; older packages ignore them. If you set only one of the two label box attributes, the other keeps its default. For what they do, see [Tightening the layout](models/directed-graph.md#tightening-the-layout).
@@ -90,6 +92,22 @@ Per-page rendering knobs.
 <renderoptions usedynamicconnectors="false" scalingfactor="20"
                direction="LeftToRight" layerseparation="0.25"
                edgelabelboxwidth="0.8" edgelabelboxheight="0.12" />
+```
+
+A page can set its own margin. Pages that set neither attribute use the document's `borderwidth` and `borderheight` (1.0 inch each by default), so existing XML is unchanged. Here the first page uses a tight 0.25 inch margin and the second follows the document's 1.0 inch:
+
+```xml
+<directedgraph>
+  <documentoptions borderwidth="1.0" borderheight="1.0" />
+  <page>
+    <renderoptions usedynamicconnectors="true" scalingfactor="20" borderwidth="0.25" borderheight="0.25" />
+    ...
+  </page>
+  <page>
+    <renderoptions usedynamicconnectors="true" scalingfactor="20" />
+    ...
+  </page>
+</directedgraph>
 ```
 
 ## `<shape>` (under `<shapes>`)
@@ -200,7 +218,7 @@ The following can be set programmatically on the in-memory model but are not exp
 * Cells that are not properties of `ShapeCells`, such as `User.` and `Prop.` rows. (Custom properties have their own `<customprop>` element.)
 * Hyperlink properties other than `name`, `address`, `subaddress` and `description` (for example frame, sort key or new window), and hyperlinks on connectors.
 * Layout algorithms other than Sugiyama.
-* The page border (`PageBorderWidth`) and the default node size (`DefaultShapeSize`). The page border is overridden by the document's `borderwidth` and `borderheight` when a directed graph document is drawn, and the default node size is never used because node sizes come from their masters, so exposing them would have no effect.
+* The default node size (`DefaultShapeSize`). Node sizes come from their masters, so exposing it would have no effect.
 
 The remaining gaps are tracked in [#225](https://github.com/saveenr/VisioAutomation/issues/225).
 
