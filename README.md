@@ -4,6 +4,8 @@
 
 **VisioAutomation** is a .NET library that simplifies automating **Microsoft Visio**.
 
+This documentation covers the **VisioAutomation2010** NuGet package, version **5.0.0**.
+
 **VisioAutomation** helps you:
 
 * Write Visio Add-ins
