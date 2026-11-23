@@ -204,6 +204,8 @@ Each connector becomes one edge in the graph.
 | `color` | no | Web color (for example `#ff0000`). Defaults to black. An invalid value throws `FormatException`. |
 | `weight` | no | Line weight in points (the loader converts to inches). Defaults to `1`. |
 | `connectortype` | no | `Curved`, `Straight` or `RightAngle`, case-insensitive. Overrides the page's `connectortype` for this connector only. Added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)). |
+| `master` | no | Name of the master to draw this connector from, for example `Dynamic connector` or `Line-curve connector`. Set it together with `stencil`. Without both, the connector uses the page-wide `Dynamic connector` master. Only applies when the page's `usedynamicconnectors` is `true`. Unreleased: added after NuGet 5.0.0 ([#299](https://github.com/saveenr/VisioAutomation/issues/299)). |
+| `stencil` | no | Filename of the stencil that holds `master`, for example `connec_u.vss`. Setting only one of `master` and `stencil` raises `ArgumentException` naming the connector. Unreleased: added after NuGet 5.0.0. |
 
 A `<connector>` can also contain a `<cells>` element (see above) and `<customprop>` children, which work as they do on a `<shape>`. Cells set explicitly in `<cells>` win over the `color`, `weight` and arrow defaults, and custom properties on a connector are applied to the drawn connector. Both were added in NuGet 3.2.0 ([#225](https://github.com/saveenr/VisioAutomation/issues/225)).
 
@@ -221,7 +223,6 @@ Validation happens at render time, not at load time:
 
 The following can be set programmatically on the in-memory model but are not exposed in the XML schema:
 
-* Per-edge master and stencil. Every connector uses the page-wide connector master (`DirectedGraphStyling.EdgeMasterName` and `EdgeStencilName`).
 * `DirectedGraphStyling` itself, and choosing the Visio-based renderer (`VisioLayoutRenderer`). Drawing from XML always uses the MSAGL renderer with the default styling.
 * Cells that are not properties of `ShapeCells`, such as `User.` and `Prop.` rows. (Custom properties have their own `<customprop>` element.)
 * Hyperlinks on connectors.
