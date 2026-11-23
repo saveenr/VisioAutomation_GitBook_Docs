@@ -53,6 +53,8 @@ var dgdoc = client.Model.LoadDirectedGraphFromXml(dgxml);
 client.Model.DrawDirectedGraphDocument(dgdoc, new VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling());
 ```
 
+If the document carries its own `Styling` (set in XML by `connectormaster` and `connectorstencil` on `<documentoptions>`), that styling is used instead of the one you pass, and a connector's own `master` and `stencil` win over both. Unreleased: added after NuGet 5.0.0 ([#301](https://github.com/saveenr/VisioAutomation/issues/301)).
+
 ## See also
 
 - [DOM](../models/dom.md): the building blocks for arbitrary shape models.
