@@ -167,7 +167,7 @@ A `<shape>` can contain any number of `<hyperlink>` children, in addition to the
 | `frame` | no | The name of a frame to open the link in. It only has an effect when Visio is hosted as an active document inside a container application such as a browser, and Visio accepts any text (`_blank`, `_self`, `_top`, `_parent` and ordinary frame names are all stored as written). Unreleased: added after NuGet 5.0.0. |
 | `sortkey` | no | Controls the order of the links on the shape's shortcut menu: lower values come first, and links with equal keys keep their order. Use a number such as `1` or `10`; Visio also accepts other text but does not sort it meaningfully. Unreleased: added after NuGet 5.0.0. |
 | `newwindow` | no | `true` opens the link in a new window. Default `false`. Unreleased: added after NuGet 5.0.0. |
-| `default` | no | `true` makes this the shape's default link, the one that opens on Ctrl+click and shows in bold on the shortcut menu. Default `false`. Unreleased: added after NuGet 5.0.0. |
+| `default` | no | `true` makes this the shape's default link, the one Visio shows in bold on the shortcut menu. Default `false`. Unreleased: added after NuGet 5.0.0. |
 | `invisible` | no | `true` keeps the link off the shape's shortcut menu. Default `false`. Unreleased: added after NuGet 5.0.0. |
 
 `newwindow`, `default` and `invisible` must be `true` or `false` (any letter case); anything else, including `yes` and `1`, raises `ArgumentException` naming the attribute. An attribute you leave out keeps Visio's default, which is empty text for the text attributes and `false` for the three switches.
