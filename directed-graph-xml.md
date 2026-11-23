@@ -163,6 +163,14 @@ A `<shape>` can contain any number of `<hyperlink>` children, in addition to the
 | `address` | yes | The address. |
 | `subaddress` | no | A location inside the address, for example a page name. |
 | `description` | no | Description text for the link. |
+| `extrainfo` | no | Extra text passed along when the address is resolved, for example image-map coordinates such as `x=10,y=20`. Visio accepts any text. Unreleased: added after NuGet 5.0.0 ([#303](https://github.com/saveenr/VisioAutomation/issues/303)). |
+| `frame` | no | The name of a frame to open the link in. It only has an effect when Visio is hosted as an active document inside a container application such as a browser, and Visio accepts any text (`_blank`, `_self`, `_top`, `_parent` and ordinary frame names are all stored as written). Unreleased: added after NuGet 5.0.0. |
+| `sortkey` | no | Controls the order of the links on the shape's shortcut menu: lower values come first, and links with equal keys keep their order. Use a number such as `1` or `10`; Visio also accepts other text but does not sort it meaningfully. Unreleased: added after NuGet 5.0.0. |
+| `newwindow` | no | `true` opens the link in a new window. Default `false`. Unreleased: added after NuGet 5.0.0. |
+| `default` | no | `true` makes this the shape's default link, the one Visio shows in bold on the shortcut menu. Default `false`. Unreleased: added after NuGet 5.0.0. |
+| `invisible` | no | `true` keeps the link off the shape's shortcut menu. Default `false`. Unreleased: added after NuGet 5.0.0. |
+
+`newwindow`, `default` and `invisible` must be `true` or `false` (any letter case); anything else, including `yes` and `1`, raises `ArgumentException` naming the attribute. An attribute you leave out keeps Visio's default, which is empty text for the text attributes and `false` for the three switches.
 
 If the shape also has a `url` attribute, that link comes first (as `Row_1`), followed by the `<hyperlink>` links in order. Connectors do not support hyperlinks.
 
@@ -216,7 +224,7 @@ The following can be set programmatically on the in-memory model but are not exp
 * Per-edge master and stencil. Every connector uses the page-wide connector master (`DirectedGraphStyling.EdgeMasterName` and `EdgeStencilName`).
 * `DirectedGraphStyling` itself, and choosing the Visio-based renderer (`VisioLayoutRenderer`). Drawing from XML always uses the MSAGL renderer with the default styling.
 * Cells that are not properties of `ShapeCells`, such as `User.` and `Prop.` rows. (Custom properties have their own `<customprop>` element.)
-* Hyperlink properties other than `name`, `address`, `subaddress` and `description` (for example frame, sort key or new window), and hyperlinks on connectors.
+* Hyperlinks on connectors.
 * Layout algorithms other than Sugiyama.
 * The default node size (`DefaultShapeSize`). Node sizes come from their masters, so exposing it would have no effect.
 
