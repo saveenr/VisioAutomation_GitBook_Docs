@@ -45,6 +45,10 @@ An optional element, placed directly under `<directedgraph>` before the `<page>`
 | `template` | string | none | A Visio template file name (for example `basflo_u.vstx`; use `.vst` before Visio 2013). The drawing is created from it. See the note below. |
 | `borderwidth` | `double` | `1.0` | Margin in inches on each of the left and right sides of the drawing, on every page. |
 | `borderheight` | `double` | `1.0` | Margin in inches above and below the drawing, on every page. |
+| `connectormaster` | string | none | Name of the master to draw every connector from, for example `Line-curve connector`. Set it together with `connectorstencil`. Unreleased: added after NuGet 5.0.0 ([#301](https://github.com/saveenr/VisioAutomation/issues/301)). |
+| `connectorstencil` | string | none | Filename of the stencil that holds `connectormaster`, for example `connec_u.vss`. Setting only one of the two raises `ArgumentException`. Unreleased: added after NuGet 5.0.0. |
+
+Without `connectormaster` and `connectorstencil`, connectors use `Dynamic Connector` from `connec_u.vss`. When they are set, the loader stores them in the document's `Styling` property. Which connector master a connector gets, most specific first: the connector's own `master` and `stencil`; the document's `Styling` (these attributes); the `DirectedGraphStyling` passed to `DrawDirectedGraphDocument` or `Out-VisioApplication -DirectedGraphStyling`; the built-in default. So a document that names its connector master is drawn the same way even when the call passes `new DirectedGraphStyling()`. Unreleased: added after NuGet 5.0.0.
 
 If you set only one of the two border attributes, the other keeps its default. The border is applied last, when each page is resized to fit its contents, so it decides the final margin around the drawing, unless a page sets its own border on its `<renderoptions>` element (see below).
 
@@ -223,7 +227,7 @@ Validation happens at render time, not at load time:
 
 The following can be set programmatically on the in-memory model but are not exposed in the XML schema:
 
-* `DirectedGraphStyling` itself, and choosing the Visio-based renderer (`VisioLayoutRenderer`). Drawing from XML always uses the MSAGL renderer with the default styling.
+* Choosing the Visio-based renderer (`VisioLayoutRenderer`). Drawing from XML always uses the MSAGL renderer.
 * Cells that are not properties of `ShapeCells`, such as `User.` and `Prop.` rows. (Custom properties have their own `<customprop>` element.)
 * Hyperlinks on connectors.
 * Layout algorithms other than Sugiyama.
